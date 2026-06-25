@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title') - RCE East Java</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Scripts & Styles (Vite Tailwind from Breeze) -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f7f9f6;
+        }
+        .text-primary-green {
+            color: #1e4620;
+        }
+        .bg-primary-green {
+            background-color: #1e4620;
+        }
+        .hover-bg-primary-green:hover {
+            background-color: #153216;
+        }
+        .bg-accent-orange {
+            background-color: #d97724;
+        }
+        .hover-bg-accent-orange:hover {
+            background-color: #b75e18;
+        }
+    </style>
+    @yield('styles')
+</head>
+
+<body class="antialiased text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <!-- Logo & Name -->
+                    <a href="{{ route('home') }}" class="flex items-center gap-3">
+                        <div class="bg-primary-green text-white p-2.5 rounded-lg flex items-center justify-center font-bold text-lg shadow-md">
+                            RCE
+                        </div>
+                        <div>
+                            <span class="font-extrabold text-xl text-primary-green tracking-tight">RCE EAST JAVA</span>
+                            <span class="block text-xs text-gray-500 uppercase tracking-widest -mt-1 font-semibold">Sustainability Network</span>
+                        </div>
+                    </a>
+                    
+                    <!-- Navigation Links -->
+                    <div class="hidden md:flex space-x-8 ms-12">
+                        <a href="{{ route('home') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ Request::is('/') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium transition duration-150 ease-in-out">
+                            Beranda
+                        </a>
+                        <a href="{{ route('projects.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ Request::is('proyek*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium transition duration-150 ease-in-out">
+                            Portofolio Proyek
+                        </a>
+                        <a href="{{ route('staff.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium transition duration-150 ease-in-out">
+                            Direktori Staf
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    @auth
+                        <a href="{{ route('dashboard') }}" class="bg-primary-green hover-bg-primary-green text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-md transition duration-150 ease-in-out">
+                            Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="bg-primary-green hover-bg-primary-green text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-md transition duration-150 ease-in-out">
+                            Masuk
+                        </a>
+                    @endauth
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        @yield('content')
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-900 text-white mt-12 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Branding -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-primary-green text-white p-2.5 rounded-lg font-bold text-lg">
+                            RCE
+                        </div>
+                        <span class="font-extrabold text-xl tracking-tight">RCE EAST JAVA</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Regional Centre of Expertise on Education for Sustainable Development East Java (RCE East Java) adalah wadah kolaborasi untuk mendorong pembangunan berkelanjutan melalui pendidikan dan aksi nyata di Jawa Timur.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-bold text-lg mb-6 border-b border-zinc-800 pb-2">Navigasi Cepat</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a></li>
+                        <li><a href="{{ route('projects.index') }}" class="hover:text-white transition">Portofolio Proyek</a></li>
+                        <li><a href="{{ route('staff.index') }}" class="hover:text-white transition">Direktori Staf</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="font-bold text-lg mb-6 border-b border-zinc-800 pb-2">Hubungi Kami</h3>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li class="flex gap-3">
+                            <i class="bi bi-geo-alt-fill text-accent-orange text-lg"></i>
+                            <span>Surabaya, Jawa Timur, Indonesia</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i class="bi bi-envelope-fill text-accent-orange text-lg"></i>
+                            <span>info@rce-eastjava.org</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <i class="bi bi-telephone-fill text-accent-orange text-lg"></i>
+                            <span>+62 31 1234 5678</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-zinc-800 mt-12 pt-8 text-center text-sm text-gray-500 flex justify-between items-center flex-wrap gap-4">
+                <p>&copy; 2026 RCE East Java. Semua Hak Cipta Dilindungi.</p>
+                <p>Designed for Sustainable Development Goals (SDGs)</p>
+            </div>
+        </div>
+    </footer>
+    @yield('scripts')
+</body>
+
+</html>
