@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminStaffController;
+use App\Http\Controllers\Admin\AdminHeroController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Publik
@@ -34,6 +35,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('projects', AdminProjectController::class)->names('admin.projects');
     Route::resource('staff', AdminStaffController::class)->names('admin.staff');
+    Route::resource('hero', AdminHeroController::class)->names('admin.hero')->except(['show']);
 });
 
 require __DIR__.'/auth.php';

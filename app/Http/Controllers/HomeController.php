@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Staff;
+use App\Models\HeroPhoto;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -20,6 +21,8 @@ class HomeController extends Controller
             'staff' => Staff::count() + 85, // base stats + dummy
         ];
 
-        return view('welcome', compact('latestProjects', 'stats'));
+        $heroPhotos = HeroPhoto::active()->get();
+
+        return view('welcome', compact('latestProjects', 'stats', 'heroPhotos'));
     }
 }

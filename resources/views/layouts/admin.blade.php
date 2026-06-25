@@ -98,6 +98,13 @@
                                 <span>Kelola Staf</span>
                             </a>
                         </li>
+
+                        <li class="sidebar-item {{ Request::is('admin/hero*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.hero.index') }}" class='sidebar-link'>
+                                <i class="bi bi-images"></i>
+                                <span>Foto Hero</span>
+                            </a>
+                        </li>
                         
                         <li class="sidebar-title">Akun</li>
                         

@@ -4,12 +4,107 @@
 
 @section('content')
 <!-- Hero Section -->
-<div class="relative bg-zinc-950 text-white overflow-hidden">
-    <!-- Background overlay with a dark premium gradient -->
-    <div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=1200');"></div>
-    <div class="absolute inset-0 bg-gradient-to-tr from-zinc-950 via-zinc-900/90 to-transparent"></div>
-    
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48 flex flex-col justify-center min-h-[70vh]">
+@php
+    $heroImages = $heroPhotos->isNotEmpty()
+        ? $heroPhotos->map(fn($p) => asset($p->image))->values()->toJson()
+        : json_encode(['https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=1920']);
+@endphp
+
+<div class="relative bg-zinc-950 text-white overflow-hidden min-h-[70vh]"
+     x-data="{
+        slides: {{ $heroImages }},
+        current: 0,
+        timer: null,
+        init() {
+            this.startAuto();
+        },
+        startAuto() {
+            this.timer = setInterval(() => { this.next(); }, 5000);
+        },
+        next() {
+            this.current = (this.current + 1) % this.slides.length;
+        },
+        prev() {
+            this.current = (this.current - 1 + this.slides.length) % this.slides.length;
+        },
+        goTo(i) {
+            this.current = i;
+            clearInterval(this.timer);
+            this.startAuto();
+        }
+     }">
+
+    <!-- Slider background images -->
+    <template x-for="(slide, index) in slides" :key="index">
+        <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+             :style="'background-image: url(' + slide + ')'"
+             :class="current === index ? 'opacity-60' : 'opacity-0'">
+        </div>
+    </template>
+
+    <!-- Dark gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-tr from-zinc-950/80 via-zinc-900/40 to-transparent pointer-events-none"></div>
+
+    <!-- Prev / Next arrows -->
+    <template x-if="slides.length > 1">
+        <div>
+            <button @click="prev(); clearInterval(timer); startAuto();"
+                class="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-zinc-800/60 hover:bg-zinc-700/80 text-white rounded-full w-10 h-10 flex items-center justify-center transition backdrop-blur-sm"
+                aria-label="Previous">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <button @click="next(); clearInterval(timer); startAuto();"
+                class="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-zinc-800/60 hover:bg-zinc-700/80 text-white rounded-full w-10 h-10 flex items-center justify-center transition backdrop-blur-sm"
+                aria-label="Next">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </template>
+
+    <!-- Dot indicators -->
+    <template x-if="slides.length > 1">
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+            <template x-for="(slide, index) in slides" :key="index">
+                <button @click="goTo(index)"
+                    class="rounded-full transition-all duration-300"
+                    :class="current === index ? 'bg-white w-6 h-2' : 'bg-white/40 w-2 h-2'"
+                    :aria-label="'Slide ' + (index + 1)">
+                </button>
+            </template>
+        </div>
+    </template>
+
+    <!-- Caption -->
+    @if($heroPhotos->isNotEmpty())
+    <div class="absolute bottom-10 right-6 z-20 hidden md:block">
+        <template x-for="(slide, index) in slides" :key="'cap-' + index">
+            <p x-show="current === index"
+               x-transition:enter="transition ease-out duration-500"
+               x-transition:enter-start="opacity-0 translate-y-2"
+               x-transition:enter-end="opacity-100 translate-y-0"
+               class="text-xs text-white/50 italic text-right max-w-xs">
+                {{ '' }}
+            </p>
+        </template>
+        @foreach($heroPhotos as $i => $photo)
+            @if($photo->caption)
+            <p x-show="current === {{ $i }}"
+               x-transition:enter="transition ease-out duration-500"
+               x-transition:enter-start="opacity-0 translate-y-2"
+               x-transition:enter-end="opacity-100 translate-y-0"
+               class="text-xs text-white/50 italic text-right max-w-xs">
+                {{ $photo->caption }}
+            </p>
+            @endif
+        @endforeach
+    </div>
+    @endif
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 md:pt-52 md:pb-48 flex flex-col justify-center min-h-[70vh]">
         <span class="text-accent-orange font-bold text-sm tracking-widest uppercase mb-4 block">Regional Centre of Expertise - East Java</span>
         <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
             RCE <br>
