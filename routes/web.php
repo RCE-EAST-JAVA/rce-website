@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/proyek', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/proyek/{project}', [ProjectController::class, 'show'])->name('projects.show');
 Route::get('/staf', [StaffController::class, 'index'])->name('staff.index');
 
 // Redirect Dashboard Dinamis Berdasarkan Role

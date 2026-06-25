@@ -54,12 +54,13 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-24">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @forelse($projects as $project)
-            <div class="bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between">
+            <a href="{{ route('projects.show', $project->id) }}"
+               class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between">
                 <div>
                     <!-- Project Image -->
                     <div class="relative h-48 bg-zinc-200 overflow-hidden">
                         @if($project->image)
-                            <img src="{{ asset($project->image) }}" class="w-full h-full object-cover">
+                            <img src="{{ asset($project->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
                                 <i class="bi bi-image text-3xl"></i>
@@ -77,7 +78,7 @@
                     <!-- Content -->
                     <div class="p-6">
                         <span class="text-xs text-gray-400 font-semibold block mb-2">{{ $project->date }}</span>
-                        <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2">{{ $project->title }}</h3>
+                        <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2 group-hover:text-primary-green transition-colors">{{ $project->title }}</h3>
                         <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mb-4">
                             {{ $project->description }}
                         </p>
@@ -97,7 +98,7 @@
                         </div>
                     @endif
                 </div>
-            </div>
+            </a>
         @empty
             <div class="col-span-3 text-center py-24 bg-white rounded-3xl border border-zinc-100 text-gray-400">
                 <i class="bi bi-search text-4xl block mb-4"></i>
