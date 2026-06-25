@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Project;
 use App\Models\Staff;
 use App\Models\HeroPhoto;
@@ -22,7 +23,11 @@ class HomeController extends Controller
         ];
 
         $heroPhotos = HeroPhoto::active()->get();
+        $latestArticles = Article::where('status', 'published')
+            ->orderBy('published_at', 'desc')
+            ->take(3)
+            ->get();
 
-        return view('welcome', compact('latestProjects', 'stats', 'heroPhotos'));
+        return view('welcome', compact('latestProjects', 'stats', 'heroPhotos', 'latestArticles'));
     }
 }

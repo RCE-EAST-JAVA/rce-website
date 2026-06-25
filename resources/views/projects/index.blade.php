@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Header Page -->
-<div class="bg-gradient-to-br from-emerald-950 to-primary-green text-white py-16">
+<div class="bg-gradient-to-br from-emerald-950 to-primary-green text-white pt-32 pb-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 block">Daftar Inisiatif</span>
         <h1 class="text-4xl font-extrabold mb-4">Portofolio Proyek</h1>

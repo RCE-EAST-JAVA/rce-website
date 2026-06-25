@@ -54,9 +54,9 @@
                 <div class="flex items-center">
                     <!-- Logo & Name -->
                     <a href="{{ route('home') }}" class="flex items-center gap-3">
-                        <div class="bg-primary-green text-white p-2.5 rounded-lg flex items-center justify-center font-bold text-lg shadow-md">
-                            RCE
-                        </div>
+                        <img src="{{ asset('rce_logo.png') }}" alt="RCE Logo"
+                             class="rounded shadow-md"
+                             style="width: 38px; height: 38px; object-fit: cover;">
                         <div>
                             <span :class="scrolled ? 'text-primary-green' : 'text-white'"
                                   class="font-extrabold text-xl tracking-tight transition-colors duration-300">RCE EAST JAVA</span>
@@ -81,13 +81,7 @@
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Portofolio Proyek
                         </a>
-                        <a href="{{ route('staff.index') }}"
-                           :class="scrolled
-                               ? '{{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
-                               : '{{ Request::is('staf*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
-                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
-                            Direktori Staf
-                        </a>
+                        
                         <a href="{{ route('articles.index') }}"
                            :class="scrolled
                                ? '{{ Request::is('artikel*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
@@ -95,6 +89,15 @@
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Artikel
                         </a>
+
+                        <a href="{{ route('staff.index') }}"
+                           :class="scrolled
+                               ? '{{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
+                               : '{{ Request::is('staf*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
+                             Staf
+                        </a>
+                        
                     </div>
                 </div>
 
@@ -129,9 +132,9 @@
                 <!-- Branding -->
                 <div>
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="bg-primary-green text-white p-2.5 rounded-lg font-bold text-lg">
-                            RCE
-                        </div>
+                        <img src="{{ asset('rce_logo.png') }}" alt="RCE Logo"
+                             class="rounded"
+                             style="width: 38px; height: 38px; object-fit: cover;">
                         <span class="font-extrabold text-xl tracking-tight">RCE EAST JAVA</span>
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed">
@@ -145,6 +148,7 @@
                     <ul class="space-y-3 text-sm text-gray-400">
                         <li><a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a></li>
                         <li><a href="{{ route('projects.index') }}" class="hover:text-white transition">Portofolio Proyek</a></li>
+                        <li><a href="{{ route('articles.index') }}" class="hover:text-white transition">Artikel</a></li>
                         <li><a href="{{ route('staff.index') }}" class="hover:text-white transition">Direktori Staf</a></li>
                     </ul>
                 </div>

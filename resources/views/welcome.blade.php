@@ -269,19 +269,80 @@
     </div>
 </div>
 
+<!-- Artikel Terbaru -->
+@if($latestArticles->isNotEmpty())
+<div class="py-24 bg-zinc-50 border-t border-zinc-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between mb-10">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2 block">Dari Blog Kami</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-zinc-900">Artikel Terbaru</h2>
+            </div>
+            <a href="{{ route('articles.index') }}" class="text-sm font-semibold text-emerald-700 hover:text-emerald-900 flex items-center gap-1 transition">
+                Lihat semua
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @foreach($latestArticles as $article)
+            <a href="{{ route('articles.show', $article->slug) }}" class="group flex flex-col bg-white rounded-2xl shadow-sm border border-zinc-100 overflow-hidden hover:shadow-md transition">
+                <!-- Thumbnail -->
+                <div class="aspect-[16/9] bg-zinc-100 overflow-hidden">
+                    @if($article->thumbnail)
+                        <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}"
+                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 2v6h6"/>
+                            </svg>
+                        </div>
+                    @endif
+                </div>
+                <!-- Content -->
+                <div class="flex flex-col flex-1 p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full">{{ $article->category }}</span>
+                        <span class="text-xs text-zinc-400">{{ $article->published_at?->format('d M Y') }}</span>
+                    </div>
+                    <h3 class="font-bold text-zinc-900 text-base leading-snug mb-2 group-hover:text-emerald-700 transition line-clamp-2">
+                        {{ $article->title }}
+                    </h3>
+                    @if($article->excerpt)
+                    <p class="text-zinc-500 text-sm leading-relaxed line-clamp-3 flex-1">{{ $article->excerpt }}</p>
+                    @endif
+                    <div class="mt-4 flex items-center gap-2 text-xs text-zinc-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        {{ $article->author }}
+                    </div>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
 <!-- CTA Banner -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-    <div class="bg-gradient-to-r from-emerald-950 to-primary-green text-white p-12 md:p-16 rounded-[2.5rem] shadow-xl text-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center opacity-10 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=1200');"></div>
-        <div class="relative z-10 max-w-2xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Bergabunglah dalam Gerakan Keberlanjutan</h2>
-            <p class="text-gray-300 text-sm md:text-base mb-8 leading-relaxed">
-                Kami mengundang universitas, peneliti, LSM, instansi pemerintah, dan sukarelawan untuk berkolaborasi dalam berbagai proyek lingkungan dan sosial di Jawa Timur.
-            </p>
-            <div class="flex justify-center gap-4 flex-wrap">
-                <a href="mailto:info@rce-eastjava.org" class="bg-accent-orange hover-bg-accent-orange text-white px-8 py-3.5 rounded-full font-bold shadow-lg transition">
-                    Hubungi Kami via Email
-                </a>
+<div class="py-24 bg-zinc-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-emerald-950 to-primary-green text-white p-12 md:p-16 rounded-[2.5rem] shadow-xl text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center opacity-10 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=1200');"></div>
+            <div class="relative z-10 max-w-2xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Bergabunglah dalam Gerakan Keberlanjutan</h2>
+                <p class="text-gray-300 text-sm md:text-base mb-8 leading-relaxed">
+                    Kami mengundang universitas, peneliti, LSM, instansi pemerintah, dan sukarelawan untuk berkolaborasi dalam berbagai proyek lingkungan dan sosial di Jawa Timur.
+                </p>
+                <div class="flex justify-center gap-4 flex-wrap">
+                    <a href="mailto:info@rce-eastjava.org" class="bg-accent-orange hover-bg-accent-orange text-white px-8 py-3.5 rounded-full font-bold shadow-lg transition">
+                        Hubungi Kami via Email
+                    </a>
+                </div>
             </div>
         </div>
     </div>
