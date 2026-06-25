@@ -219,53 +219,111 @@
                 Lihat Semua Proyek <i class="bi bi-arrow-right"></i>
             </a>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @forelse($latestProjects as $project)
-                <div class="bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between">
-                    <div>
-                        <!-- Project Image -->
-                        <div class="relative h-48 bg-zinc-200 overflow-hidden">
-                            @if($project->image)
-                                <img src="{{ asset($project->image) }}" class="w-full h-full object-cover transition hover:scale-105 duration-300">
-                            @else
-                                <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
-                                    <i class="bi bi-image text-3xl"></i>
-                                </div>
-                            @endif
-                            <span class="absolute top-4 left-4 bg-primary-green text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-md">
-                                {{ $project->category }}
-                            </span>
+
+        @if($latestProjects->isNotEmpty())
+        @php
+            $featured = $latestProjects->get(0);
+            $side     = $latestProjects->slice(1, 2);
+            $bottom   = $latestProjects->slice(3, 2);
+        @endphp
+
+        {{-- Row 1: featured + 2 kecil di kanan --}}
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
+            {{-- Featured --}}
+            <a href="{{ route('projects.show', $featured->id) }}"
+               class="group lg:col-span-3 bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col">
+                <div class="relative h-72 bg-zinc-200 overflow-hidden">
+                    @if($featured->image)
+                        <img src="{{ asset($featured->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
+                            <i class="bi bi-image text-5xl"></i>
                         </div>
-                        
-                        <!-- Content -->
-                        <div class="p-6">
-                            <span class="text-xs text-gray-400 font-semibold block mb-2">{{ $project->date }}</span>
-                            <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2">{{ $project->title }}</h3>
-                            <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mb-4">
-                                {{ $project->description }}
-                            </p>
+                    @endif
+                    <span class="absolute top-4 left-4 bg-primary-green text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-md">
+                        {{ $featured->category }}
+                    </span>
+                </div>
+                <div class="p-7 flex flex-col flex-1">
+                    <span class="text-xs text-gray-400 font-semibold block mb-2">{{ $featured->date }}</span>
+                    <h3 class="font-extrabold text-xl text-gray-900 mb-3 line-clamp-2 group-hover:text-primary-green transition-colors">{{ $featured->title }}</h3>
+                    <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed flex-1">{{ $featured->description }}</p>
+                    <div class="flex items-center justify-between mt-5 pt-4 border-t border-zinc-100">
+                        <span class="text-xs text-gray-500">Oleh: {{ $featured->author }}</span>
+                        @if($featured->sdgs)
+                        <div class="flex gap-1">
+                            @foreach(explode(',', $featured->sdgs) as $sdg)
+                            <span class="text-[10px] bg-accent-orange/10 text-accent-orange font-bold px-2 py-0.5 rounded">{{ trim($sdg) }}</span>
+                            @endforeach
                         </div>
-                    </div>
-                    
-                    <!-- Footer Info -->
-                    <div class="px-6 pb-6 pt-4 border-t border-zinc-100 flex justify-between items-center bg-zinc-50/50">
-                        <span class="text-xs text-gray-500 font-medium">Oleh: {{ $project->author }}</span>
-                        @if($project->sdgs)
-                            <div class="flex gap-1">
-                                @foreach(explode(',', $project->sdgs) as $sdg)
-                                    <span class="text-[10px] bg-accent-orange/10 text-accent-orange font-bold px-2 py-0.5 rounded">
-                                        {{ trim($sdg) }}
-                                    </span>
-                                @endforeach
-                            </div>
                         @endif
                     </div>
                 </div>
-            @empty
-                <div class="col-span-3 text-center py-12 text-gray-400">Belum ada proyek terbaru.</div>
-            @endforelse
+            </a>
+
+            {{-- 2 kecil di kanan --}}
+            <div class="lg:col-span-2 flex flex-col gap-6">
+                @foreach($side as $project)
+                <a href="{{ route('projects.show', $project->id) }}"
+                   class="group bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex gap-4 p-4 flex-1">
+                    <div class="w-28 flex-shrink-0 rounded-2xl overflow-hidden bg-zinc-200 self-stretch">
+                        @if($project->image)
+                            <img src="{{ asset($project->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
+                                <i class="bi bi-image text-2xl"></i>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="flex flex-col justify-center min-w-0">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-primary-green mb-1">{{ $project->category }}</span>
+                        <h3 class="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-primary-green transition-colors leading-snug mb-1">{{ $project->title }}</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-1">{{ $project->description }}</p>
+                        <span class="text-xs text-gray-400">{{ $project->date }}</span>
+                    </div>
+                </a>
+                @endforeach
+            </div>
         </div>
+
+        {{-- Row 2: 2 proyek bawah (horizontal) --}}
+        @if($bottom->isNotEmpty())
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @foreach($bottom as $project)
+            <a href="{{ route('projects.show', $project->id) }}"
+               class="group bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex gap-5 p-5">
+                <div class="w-36 h-28 flex-shrink-0 rounded-2xl overflow-hidden bg-zinc-200">
+                    @if($project->image)
+                        <img src="{{ asset($project->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
+                            <i class="bi bi-image text-2xl"></i>
+                        </div>
+                    @endif
+                </div>
+                <div class="flex flex-col justify-center min-w-0">
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-primary-green mb-1">{{ $project->category }}</span>
+                    <h3 class="font-bold text-base text-gray-900 line-clamp-2 group-hover:text-primary-green transition-colors leading-snug mb-2">{{ $project->title }}</h3>
+                    <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-2">{{ $project->description }}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-400">{{ $project->date }}</span>
+                        @if($project->sdgs)
+                        <div class="flex gap-1">
+                            @foreach(explode(',', $project->sdgs) as $sdg)
+                            <span class="text-[10px] bg-accent-orange/10 text-accent-orange font-bold px-2 py-0.5 rounded">{{ trim($sdg) }}</span>
+                            @endforeach
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </a>
+            @endforeach
+        </div>
+        @endif
+
+        @else
+            <div class="text-center py-12 text-gray-400">Belum ada proyek terbaru.</div>
+        @endif
     </div>
 </div>
 
@@ -285,45 +343,79 @@
                 </svg>
             </a>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach($latestArticles as $article)
-            <a href="{{ route('articles.show', $article->slug) }}" class="group flex flex-col bg-white rounded-2xl shadow-sm border border-zinc-100 overflow-hidden hover:shadow-md transition">
-                <!-- Thumbnail -->
-                <div class="aspect-[16/9] bg-zinc-100 overflow-hidden">
+
+        {{-- Featured article: horizontal full-width --}}
+        @php $featuredArticle = $latestArticles->first(); $restArticles = $latestArticles->skip(1); @endphp
+
+        <a href="{{ route('articles.show', $featuredArticle->slug) }}"
+           class="group flex flex-col md:flex-row bg-white rounded-3xl border border-zinc-100 shadow-sm hover:shadow-md overflow-hidden transition mb-6">
+            <div class="md:w-2/5 aspect-[16/9] md:aspect-auto bg-zinc-100 overflow-hidden flex-shrink-0">
+                @if($featuredArticle->thumbnail)
+                    <img src="{{ asset($featuredArticle->thumbnail) }}" alt="{{ $featuredArticle->title }}"
+                         class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                @else
+                    <div class="w-full h-full min-h-[200px] flex items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-emerald-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                @endif
+            </div>
+            <div class="flex flex-col justify-center p-8 flex-1">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="text-xs font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full">{{ $featuredArticle->category }}</span>
+                    <span class="text-xs text-zinc-400">{{ $featuredArticle->published_at?->format('d M Y') }}</span>
+                </div>
+                <h3 class="font-extrabold text-2xl text-zinc-900 leading-snug mb-3 group-hover:text-emerald-700 transition line-clamp-2">
+                    {{ $featuredArticle->title }}
+                </h3>
+                @if($featuredArticle->excerpt)
+                <p class="text-zinc-500 text-sm leading-relaxed line-clamp-3 mb-4">{{ $featuredArticle->excerpt }}</p>
+                @endif
+                <div class="flex items-center gap-2 text-xs text-zinc-400 mt-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    {{ $featuredArticle->author }}
+                </div>
+            </div>
+        </a>
+
+        {{-- 2 smaller articles below --}}
+        @if($restArticles->isNotEmpty())
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @foreach($restArticles as $article)
+            <a href="{{ route('articles.show', $article->slug) }}"
+               class="group flex gap-5 bg-white rounded-2xl border border-zinc-100 shadow-sm hover:shadow-md p-5 overflow-hidden transition">
+                <div class="w-28 h-28 flex-shrink-0 rounded-xl overflow-hidden bg-zinc-100">
                     @if($article->thumbnail)
                         <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}"
                              class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                     @else
                         <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-emerald-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 2v6h6"/>
                             </svg>
                         </div>
                     @endif
                 </div>
-                <!-- Content -->
-                <div class="flex flex-col flex-1 p-6">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="text-xs font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full">{{ $article->category }}</span>
-                        <span class="text-xs text-zinc-400">{{ $article->published_at?->format('d M Y') }}</span>
+                <div class="flex flex-col justify-center min-w-0">
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-600">{{ $article->category }}</span>
+                        <span class="text-[10px] text-zinc-400">{{ $article->published_at?->format('d M Y') }}</span>
                     </div>
-                    <h3 class="font-bold text-zinc-900 text-base leading-snug mb-2 group-hover:text-emerald-700 transition line-clamp-2">
+                    <h3 class="font-bold text-sm text-zinc-900 line-clamp-2 group-hover:text-emerald-700 transition leading-snug mb-1.5">
                         {{ $article->title }}
                     </h3>
                     @if($article->excerpt)
-                    <p class="text-zinc-500 text-sm leading-relaxed line-clamp-3 flex-1">{{ $article->excerpt }}</p>
+                    <p class="text-xs text-zinc-500 line-clamp-2 leading-relaxed mb-1.5">{{ $article->excerpt }}</p>
                     @endif
-                    <div class="mt-4 flex items-center gap-2 text-xs text-zinc-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-                        {{ $article->author }}
-                    </div>
+                    <span class="text-xs text-zinc-400">{{ $article->author }}</span>
                 </div>
             </a>
             @endforeach
         </div>
+        @endif
     </div>
 </div>
 @endif
@@ -331,11 +423,11 @@
 <!-- CTA Banner -->
 <div class="py-24 bg-zinc-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-emerald-950 to-primary-green text-white p-12 md:p-16 rounded-[2.5rem] shadow-xl text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center opacity-10 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=1200');"></div>
+        <div class="bg-gradient-to-r from-emerald-950 via-emerald-50 to-emerald-950 p-12 md:p-16 rounded-[2.5rem] shadow-xl text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center opacity-5 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=1200');"></div>
             <div class="relative z-10 max-w-2xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Bergabunglah dalam Gerakan Keberlanjutan</h2>
-                <p class="text-gray-300 text-sm md:text-base mb-8 leading-relaxed">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-emerald-950">Bergabunglah dalam Gerakan Keberlanjutan</h2>
+                <p class="text-zinc-600 text-sm md:text-base mb-8 leading-relaxed">
                     Kami mengundang universitas, peneliti, LSM, instansi pemerintah, dan sukarelawan untuk berkolaborasi dalam berbagai proyek lingkungan dan sosial di Jawa Timur.
                 </p>
                 <div class="flex justify-center gap-4 flex-wrap">
