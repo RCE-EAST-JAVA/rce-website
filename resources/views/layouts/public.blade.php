@@ -90,13 +90,23 @@
                             Artikel
                         </a>
 
-                        <a href="{{ route('staff.index') }}"
+                         <a href="{{ route('staff.index') }}"
                            :class="scrolled
                                ? '{{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
                                : '{{ Request::is('staf*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                              Staf
                         </a>
+
+                        <a href="{{ route('sdg.index') }}"
+                           :class="scrolled
+                               ? '{{ Request::is('sdg*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
+                               : '{{ Request::is('sdg*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
+                            SDGs
+                        </a>
+
+                       
                         
                     </div>
                 </div>
@@ -149,6 +159,7 @@
                         <li><a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a></li>
                         <li><a href="{{ route('projects.index') }}" class="hover:text-white transition">Portofolio Proyek</a></li>
                         <li><a href="{{ route('articles.index') }}" class="hover:text-white transition">Artikel</a></li>
+                        <li><a href="{{ route('sdg.index') }}" class="hover:text-white transition">Sustainable Development Goals</a></li>
                         <li><a href="{{ route('staff.index') }}" class="hover:text-white transition">Direktori Staf</a></li>
                     </ul>
                 </div>

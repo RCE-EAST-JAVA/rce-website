@@ -58,7 +58,7 @@
             letter-spacing: -0.01em;
         }
 
-        /* Card polish */
+        /* Card polish - light */
         .card {
             border-radius: 1rem !important;
             border: 1px solid #f1f5f1 !important;
@@ -72,7 +72,7 @@
         }
         .card-body { padding: 1.4rem !important; }
 
-        /* Table polish */
+        /* Table polish - light */
         .table thead th {
             background: #f8faf8;
             font-size: 0.78rem;
@@ -115,6 +115,53 @@
 
         /* Footer */
         footer .footer { font-size: 0.8rem; }
+
+        /* ── Dark mode overrides ── */
+        body.dark .sidebar-brand-name {
+            color: #6ee27b;
+        }
+        body.dark .topbar-page-title {
+            color: #6ee27b;
+        }
+        body.dark .card {
+            border: 1px solid #2a2f2a !important;
+            box-shadow: 0 1px 8px 0 rgba(0,0,0,.25) !important;
+        }
+        body.dark .card-header {
+            background: transparent !important;
+            border-bottom: 1px solid #2a2f2a !important;
+        }
+        body.dark .table thead th {
+            background: transparent;
+            color: #9ca3af;
+            border-bottom: 1px solid #2a2f2a !important;
+        }
+        body.dark .table tbody tr:hover {
+            background: rgba(255,255,255,.04);
+        }
+        body.dark .form-control,
+        body.dark .form-select {
+            border-color: #374137 !important;
+        }
+        body.dark .form-control:focus,
+        body.dark .form-select:focus {
+            border-color: #4ade80 !important;
+            box-shadow: 0 0 0 0.2rem rgba(74,222,128,.12) !important;
+        }
+        body.dark .dropdown-menu {
+            background: #1e2320 !important;
+            border: 1px solid #2a2f2a !important;
+        }
+        body.dark .dropdown-item {
+            color: #d1d5db !important;
+        }
+        body.dark .dropdown-item:hover {
+            background: #2a2f2a !important;
+            color: #fff !important;
+        }
+        body.dark .dropdown-divider {
+            border-color: #2a2f2a !important;
+        }
     </style>
 
     @yield('styles')

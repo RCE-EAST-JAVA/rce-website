@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\SdgController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProjectController;
@@ -19,6 +20,8 @@ Route::get('/proyek/{project}', [ProjectController::class, 'show'])->name('proje
 Route::get('/artikel', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/staf', [StaffController::class, 'index'])->name('staff.index');
+Route::get('/sdg', [SdgController::class, 'index'])->name('sdg.index');
+Route::get('/sdg/{number}', [SdgController::class, 'show'])->name('sdg.show')->where('number', '[0-9]+');
 
 // Redirect Dashboard Dinamis Berdasarkan Role
 Route::get('/dashboard', function () {
