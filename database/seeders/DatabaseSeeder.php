@@ -104,5 +104,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'aliyah.p@rce-eastjava.org',
             'linkedin' => 'linkedin.com/in/aliyahp',
         ]);
+        $this->call(ArticleSeeder::class);
     }
 }

@@ -3,17 +3,21 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminStaffController;
 use App\Http\Controllers\Admin\AdminHeroController;
+use App\Http\Controllers\Admin\AdminArticleController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/proyek', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/proyek/{project}', [ProjectController::class, 'show'])->name('projects.show');
+Route::get('/artikel', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/staf', [StaffController::class, 'index'])->name('staff.index');
 
 // Redirect Dashboard Dinamis Berdasarkan Role
@@ -37,6 +41,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('projects', AdminProjectController::class)->names('admin.projects');
     Route::resource('staff', AdminStaffController::class)->names('admin.staff');
     Route::resource('hero', AdminHeroController::class)->names('admin.hero')->except(['show']);
+    Route::resource('articles', AdminArticleController::class)->names('admin.articles')->except(['show']);
+    Route::post('articles/upload-image', [AdminArticleController::class, 'uploadImage'])->name('admin.articles.upload-image');
 });
 
 require __DIR__.'/auth.php';

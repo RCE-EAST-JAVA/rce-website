@@ -88,6 +88,13 @@
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Direktori Staf
                         </a>
+                        <a href="{{ route('articles.index') }}"
+                           :class="scrolled
+                               ? '{{ Request::is('artikel*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
+                               : '{{ Request::is('artikel*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
+                           class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
+                            Artikel
+                        </a>
                     </div>
                 </div>
 
