@@ -104,6 +104,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'aliyah.p@rce-eastjava.org',
             'linkedin' => 'linkedin.com/in/aliyahp',
         ]);
+        // 4. Data Mitra & Kolaborator
+        \App\Models\Partner::create(['name' => 'UNESA']);
+        \App\Models\Partner::create(['name' => 'ITS']);
+        \App\Models\Partner::create(['name' => 'UNAIR']);
+        \App\Models\Partner::create(['name' => 'UNIVERSITAS BRAWIJAYA']);
+        \App\Models\Partner::create(['name' => 'UIN SUNAN AMPEL']);
+
         $this->call(ArticleSeeder::class);
     }
 }

@@ -234,6 +234,13 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item {{ Request::is('admin/partners*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.partners.index') }}" class="sidebar-link">
+                                <i class="bi bi-building"></i>
+                                <span>Mitra & Kolaborator</span>
+                            </a>
+                        </li>
+
                         <li class="sidebar-title">Tampilan</li>
 
                         <li class="sidebar-item {{ Request::is('admin/hero*') ? 'active' : '' }}">

@@ -192,17 +192,36 @@
 </div>
 
 <!-- Section 02: Mitra & Kolaborator -->
-<div class="py-20 bg-zinc-50 border-y border-zinc-100">
+<div class="py-20 bg-gradient-to-br from-zinc-50 to-white border-y border-zinc-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3 block">Jaringan Mitra Akademik</span>
-        <h2 class="text-3xl font-extrabold text-primary-green mb-12">Mitra & Kolaborator</h2>
+        <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-3 block">Jaringan Mitra Akademik</span>
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Mitra & Kolaborator</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto mb-14 leading-relaxed">
+            Bersama kami mewujudkan riset kolaboratif dan aksi lingkungan berkelanjutan di Jawa Timur.
+        </p>
         
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-6 items-center">
-            @foreach(['UNESA', 'ITS', 'UNAIR', 'UNIVERSITAS BRAWIJAYA', 'UIN SUNAN AMPEL'] as $mitra)
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100/60 font-black text-gray-400 text-sm tracking-widest hover:text-primary-green hover:shadow transition duration-200">
-                    {{ $mitra }}
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-5">
+            @forelse($partners as $mitra)
+                <div class="group relative bg-white p-6 rounded-3xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-zinc-100">
+                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                        @if($mitra->logo)
+                            <img src="{{ asset($mitra->logo) }}" alt="{{ $mitra->name }}"
+                                class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300">
+                        @else
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-green/10 to-emerald-50 flex items-center justify-center group-hover:from-primary-green group-hover:to-emerald-600 transition-all duration-300">
+                                <i class="bi bi-building text-2xl text-primary-green group-hover:text-white transition-colors duration-300"></i>
+                            </div>
+                        @endif
+                    </div>
+                    <h3 class="font-extrabold text-gray-700 text-sm tracking-wide group-hover:text-primary-green transition-colors duration-200">{{ $mitra->name }}</h3>
+                    <div class="mt-3 w-8 h-1 bg-zinc-200 rounded-full mx-auto group-hover:w-12 group-hover:bg-primary-green transition-all duration-300"></div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-span-5 text-center py-10 text-gray-400">
+                    <i class="bi bi-building text-4xl block mb-3 opacity-50"></i>
+                    <p>Belum ada mitra ditambahkan.</p>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>

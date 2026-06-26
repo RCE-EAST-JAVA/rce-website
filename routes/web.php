@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminStaffController;
 use App\Http\Controllers\Admin\AdminHeroController;
 use App\Http\Controllers\Admin\AdminArticleController;
+use App\Http\Controllers\Admin\AdminPartnerController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Publik
@@ -46,6 +47,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('hero', AdminHeroController::class)->names('admin.hero')->except(['show']);
     Route::resource('articles', AdminArticleController::class)->names('admin.articles')->except(['show']);
     Route::post('articles/upload-image', [AdminArticleController::class, 'uploadImage'])->name('admin.articles.upload-image');
+    Route::resource('partners', AdminPartnerController::class)->names('admin.partners')->except(['show']);
 });
 
 require __DIR__.'/auth.php';
