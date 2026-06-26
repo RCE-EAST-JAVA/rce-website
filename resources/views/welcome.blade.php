@@ -15,8 +15,10 @@
         slides: {{ $heroImages }},
         current: 0,
         timer: null,
+        scrollY: 0,
         init() {
             this.startAuto();
+            window.addEventListener('scroll', () => { this.scrollY = window.scrollY; }, { passive: true });
         },
         startAuto() {
             this.timer = setInterval(() => { this.next(); }, 5000);
@@ -37,13 +39,21 @@
     <!-- Slider background images -->
     <template x-for="(slide, index) in slides" :key="index">
         <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-             :style="'background-image: url(' + slide + ')'"
+             :style="'background-image: url(' + slide + '); transform: translateY(' + (scrollY * 0.3) + 'px)'"
              :class="current === index ? 'opacity-60' : 'opacity-0'">
         </div>
     </template>
 
     <!-- Dark gradient overlay -->
     <div class="absolute inset-0 bg-gradient-to-tr from-zinc-950/80 via-zinc-900/40 to-transparent pointer-events-none"></div>
+
+    <!-- Parallax decorative blobs -->
+    <div class="absolute bottom-20 right-20 w-72 h-72 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none"
+         :style="'transform: translate(' + (scrollY * 0.15) + 'px, ' + (scrollY * -0.1) + 'px)'">
+    </div>
+    <div class="absolute top-32 left-10 w-48 h-48 rounded-full bg-emerald-400/5 blur-2xl pointer-events-none"
+         :style="'transform: translate(' + (scrollY * -0.1) + 'px, ' + (scrollY * 0.12) + 'px)'">
+    </div>
 
     <!-- Prev / Next arrows -->
     <template x-if="slides.length > 1">
@@ -104,7 +114,8 @@
     </div>
     @endif
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 md:pt-52 md:pb-48 flex flex-col justify-center min-h-[70vh]">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 md:pt-52 md:pb-48 flex flex-col justify-center min-h-[70vh]"
+         :style="'transform: translateY(' + (scrollY * -0.08) + 'px)'">
         <span data-aos="fade-up" class="text-accent-orange font-bold text-sm tracking-widest uppercase mb-4 block">Regional Centre of Expertise - East Java</span>
         <h1 data-aos="fade-up" data-aos-delay="50" class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
             RCE <br>
@@ -137,6 +148,31 @@
                 <span class="block text-3xl md:text-4xl font-extrabold text-white">{{ $stats['staff'] }}+</span>
                 <span class="text-xs md:text-sm text-gray-500 uppercase tracking-widest font-semibold mt-1 block">Akademisi & Peneliti</span>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Marquee / Ticker -->
+<div class="bg-[#d97724] text-white overflow-hidden py-3">
+    <div class="marquee-track flex whitespace-nowrap">
+        @php
+            $words = ['KOMUNITAS', 'SDGS', 'JAWA TIMUR', 'EDUCATION', 'LINGKUNGAN', 'KOLABORASI', 'UNESCO', 'GREEN FUTURE', 'KEBERLANJUTAN'];
+            $separator = '<span class="mx-4 text-amber-200">●</span>';
+        @endphp
+        <div class="marquee-content flex items-center">
+            @foreach($words as $word)
+                <span class="text-sm font-bold tracking-widest">{!! $separator !!}{{ $word }}</span>
+            @endforeach
+        </div>
+        <div class="marquee-content flex items-center">
+            @foreach($words as $word)
+                <span class="text-sm font-bold tracking-widest">{!! $separator !!}{{ $word }}</span>
+            @endforeach
+        </div>
+        <div class="marquee-content flex items-center">
+            @foreach($words as $word)
+                <span class="text-sm font-bold tracking-widest">{!! $separator !!}{{ $word }}</span>
+            @endforeach
         </div>
     </div>
 </div>

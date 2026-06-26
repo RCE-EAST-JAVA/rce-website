@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .marquee-track {
+        display: flex;
+        width: fit-content;
+        animation: marquee-scroll 30s linear infinite;
+    }
+    .marquee-content {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-33.33%);
+    }
+}

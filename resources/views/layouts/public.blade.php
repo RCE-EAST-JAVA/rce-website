@@ -204,6 +204,31 @@
             offset: 40,
         });
     </script>
+
+    <!-- Click pop effect -->
+    <script>
+        document.addEventListener('click', function(e) {
+            const pop = document.createElement('div');
+            pop.style.cssText = `
+                position: fixed; left: ${e.clientX}px; top: ${e.clientY}px;
+                width: 8px; height: 8px; border-radius: 50%;
+                background: rgba(30, 70, 32, 0.5);
+                pointer-events: none; transform: translate(-50%, -50%) scale(0);
+                z-index: 9999;
+                transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+                opacity: 0;
+            `;
+            document.body.appendChild(pop);
+            requestAnimationFrame(() => {
+                pop.style.transform = 'translate(-50%, -50%) scale(6)';
+                pop.style.opacity = '0.7';
+            });
+            setTimeout(() => {
+                pop.style.opacity = '0';
+                setTimeout(() => pop.remove(), 300);
+            }, 150);
+        });
+    </script>
 </body>
 
 </html>

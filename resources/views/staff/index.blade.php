@@ -54,7 +54,11 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-24">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         @forelse($staffs as $staff)
-            <div class="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 aspect-[3/4] cursor-pointer">
+            <div x-data="{ x: 50, y: 50 }"
+                 @mousemove="x = ($event.offsetX / $el.offsetWidth) * 100; y = ($event.offsetY / $el.offsetHeight) * 100"
+                 @mouseleave="x = 50; y = 50"
+                 :style="'background: radial-gradient(circle at ' + x + '% ' + y + '%, rgba(255,255,255,0.12) 0%, transparent 60%);'"
+                 class="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 aspect-[3/4] cursor-pointer">
 
                 <!-- Fullscreen photo background -->
                 @if($staff->image)
