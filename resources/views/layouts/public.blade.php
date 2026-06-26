@@ -205,28 +205,38 @@
         });
     </script>
 
-    <!-- Click pop effect -->
+    <!-- Click splash effect -->
     <script>
         document.addEventListener('click', function(e) {
-            const pop = document.createElement('div');
-            pop.style.cssText = `
-                position: fixed; left: ${e.clientX}px; top: ${e.clientY}px;
-                width: 8px; height: 8px; border-radius: 50%;
-                background: rgba(30, 70, 32, 0.5);
-                pointer-events: none; transform: translate(-50%, -50%) scale(0);
-                z-index: 9999;
-                transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-                opacity: 0;
-            `;
-            document.body.appendChild(pop);
-            requestAnimationFrame(() => {
-                pop.style.transform = 'translate(-50%, -50%) scale(6)';
-                pop.style.opacity = '0.7';
-            });
-            setTimeout(() => {
-                pop.style.opacity = '0';
-                setTimeout(() => pop.remove(), 300);
-            }, 150);
+            const colors = ['#1e4620', '#d97724', '#34d399', '#10b981', '#fbbf24'];
+            const count = 8;
+            for (let i = 0; i < count; i++) {
+                const drop = document.createElement('div');
+                const angle = (i / count) * 360;
+                const dist = 40 + Math.random() * 30;
+                const rad = angle * (Math.PI / 180);
+                const dx = Math.cos(rad) * dist;
+                const dy = Math.sin(rad) * dist;
+                const size = 4 + Math.random() * 4;
+                drop.style.cssText = `
+                    position: fixed; left: ${e.clientX}px; top: ${e.clientY}px;
+                    width: ${size}px; height: ${size}px; border-radius: 50%;
+                    background: ${colors[i % colors.length]};
+                    pointer-events: none; z-index: 9999;
+                    transition: transform 0.5s cubic-bezier(.25,.46,.45,.94), opacity 0.5s ease-out;
+                    transform: translate(-50%, -50%);
+                    opacity: 0;
+                `;
+                document.body.appendChild(drop);
+                requestAnimationFrame(() => {
+                    drop.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.3)`;
+                    drop.style.opacity = '0.8';
+                });
+                setTimeout(() => {
+                    drop.style.opacity = '0';
+                    setTimeout(() => drop.remove(), 500);
+                }, 200 + i * 30);
+            }
         });
     </script>
 </body>
