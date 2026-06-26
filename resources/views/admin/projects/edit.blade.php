@@ -64,6 +64,15 @@
                 </div>
 
                 <div class="col-md-6 col-12 mb-3">
+                    <label for="published_at" class="form-label">Tanggal Publikasi <span class="text-danger">*</span></label>
+                    <input type="date" id="published_at" class="form-control @error('published_at') is-invalid @enderror" name="published_at" value="{{ old('published_at', $project->published_at ? $project->published_at->format('Y-m-d') : date('Y-m-d')) }}" required>
+                    <div class="form-text">Digunakan untuk mengurutkan proyek. Bisa diset ke tanggal masa lalu.</div>
+                    @error('published_at')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6 col-12 mb-3">
                     <label for="sdgs" class="form-label">Tag SDGs (Pisahkan dengan koma)</label>
                     <input type="text" id="sdgs" class="form-control @error('sdgs') is-invalid @enderror" name="sdgs" placeholder="Contoh: SDG 7, SDG 13" value="{{ old('sdgs', $project->sdgs) }}">
                     @error('sdgs')

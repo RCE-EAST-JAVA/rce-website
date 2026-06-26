@@ -47,7 +47,12 @@
                             </span>
                         </td>
                         <td>{{ $project->author }}</td>
-                        <td>{{ $project->date }}</td>
+                        <td>
+                            <div>{{ $project->date }}</div>
+                            @if($project->published_at)
+                                <small class="text-muted">Publikasi: {{ $project->published_at->format('d M Y') }}</small>
+                            @endif
+                        </td>
                         <td>{{ $project->sdgs }}</td>
                         <td>
                             <div class="d-flex gap-2">

@@ -10,7 +10,7 @@ class AdminProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::latest()->paginate(10);
+        $projects = Project::orderBy('published_at', 'desc')->paginate(10);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -30,6 +30,7 @@ class AdminProjectController extends Controller
             'sdgs' => 'nullable|string|max:255',
             'author' => 'required|string|max:255',
             'date' => 'required|string|max:255',
+            'published_at' => 'required|date',
         ]);
 
         $data = $request->all();
@@ -61,6 +62,7 @@ class AdminProjectController extends Controller
             'sdgs' => 'nullable|string|max:255',
             'author' => 'required|string|max:255',
             'date' => 'required|string|max:255',
+            'published_at' => 'required|date',
         ]);
 
         $data = $request->all();
