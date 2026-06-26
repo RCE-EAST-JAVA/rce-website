@@ -14,6 +14,9 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <!-- Scripts & Styles (Vite Tailwind from Breeze) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
@@ -136,7 +139,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-zinc-900 text-white mt-12 py-16">
+    <footer class="bg-zinc-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <!-- Branding -->
@@ -191,6 +194,16 @@
         </div>
     </footer>
     @yield('scripts')
+    
+    <!-- AOS Init -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 40,
+        });
+    </script>
 </body>
 
 </html>

@@ -105,16 +105,16 @@
     @endif
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 md:pt-52 md:pb-48 flex flex-col justify-center min-h-[70vh]">
-        <span class="text-accent-orange font-bold text-sm tracking-widest uppercase mb-4 block">Regional Centre of Expertise - East Java</span>
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+        <span data-aos="fade-up" class="text-accent-orange font-bold text-sm tracking-widest uppercase mb-4 block">Regional Centre of Expertise - East Java</span>
+        <h1 data-aos="fade-up" data-aos-delay="50" class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
             RCE <br>
             <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500">EAST JAVA</span>
         </h1>
-        <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10 leading-relaxed">
+        <p data-aos="fade-up" data-aos-delay="100" class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10 leading-relaxed">
             Menghubungkan pendidikan, riset, dan inisiatif lokal untuk mempercepat aksi pencapaian Sustainable Development Goals (SDGs) di seluruh wilayah Jawa Timur.
         </p>
         
-        <div class="flex flex-wrap gap-4 mb-16">
+        <div data-aos="fade-up" data-aos-delay="150" class="flex flex-wrap gap-4 mb-16">
             <a href="{{ route('projects.index') }}" class="bg-accent-orange hover-bg-accent-orange text-white px-8 py-4 rounded-full font-bold shadow-lg transition duration-200">
                 Jelajahi Proyek
             </a>
@@ -124,7 +124,7 @@
         </div>
         
         <!-- Stats Counter -->
-        <div class="grid grid-cols-3 gap-6 max-w-xl border-t border-zinc-800/80 pt-10">
+        <div data-aos="fade-up" data-aos-delay="200" class="grid grid-cols-3 gap-6 max-w-xl border-t border-zinc-800/80 pt-10">
             <div>
                 <span class="block text-3xl md:text-4xl font-extrabold text-white">{{ $stats['projects'] }}+</span>
                 <span class="text-xs md:text-sm text-gray-500 uppercase tracking-widest font-semibold mt-1 block">Inisiatif Proyek</span>
@@ -145,7 +145,7 @@
 <div class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-stretch">
-            <div class="bg-gradient-to-br from-emerald-950 to-emerald-900 text-white p-10 rounded-3xl flex flex-col justify-between shadow-xl">
+            <div data-aos="fade-up" class="bg-gradient-to-br from-emerald-950 to-emerald-900 text-white p-10 rounded-3xl flex flex-col justify-between shadow-xl">
                 <div>
                     <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 block">Visi Utama</span>
                     <h2 class="text-3xl font-bold leading-snug mb-6">Pusat keunggulan regional terkemuka dalam pembangunan berkelanjutan Jawa Timur.</h2>
@@ -155,7 +155,7 @@
                 </div>
             </div>
             
-            <div class="bg-amber-600 text-white p-10 rounded-3xl flex flex-col justify-between shadow-xl">
+            <div data-aos="fade-up" data-aos-delay="50" class="bg-amber-600 text-white p-10 rounded-3xl flex flex-col justify-between shadow-xl">
                 <div>
                     <span class="text-xs font-bold uppercase tracking-widest text-amber-200 mb-2 block">Tahun Pendirian</span>
                     <h2 class="text-6xl font-black mb-4">2009</h2>
@@ -168,7 +168,7 @@
                 </div>
             </div>
 
-            <div class="bg-zinc-50 border border-zinc-100 p-10 rounded-3xl flex flex-col justify-between shadow-md">
+            <div data-aos="fade-up" data-aos-delay="100" class="bg-zinc-50 border border-zinc-100 p-10 rounded-3xl flex flex-col justify-between shadow-md">
                 <div>
                     <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-2 block">Misi Kami</span>
                     <ul class="space-y-4 text-sm text-gray-600">
@@ -194,15 +194,17 @@
 <!-- Section 02: Mitra & Kolaborator -->
 <div class="py-20 bg-gradient-to-br from-zinc-50 to-white border-y border-zinc-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-3 block">Jaringan Mitra Akademik</span>
-        <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Mitra & Kolaborator</h2>
-        <p class="text-gray-500 max-w-2xl mx-auto mb-14 leading-relaxed">
-            Bersama kami mewujudkan riset kolaboratif dan aksi lingkungan berkelanjutan di Jawa Timur.
-        </p>
+        <div data-aos="fade-up">
+            <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-3 block">Jaringan Mitra Akademik</span>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Mitra & Kolaborator</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto mb-14 leading-relaxed">
+                Bersama kami mewujudkan riset kolaboratif dan aksi lingkungan berkelanjutan di Jawa Timur.
+            </p>
+        </div>
         
         <div class="grid grid-cols-2 md:grid-cols-5 gap-5">
-            @forelse($partners as $mitra)
-                <div class="group relative bg-white p-6 rounded-3xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-zinc-100">
+            @forelse($partners as $i => $mitra)
+                <div data-aos="fade-up" data-aos-delay="{{ $i * 50 }}" class="group relative bg-white p-6 rounded-3xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-zinc-100">
                     <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
                         @if($mitra->logo)
                             <img src="{{ asset($mitra->logo) }}" alt="{{ $mitra->name }}"
@@ -229,7 +231,7 @@
 <!-- Section 03: Aktivitas/Proyek Terbaru -->
 <div class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-end mb-12">
+        <div data-aos="fade-up" class="flex justify-between items-end mb-12">
             <div>
                 <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-2 block">Galeri Aksi</span>
                 <h2 class="text-3xl font-extrabold text-primary-green">Aktivitas Terbaru</h2>
@@ -248,7 +250,7 @@
         {{-- Row 1: featured + 2 kecil di kanan --}}
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
             {{-- Featured --}}
-            <a href="{{ route('projects.show', $featured->id) }}"
+            <a data-aos="fade-up" href="{{ route('projects.show', $featured->id) }}"
                class="group lg:col-span-3 bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col">
                 <div class="relative h-72 bg-zinc-200 overflow-hidden">
                     @if($featured->image)
@@ -280,8 +282,8 @@
             </a>
 
             {{-- 3 kecil di kanan --}}
-            <div class="lg:col-span-2 flex flex-col gap-4">
-                @foreach($side as $project)
+            <div data-aos="fade-up" data-aos-delay="50" class="lg:col-span-2 flex flex-col gap-4">
+                @foreach($side as $i => $project)
                 <a href="{{ route('projects.show', $project->id) }}"
                    class="group bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex gap-4 p-4 flex-1">
                     <div class="w-28 flex-shrink-0 rounded-2xl overflow-hidden bg-zinc-200 self-stretch">
@@ -315,7 +317,7 @@
 @if($latestArticles->isNotEmpty())
 <div class="py-24 bg-zinc-50 border-t border-zinc-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-end justify-between mb-10">
+        <div data-aos="fade-up" class="flex items-end justify-between mb-10">
             <div>
                 <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2 block">Dari Blog Kami</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-zinc-900">Artikel Terbaru</h2>
@@ -331,7 +333,7 @@
         {{-- Featured article: horizontal full-width --}}
         @php $featuredArticle = $latestArticles->first(); $restArticles = $latestArticles->skip(1); @endphp
 
-        <a href="{{ route('articles.show', $featuredArticle->slug) }}"
+        <a data-aos="fade-up" href="{{ route('articles.show', $featuredArticle->slug) }}"
            class="group flex flex-col md:flex-row bg-white rounded-3xl border border-zinc-100 shadow-sm hover:shadow-md overflow-hidden transition mb-6">
             <div class="md:w-2/5 aspect-[16/9] md:aspect-auto bg-zinc-100 overflow-hidden flex-shrink-0">
                 @if($featuredArticle->thumbnail)
@@ -368,8 +370,8 @@
         {{-- 2 smaller articles below --}}
         @if($restArticles->isNotEmpty())
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            @foreach($restArticles as $article)
-            <a href="{{ route('articles.show', $article->slug) }}"
+            @foreach($restArticles as $i => $article)
+            <a data-aos="fade-up" data-aos-delay="{{ $i * 50 }}" href="{{ route('articles.show', $article->slug) }}"
                class="group flex gap-5 bg-white rounded-2xl border border-zinc-100 shadow-sm hover:shadow-md p-5 overflow-hidden transition">
                 <div class="w-28 h-28 flex-shrink-0 rounded-xl overflow-hidden bg-zinc-100">
                     @if($article->thumbnail)
@@ -405,7 +407,7 @@
 @endif
 
 <!-- CTA Banner -->
-<div class="py-24 bg-zinc-100">
+<div data-aos="fade-up" class="py-24 bg-zinc-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-gradient-to-r from-emerald-950 via-emerald-50 to-emerald-950 p-12 md:p-16 rounded-[2.5rem] shadow-xl text-center relative overflow-hidden">
             <div class="absolute inset-0 bg-cover bg-center opacity-5 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=1200');"></div>
