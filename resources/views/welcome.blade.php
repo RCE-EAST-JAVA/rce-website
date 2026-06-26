@@ -223,8 +223,7 @@
         @if($latestProjects->isNotEmpty())
         @php
             $featured = $latestProjects->get(0);
-            $side     = $latestProjects->slice(1, 2);
-            $bottom   = $latestProjects->slice(3, 2);
+            $side     = $latestProjects->slice(1, 3);
         @endphp
 
         {{-- Row 1: featured + 2 kecil di kanan --}}
@@ -261,8 +260,8 @@
                 </div>
             </a>
 
-            {{-- 2 kecil di kanan --}}
-            <div class="lg:col-span-2 flex flex-col gap-6">
+            {{-- 3 kecil di kanan --}}
+            <div class="lg:col-span-2 flex flex-col gap-4">
                 @foreach($side as $project)
                 <a href="{{ route('projects.show', $project->id) }}"
                    class="group bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex gap-4 p-4 flex-1">
@@ -280,46 +279,12 @@
                         <h3 class="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-primary-green transition-colors leading-snug mb-1">{{ $project->title }}</h3>
                         <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-1">{{ $project->description }}</p>
                         <span class="text-xs text-gray-400">{{ $project->date }}</span>
+                        <span class="text-xs text-gray-400 mt-0.5">Oleh: {{ $project->author }}</span>
                     </div>
                 </a>
                 @endforeach
             </div>
         </div>
-
-        {{-- Row 2: 2 proyek bawah (horizontal) --}}
-        @if($bottom->isNotEmpty())
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            @foreach($bottom as $project)
-            <a href="{{ route('projects.show', $project->id) }}"
-               class="group bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex gap-5 p-5">
-                <div class="w-36 h-28 flex-shrink-0 rounded-2xl overflow-hidden bg-zinc-200">
-                    @if($project->image)
-                        <img src="{{ asset($project->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    @else
-                        <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
-                            <i class="bi bi-image text-2xl"></i>
-                        </div>
-                    @endif
-                </div>
-                <div class="flex flex-col justify-center min-w-0">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-primary-green mb-1">{{ $project->category }}</span>
-                    <h3 class="font-bold text-base text-gray-900 line-clamp-2 group-hover:text-primary-green transition-colors leading-snug mb-2">{{ $project->title }}</h3>
-                    <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-2">{{ $project->description }}</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-gray-400">{{ $project->date }}</span>
-                        @if($project->sdgs)
-                        <div class="flex gap-1">
-                            @foreach(explode(',', $project->sdgs) as $sdg)
-                            <span class="text-[10px] bg-accent-orange/10 text-accent-orange font-bold px-2 py-0.5 rounded">{{ trim($sdg) }}</span>
-                            @endforeach
-                        </div>
-                        @endif
-                    </div>
-                </div>
-            </a>
-            @endforeach
-        </div>
-        @endif
 
         @else
             <div class="text-center py-12 text-gray-400">Belum ada proyek terbaru.</div>

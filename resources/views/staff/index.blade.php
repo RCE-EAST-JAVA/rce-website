@@ -54,50 +54,68 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-24">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         @forelse($staffs as $staff)
-            <div class="bg-white rounded-3xl p-6 border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between items-center text-center">
-                <div class="flex flex-col items-center w-full">
-                    <!-- Profile Picture -->
-                    <div class="relative w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-primary-green/20">
-                        @if($staff->image)
-                            <img src="{{ asset($staff->image) }}" class="w-full h-full object-cover">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center bg-zinc-100 text-zinc-400">
-                                <i class="bi bi-person-fill text-4xl"></i>
-                            </div>
-                        @endif
+            <div class="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 aspect-[3/4] cursor-pointer">
+
+                <!-- Fullscreen photo background -->
+                @if($staff->image)
+                    <img src="{{ asset($staff->image) }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                @else
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-800 to-teal-600 flex items-center justify-center">
+                        <i class="bi bi-person-fill text-white/30 text-8xl"></i>
                     </div>
-                    
-                    <!-- Meta info -->
-                    <span class="text-[10px] text-accent-orange font-bold uppercase tracking-wider block mb-1">
+                @endif
+
+                <!-- Gradient overlay — always visible at bottom -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                <!-- Hover overlay — slides up -->
+                <div class="absolute inset-0 bg-gradient-to-t from-primary-green/90 via-primary-green/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <!-- Role badge top right -->
+                <div class="absolute top-4 right-4 z-20">
+                    <span class="text-[10px] font-bold uppercase tracking-wider bg-primary-green text-white px-3 py-1.5 rounded-full shadow-lg">
                         {{ $staff->role }}
                     </span>
-                    <h3 class="font-extrabold text-base text-gray-900 mb-1 leading-snug">{{ $staff->name }}</h3>
-                    <p class="text-xs text-gray-400 font-medium mb-4">{{ $staff->affiliation }}</p>
-                    
-                    <!-- Expertise tags -->
-                    @if($staff->expertise)
-                        <div class="flex flex-wrap justify-center gap-1.5 mb-6">
-                            @foreach(explode(',', $staff->expertise) as $exp)
-                                <span class="text-[10px] bg-zinc-100 text-gray-600 px-2.5 py-1 rounded-full font-medium">
-                                    {{ trim($exp) }}
-                                </span>
-                            @endforeach
-                        </div>
-                    @endif
                 </div>
-                
-                <!-- Social Contact Row -->
-                <div class="flex gap-4 border-t border-zinc-100 pt-4 w-full justify-center">
-                    @if($staff->email)
-                        <a href="mailto:{{ $staff->email }}" class="text-gray-400 hover:text-primary-green transition text-lg">
-                            <i class="bi bi-envelope-fill"></i>
-                        </a>
-                    @endif
-                    @if($staff->linkedin)
-                        <a href="https://{{ $staff->linkedin }}" target="_blank" class="text-gray-400 hover:text-blue-600 transition text-lg">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
-                    @endif
+
+                <!-- Bottom content -->
+                <div class="absolute bottom-0 left-0 right-0 z-20 p-5">
+
+                    <!-- Default state: name + affiliation -->
+                    <div class="transform group-hover:-translate-y-2 transition-transform duration-300">
+                        <h3 class="font-extrabold text-white text-lg leading-tight drop-shadow-md">{{ $staff->name }}</h3>
+                        <p class="text-white/70 text-xs mt-0.5 flex items-center gap-1">
+                            <i class="bi bi-building"></i> {{ $staff->affiliation }}
+                        </p>
+                    </div>
+
+                    <!-- Hover state: expertise + social -->
+                    <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">
+                        @if($staff->expertise)
+                            <div class="flex flex-wrap gap-1.5 mt-3">
+                                @foreach(array_slice(explode(',', $staff->expertise), 0, 3) as $exp)
+                                    <span class="text-[10px] bg-white text-primary-green px-2.5 py-1 rounded-full font-semibold">
+                                        {{ trim($exp) }}
+                                    </span>
+                                @endforeach
+                            </div>
+                        @endif
+
+                        <div class="flex gap-2 mt-3">
+                            @if($staff->email)
+                                <a href="mailto:{{ $staff->email }}" onclick="event.stopPropagation()"
+                                   class="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-white text-primary-green hover:bg-emerald-50 transition-all duration-200 text-xs font-bold shadow-md">
+                                    <i class="bi bi-envelope-fill"></i> Email
+                                </a>
+                            @endif
+                            @if($staff->linkedin)
+                                <a href="https://{{ $staff->linkedin }}" target="_blank" onclick="event.stopPropagation()"
+                                   class="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-white text-blue-600 hover:bg-blue-50 transition-all duration-200 text-xs font-bold shadow-md">
+                                    <i class="bi bi-linkedin"></i> LinkedIn
+                                </a>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         @empty
