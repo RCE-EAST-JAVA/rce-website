@@ -58,15 +58,65 @@
 
         <!-- Left: Description -->
         <div class="lg:col-span-2">
-            <!-- Featured Image -->
-            @if($project->image)
-                <div class="rounded-3xl overflow-hidden mb-10 shadow-lg border border-zinc-100">
-                    <img src="{{ asset($project->image) }}"
-                         alt="{{ $project->title }}"
-                         class="w-full object-cover max-h-[480px]">
+            <!-- Image Slider -->
+            @php
+                $allImages = collect();
+                if ($project->image) $allImages->push($project->image);
+                $allImages = $allImages->merge($project->images->pluck('image'));
+            @endphp
+
+            @if($allImages->isNotEmpty())
+                <div class="mb-8"
+                     x-data="{
+                         images: {{ $allImages->map(fn($i) => asset($i))->values()->toJson() }},
+                         current: 0,
+                         timer: null,
+                         init() { this.timer = setInterval(() => { this.next(); }, 4000); },
+                         next() { this.current = (this.current + 1) % this.images.length; },
+                         prev() { this.current = (this.current - 1 + this.images.length) % this.images.length; },
+                         goTo(i) { this.current = i; }
+                     }">
+                    <div class="relative rounded-3xl overflow-hidden shadow-lg border border-zinc-100 bg-zinc-100" style="height: 460px;">
+                        <template x-for="(img, index) in images" :key="index">
+                            <img :src="img" :alt="'Image ' + (index + 1)"
+                                 class="w-full h-full object-cover transition-opacity duration-500"
+                                 :class="current === index ? 'opacity-100' : 'opacity-0 absolute inset-0'">
+                        </template>
+
+                        <template x-if="images.length > 1">
+                            <div>
+                                <button @click="prev(); clearInterval(timer); timer = setInterval(() => { next(); }, 4000);"
+                                    class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-9 h-9 flex items-center justify-center shadow-md transition z-10">
+                                    <i class="bi bi-chevron-left"></i>
+                                </button>
+                                <button @click="next(); clearInterval(timer); timer = setInterval(() => { next(); }, 4000);"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-9 h-9 flex items-center justify-center shadow-md transition z-10">
+                                    <i class="bi bi-chevron-right"></i>
+                                </button>
+                            </div>
+                        </template>
+
+                        <template x-if="images.length > 1">
+                            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5">
+                                <template x-for="(img, index) in images" :key="index">
+                                    <button @click="goTo(index); clearInterval(timer); timer = setInterval(() => { next(); }, 4000);"
+                                        class="rounded-full transition-all duration-300"
+                                        :class="current === index ? 'bg-white w-5 h-2' : 'bg-white/50 w-2 h-2'">
+                                    </button>
+                                </template>
+                            </div>
+                        </template>
+
+                        <!-- Counter badge -->
+                        <template x-if="images.length > 1">
+                            <span class="absolute top-3 right-3 bg-black/40 text-white text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm z-10"
+                                  x-text="(current + 1) + ' / ' + images.length">
+                            </span>
+                        </template>
+                    </div>
                 </div>
             @else
-                <div class="rounded-3xl overflow-hidden mb-10 bg-zinc-100 border border-zinc-200 flex items-center justify-center" style="height: 320px;">
+                <div class="rounded-3xl overflow-hidden mb-8 bg-zinc-100 border border-zinc-200 flex items-center justify-center" style="height: 320px;">
                     <i class="bi bi-image text-6xl text-zinc-300"></i>
                 </div>
             @endif
@@ -74,7 +124,7 @@
             <!-- Description -->
             <div class="bg-white rounded-3xl border border-zinc-100 shadow-sm p-8 md:p-10">
                 <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-3 block">Deskripsi Proyek</span>
-                <div class="prose prose-zinc max-w-none text-gray-700 leading-relaxed text-base whitespace-pre-line">
+                <div class="prose prose-zinc max-w-none text-gray-700 leading-relaxed text-base whitespace-pre-line break-words">
                     {{ $project->description }}
                 </div>
             </div>
@@ -143,8 +193,8 @@
             <a href="{{ route('projects.show', $rel->id) }}"
                class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col">
                 <div class="relative h-44 bg-zinc-200 overflow-hidden">
-                    @if($rel->image)
-                        <img src="{{ asset($rel->image) }}" alt="{{ $rel->title }}"
+                    @if($rel->display_image)
+                        <img src="{{ asset($rel->display_image) }}" alt="{{ $rel->title }}"
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     @else
                         <div class="w-full h-full flex items-center justify-center">

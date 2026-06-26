@@ -39,13 +39,23 @@
     </style>
 </head>
 
-<body class="bg-zinc-50 antialiased text-gray-800">
+<body x-data="{
+    slides: {{ $heroPhotos->isNotEmpty() ? $heroPhotos->map(fn($p) => asset($p->image))->values()->toJson() : json_encode(['https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=800']) }},
+    current: 0,
+    timer: null,
+    init() { this.timer = setInterval(() => { this.current = (this.current + 1) % this.slides.length; }, 5000); }
+}" class="bg-zinc-50 antialiased text-gray-800">
     <div class="min-h-screen flex flex-col md:flex-row">
-        <!-- Left Pane: Branding & Visual (Split layout) -->
+        <!-- Left Pane: Hero slider -->
         <div class="hidden md:flex md:w-1/2 bg-zinc-950 relative overflow-hidden flex-col justify-between p-12 text-white">
-            <!-- Background Image with Overlay -->
-            <div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=800');"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent"></div>
+            <!-- Slider images -->
+            <template x-for="(slide, index) in slides" :key="index">
+                <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+                     :style="'background-image: url(' + slide + ')'"
+                     :class="current === index ? 'opacity-40' : 'opacity-0'">
+                </div>
+            </template>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"></div>
             
             <!-- Logo Header -->
             <div class="relative z-10">
@@ -66,8 +76,18 @@
             </div>
 
             <!-- Footer Quote -->
-            <div class="relative z-10 text-xs text-gray-500">
-                &copy; 2026 RCE East Java Network. All rights reserved.
+            <div class="relative z-10">
+                <template x-if="slides.length > 1">
+                    <div class="flex gap-1.5 mb-4">
+                        <template x-for="(slide, index) in slides" :key="index">
+                            <button @click="current = index; clearInterval(timer); timer = setInterval(() => { current = (current + 1) % slides.length; }, 5000);"
+                                class="rounded-full transition-all duration-300"
+                                :class="current === index ? 'bg-white w-5 h-1.5' : 'bg-white/40 w-1.5 h-1.5'">
+                            </button>
+                        </template>
+                    </div>
+                </template>
+                <p class="text-xs text-gray-500">&copy; 2026 RCE East Java Network. All rights reserved.</p>
             </div>
         </div>
 

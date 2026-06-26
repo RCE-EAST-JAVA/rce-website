@@ -80,11 +80,25 @@
                 </div>
 
                 <div class="col-12 mb-3">
-                    <label for="image" class="form-label">Foto Proyek</label>
+                    <label for="image" class="form-label">Foto Utama Proyek <span class="text-muted fw-normal">(opsional)</span></label>
                     <input type="file" id="image" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/*">
+                    <div class="form-text">Format: JPG, PNG, WEBP. Maks 3MB.</div>
                     @error('image')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                    <div id="imagePreview" class="mt-2 d-none">
+                        <img id="previewImg" src="#" class="rounded img-thumbnail" style="max-height: 150px;">
+                    </div>
+                </div>
+
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-semibold">Foto Galeri <span class="text-muted fw-normal">(opsional, bisa lebih dari satu)</span></label>
+                    <input type="file" id="galleryInput" class="form-control @error('images.*') is-invalid @enderror" name="images[]" accept="image/*" multiple>
+                    @error('images.*')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <div class="form-text">Format: JPG, PNG, WEBP. Maks 3MB per foto. Bisa pilih beberapa sekaligus.</div>
+                    <div id="galleryPreview" class="mt-2 d-flex flex-wrap gap-2"></div>
                 </div>
 
                 <div class="col-12 mb-4">
@@ -103,4 +117,37 @@
         </form>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    // Preview cover image
+    document.getElementById('image').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('previewImg').src = ev.target.result;
+            document.getElementById('imagePreview').classList.remove('d-none');
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Preview gallery images
+    document.getElementById('galleryInput').addEventListener('change', function(e) {
+        const container = document.getElementById('galleryPreview');
+        container.innerHTML = '';
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                img.className = 'rounded img-thumbnail';
+                img.style.maxHeight = '100px';
+                container.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
 @endsection

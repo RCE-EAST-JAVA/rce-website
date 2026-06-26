@@ -180,7 +180,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
                             <a href="{{ route('home') }}" class="d-flex align-items-center gap-2 text-decoration-none">
-                                <img src="{{ asset('rce_logo.png') }}" alt="RCE Logo"
+                                <img src="{{ asset('logo-new.png') }}" alt="RCE Logo"
                                      class="rounded"
                                      style="width: 34px; height: 34px; object-fit: cover;">
                                 <div class="d-flex flex-column text-start">

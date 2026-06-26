@@ -59,8 +59,8 @@
                 <div>
                     <!-- Project Image -->
                     <div class="relative h-48 bg-zinc-200 overflow-hidden">
-                        @if($project->image)
-                            <img src="{{ asset($project->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @if($project->display_image)
+                            <img src="{{ asset($project->display_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
                                 <i class="bi bi-image text-3xl"></i>

@@ -81,8 +81,9 @@
                 </div>
 
                 <div class="col-12 mb-3">
-                    <label for="image" class="form-label">Foto Proyek (Biarkan kosong jika tidak ingin mengubah)</label>
+                    <label for="image" class="form-label">Foto Utama Proyek <span class="text-muted fw-normal">(kosongkan jika tidak ingin mengubah)</span></label>
                     <input type="file" id="image" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/*">
+                    <div class="form-text">Format: JPG, PNG, WEBP. Maks 3MB.</div>
                     @if($project->image)
                         <div class="mt-2">
                             <span class="text-muted d-block mb-1">Foto Saat Ini:</span>
@@ -92,7 +93,49 @@
                     @error('image')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                    <div id="imagePreview" class="mt-2 d-none">
+                        <img id="previewImg" src="#" class="rounded img-thumbnail" style="max-height: 150px;">
+                    </div>
                 </div>
+
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-semibold">Foto Galeri</label>
+
+                    @if($project->images->isNotEmpty())
+                        <div class="mb-3">
+                            <span class="text-muted d-block mb-2">Klik foto untuk menandai hapus:</span>
+                            <div class="d-flex flex-wrap gap-2" id="galleryExisting">
+                                @foreach($project->images as $img)
+                                <div class="position-relative border rounded p-1 bg-light gallery-item"
+                                     style="width: 140px; cursor: pointer;"
+                                     onclick="toggleDelete(this, {{ $img->id }})">
+                                    <img src="{{ asset($img->image) }}" class="rounded d-block"
+                                        style="width: 100%; height: 100px; object-fit: cover;">
+                                    <div class="position-absolute top-0 start-0 end-0 bottom-0 bg-danger bg-opacity-50 rounded d-none align-items-center justify-content-center delete-overlay">
+                                        <i class="bi bi-trash3-fill text-white fs-4"></i>
+                                    </div>
+                                    <input type="checkbox" name="delete_images[]" value="{{ $img->id }}"
+                                        class="d-none" data-id="{{ $img->id }}">
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+                    <label class="form-label fw-semibold mt-2">Tambah Foto Baru</label>
+                    <input type="file" id="galleryInput" class="form-control @error('images.*') is-invalid @enderror"
+                        name="images[]" accept="image/*" multiple>
+                    @error('images.*')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <div class="form-text">Bisa pilih beberapa sekaligus. Format: JPG, PNG, WEBP. Maks 3MB.</div>
+                    <div id="galleryPreview" class="mt-2 d-flex flex-wrap gap-2"></div>
+                </div>
+
+                <style>
+                    .gallery-item.selected .delete-overlay { display: flex !important; }
+                    .gallery-item.selected { border-color: #dc3545 !important; background: #fce4ec !important; }
+                </style>
 
                 <div class="col-12 mb-4">
                     <label for="description" class="form-label">Deskripsi Proyek <span class="text-danger">*</span></label>
@@ -110,4 +153,50 @@
         </form>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    // Toggle delete gallery image
+    function toggleDelete(el, id) {
+        el.classList.toggle('selected');
+        const cb = el.querySelector('input[type="checkbox"]');
+        if (cb) cb.checked = !cb.checked;
+    }
+
+    // Preview cover image
+    document.getElementById('image').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('previewImg').src = ev.target.result;
+            document.getElementById('imagePreview').classList.remove('d-none');
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // Preview new gallery images
+    document.getElementById('galleryInput').addEventListener('change', function(e) {
+        const container = document.getElementById('galleryPreview');
+        container.innerHTML = '';
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'position-relative border rounded p-1 bg-light';
+                wrapper.style.width = '140px';
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                img.className = 'rounded d-block';
+                img.style.width = '100%';
+                img.style.height = '100px';
+                img.style.objectFit = 'cover';
+                wrapper.appendChild(img);
+                container.appendChild(wrapper);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
 @endsection

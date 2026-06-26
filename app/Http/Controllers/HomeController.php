@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         // Ambil 5 proyek terbaru untuk halaman depan
-        $latestProjects = Project::latest()->take(6)->get();
+        $latestProjects = Project::with('images')->latest()->take(6)->get();
         
         // Ambil statistik
         $stats = [

@@ -253,8 +253,8 @@
             <a data-aos="fade-up" href="{{ route('projects.show', $featured->id) }}"
                class="group lg:col-span-3 bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col">
                 <div class="relative h-72 bg-zinc-200 overflow-hidden">
-                    @if($featured->image)
-                        <img src="{{ asset($featured->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    @if($featured->display_image)
+                        <img src="{{ asset($featured->display_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     @else
                         <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
                             <i class="bi bi-image text-5xl"></i>
@@ -287,8 +287,8 @@
                 <a href="{{ route('projects.show', $project->id) }}"
                    class="group bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex gap-4 p-4 flex-1">
                     <div class="w-28 flex-shrink-0 rounded-2xl overflow-hidden bg-zinc-200 self-stretch">
-                        @if($project->image)
-                            <img src="{{ asset($project->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @if($project->display_image)
+                            <img src="{{ asset($project->display_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
                                 <i class="bi bi-image text-2xl"></i>

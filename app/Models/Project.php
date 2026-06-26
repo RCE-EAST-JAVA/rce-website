@@ -26,4 +26,14 @@ class Project extends Model
     {
         return $query->orderBy('published_at', 'desc');
     }
+
+    public function images()
+    {
+        return $this->hasMany(ProjectImage::class)->orderBy('order');
+    }
+
+    public function getDisplayImageAttribute()
+    {
+        return $this->image ?: $this->images->first()?->image;
+    }
 }

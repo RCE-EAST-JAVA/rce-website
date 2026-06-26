@@ -30,14 +30,19 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
-                                @if($project->image)
-                                    <img src="{{ asset($project->image) }}" class="rounded me-2" width="40" height="40" style="object-fit: cover;">
+                                @if($project->display_image)
+                                    <img src="{{ asset($project->display_image) }}" class="rounded me-2" width="40" height="40" style="object-fit: cover;">
                                 @else
                                     <div class="bg-secondary rounded me-2 d-flex align-items-center justify-content-center text-white" style="width: 40px; height: 40px;">
                                         <i class="bi bi-image"></i>
                                     </div>
                                 @endif
-                                <span>{{ Str::limit($project->title, 40) }}</span>
+                                <div>
+                                    <span>{{ Str::limit($project->title, 40) }}</span>
+                                    @if($project->images->count() > 0)
+                                        <small class="d-block text-muted">{{ $project->images->count() }} foto galeri</small>
+                                    @endif
+                                </div>
                             </div>
                         </td>
                         <td><span class="badge bg-info">{{ $project->category }}</span></td>

@@ -28,14 +28,16 @@ class ProjectController extends Controller
             $query->where('status', $request->status);
         }
 
-        $projects = $query->orderBy('published_at', 'desc')->paginate(9);
+        $projects = $query->with('images')->orderBy('published_at', 'desc')->paginate(9);
 
         return view('projects.index', compact('projects'));
     }
 
     public function show(Project $project)
     {
-        $related = Project::where('category', $project->category)
+        $project->load('images');
+
+        $related = Project::with('images')->where('category', $project->category)
             ->where('id', '!=', $project->id)
             ->latest()
             ->take(3)

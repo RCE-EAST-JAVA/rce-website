@@ -57,9 +57,9 @@
                 <div class="flex items-center">
                     <!-- Logo & Name -->
                     <a href="{{ route('home') }}" class="flex items-center gap-3">
-                        <img src="{{ asset('rce_logo.png') }}" alt="RCE Logo"
-                             class="rounded shadow-md"
-                             style="width: 38px; height: 38px; object-fit: cover;">
+                        <img src="{{ asset('logo-new.png') }}" alt="RCE Logo"
+                             class="rounded-lg shadow-md"
+                             style="width: 50px; height: 50px; object-fit: contain;">
                         <div>
                             <span :class="scrolled ? 'text-primary-green' : 'text-white'"
                                   class="font-extrabold text-xl tracking-tight transition-colors duration-300">RCE EAST JAVA</span>
@@ -145,7 +145,7 @@
                 <!-- Branding -->
                 <div>
                     <div class="flex items-center gap-3 mb-6">
-                        <img src="{{ asset('rce_logo.png') }}" alt="RCE Logo"
+                        <img src="{{ asset('logo-new.png') }}" alt="RCE Logo"
                              class="rounded"
                              style="width: 38px; height: 38px; object-fit: cover;">
                         <span class="font-extrabold text-xl tracking-tight">RCE EAST JAVA</span>

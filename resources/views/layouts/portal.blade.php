@@ -32,7 +32,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
                             <a href="/" class="d-flex align-items-center gap-2 text-decoration-none">
-                                <img src="{{ asset('rce_logo.png') }}" alt="Logo" class="rounded" style="width: 35px; height: 35px; object-fit: cover;">
+                                <img src="{{ asset('logo-new.png') }}" alt="Logo" class="rounded" style="width: 35px; height: 35px; object-fit: cover;">
                                 <div class="d-flex flex-column text-start">
                                     <span class="font-extrabold text-base tracking-tight" style="color: #1e4620; font-family: 'Outfit', sans-serif; font-weight: 800; line-height: 1.1; display: block;">RCE EAST JAVA</span>
                                     <span class="text-muted" style="font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1; display: block;">Sustainability Network</span>
