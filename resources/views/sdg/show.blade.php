@@ -19,6 +19,7 @@
             <div>
                 <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-1 block">SDG {{ $sdg['number'] }}</span>
                 <h1 class="text-3xl md:text-4xl font-extrabold leading-tight">{{ $sdg['title'] }}</h1>
+                <div class="w-12 h-0.5 bg-accent-orange rounded-full mt-4"></div>
             </div>
         </div>
         <p class="text-gray-300 max-w-2xl text-sm md:text-base leading-relaxed mt-6">
@@ -85,7 +86,7 @@
                            class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition
                                {{ $item['number'] === $sdg['number']
                                    ? 'bg-primary-green text-white font-bold'
-                                   : 'text-zinc-600 hover:bg-zinc-50 hover:text-primary-green' }}">
+                                    : 'text-zinc-600 hover:bg-zinc-50 hover:text-accent-orange' }}">
                             <span class="font-extrabold w-7 text-center flex-shrink-0 text-xs
                                 {{ $item['number'] === $sdg['number'] ? 'text-white' : 'text-zinc-400' }}">
                                 {{ $item['number'] }}
@@ -103,12 +104,12 @@
             @if($prev)
             <a href="{{ route('sdg.show', $prev['number']) }}"
                class="flex items-center gap-3 bg-white rounded-2xl border border-zinc-100 shadow-sm px-6 py-4 hover:shadow-md transition group">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-zinc-400 group-hover:text-primary-green transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-zinc-400 group-hover:text-accent-orange transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                 </svg>
                 <div>
                     <span class="text-xs text-zinc-400 block">SDG {{ $prev['number'] }}</span>
-                    <span class="text-sm font-bold text-zinc-900 group-hover:text-primary-green transition">{{ $prev['title'] }}</span>
+                    <span class="text-sm font-bold text-zinc-900 group-hover:text-accent-orange transition">{{ $prev['title'] }}</span>
                 </div>
             </a>
             @else
@@ -120,9 +121,9 @@
                class="flex items-center gap-3 bg-white rounded-2xl border border-zinc-100 shadow-sm px-6 py-4 hover:shadow-md transition group text-right">
                 <div>
                     <span class="text-xs text-zinc-400 block">SDG {{ $next['number'] }}</span>
-                    <span class="text-sm font-bold text-zinc-900 group-hover:text-primary-green transition">{{ $next['title'] }}</span>
+                    <span class="text-sm font-bold text-zinc-900 group-hover:text-accent-orange transition">{{ $next['title'] }}</span>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-zinc-400 group-hover:text-primary-green transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-zinc-400 group-hover:text-accent-orange transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                 </svg>
             </a>
