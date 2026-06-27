@@ -4,8 +4,13 @@
 
 @section('content')
 <!-- Header -->
-<div class="bg-gradient-to-br from-emerald-950 to-primary-green text-white pt-32 pb-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="relative bg-zinc-950 text-white overflow-hidden pt-32 pb-16">
+    <!-- Background gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950 via-emerald-950/40 to-zinc-950 pointer-events-none"></div>
+    <!-- Decorative blobs -->
+    <div class="absolute top-10 right-20 w-80 h-80 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-10 w-56 h-56 rounded-full bg-emerald-400/5 blur-2xl pointer-events-none"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <a href="{{ route('sdg.index') }}" class="inline-flex items-center gap-2 text-emerald-400 hover:text-white text-sm font-semibold mb-6 transition">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>

@@ -4,11 +4,18 @@
 
 @section('content')
 <!-- Header Page -->
-<div class="bg-gradient-to-br from-emerald-950 to-primary-green text-white pt-32 pb-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 block">Daftar Inisiatif</span>
-        <h1 class="text-4xl font-extrabold mb-4">Portofolio Proyek</h1>
-        <p class="text-gray-300 max-w-2xl text-sm md:text-base leading-relaxed">
+<div class="relative bg-zinc-950 text-white overflow-hidden pt-32 pb-20">
+    <!-- Background gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950 via-emerald-950/40 to-zinc-950 pointer-events-none"></div>
+    <!-- Decorative blobs -->
+    <div class="absolute top-10 right-20 w-80 h-80 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-10 w-56 h-56 rounded-full bg-emerald-400/5 blur-2xl pointer-events-none"></div>
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3 block">Daftar Inisiatif</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-white">Portofolio Proyek</h1>
+        <div class="w-12 h-1 bg-accent-orange rounded-full mb-5"></div>
+        <p class="text-zinc-400 max-w-2xl text-sm md:text-base leading-relaxed">
             Temukan berbagai proyek keunggulan regional kami dalam pembangunan berkelanjutan di Jawa Timur, mulai dari pengelolaan sampah, air, hingga energi terbarukan.
         </p>
     </div>

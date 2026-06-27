@@ -4,8 +4,13 @@
 
 @section('content')
 <!-- Hero / Header -->
-<div class="bg-gradient-to-br from-emerald-950 to-primary-green text-white pt-36 pb-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="relative bg-zinc-950 text-white overflow-hidden pt-36 pb-16">
+    <!-- Background gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950 via-emerald-950/40 to-zinc-950 pointer-events-none"></div>
+    <!-- Decorative blobs -->
+    <div class="absolute top-10 right-20 w-80 h-80 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-10 w-56 h-56 rounded-full bg-emerald-400/5 blur-2xl pointer-events-none"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 text-xs text-emerald-400 mb-6 font-semibold uppercase tracking-widest">
             <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>

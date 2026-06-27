@@ -10,7 +10,7 @@
         : json_encode(['https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=1920']);
 @endphp
 
-<div class="relative bg-zinc-950 text-white overflow-hidden min-h-[70vh]"
+<div class="relative bg-zinc-950 text-white overflow-hidden min-h-screen"
      x-data="{
         slides: {{ $heroImages }},
         current: 0,
@@ -114,7 +114,7 @@
     </div>
     @endif
 
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 md:pt-52 md:pb-48 flex flex-col justify-center min-h-[70vh]"
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 md:pt-52 md:pb-48 flex flex-col justify-center min-h-screen"
          :style="'transform: translateY(' + (scrollY * -0.08) + 'px)'">
         <span data-aos="fade-up" class="text-accent-orange font-bold text-sm tracking-widest uppercase mb-4 block">Regional Centre of Expertise - East Java</span>
         <h1 data-aos="fade-up" data-aos-delay="50" class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
@@ -449,11 +449,18 @@
 <!-- CTA Banner -->
 <div data-aos="fade-up" class="py-24 bg-zinc-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-emerald-950 via-emerald-50 to-emerald-950 p-12 md:p-16 rounded-[2.5rem] shadow-xl text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center opacity-5 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=1200');"></div>
+        <div class="bg-zinc-950 p-12 md:p-16 rounded-[2.5rem] shadow-xl text-center relative overflow-hidden">
+            <!-- Gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/60 via-zinc-950 to-zinc-950 pointer-events-none"></div>
+            <!-- Background image -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=1200');"></div>
+            <!-- Decorative blob -->
+            <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none"></div>
+            <!-- Orange accent line -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-accent-orange rounded-full"></div>
             <div class="relative z-10 max-w-2xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-emerald-950">Bergabunglah dalam Gerakan Keberlanjutan</h2>
-                <p class="text-zinc-600 text-sm md:text-base mb-8 leading-relaxed">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Bergabunglah dalam Gerakan Keberlanjutan</h2>
+                <p class="text-zinc-400 text-sm md:text-base mb-8 leading-relaxed">
                     Kami mengundang universitas, peneliti, LSM, instansi pemerintah, dan sukarelawan untuk berkolaborasi dalam berbagai proyek lingkungan dan sosial di Jawa Timur.
                 </p>
                 <div class="flex justify-center gap-4 flex-wrap">
