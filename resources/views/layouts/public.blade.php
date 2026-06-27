@@ -28,6 +28,9 @@
         .text-primary-green {
             color: #1e4620;
         }
+        .text-accent-orange {
+            color: #d97724;
+        }
         .bg-primary-green {
             background-color: #1e4620;
         }
@@ -39,6 +42,9 @@
         }
         .hover-bg-accent-orange:hover {
             background-color: #b75e18;
+        }
+        .border-accent-orange {
+            border-color: #d97724;
         }
     </style>
     @yield('styles')
@@ -72,39 +78,39 @@
                     <div class="hidden md:flex space-x-8 ms-12">
                         <a href="{{ route('home') }}"
                            :class="scrolled
-                               ? '{{ Request::is('/') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
-                               : '{{ Request::is('/') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
+                               ? '{{ Request::is('/') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                               : '{{ Request::is('/') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Beranda
                         </a>
                         <a href="{{ route('projects.index') }}"
                            :class="scrolled
-                               ? '{{ Request::is('proyek*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
-                               : '{{ Request::is('proyek*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
+                               ? '{{ Request::is('proyek*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                               : '{{ Request::is('proyek*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Portofolio Proyek
                         </a>
                         
                         <a href="{{ route('articles.index') }}"
                            :class="scrolled
-                               ? '{{ Request::is('artikel*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
-                               : '{{ Request::is('artikel*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
+                               ? '{{ Request::is('artikel*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                               : '{{ Request::is('artikel*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Artikel
                         </a>
 
                          <a href="{{ route('staff.index') }}"
                            :class="scrolled
-                               ? '{{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
-                               : '{{ Request::is('staf*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
+                               ? '{{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                               : '{{ Request::is('staf*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                              Staf
                         </a>
 
                         <a href="{{ route('sdg.index') }}"
                            :class="scrolled
-                               ? '{{ Request::is('sdg*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }}'
-                               : '{{ Request::is('sdg*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-white hover:border-white/50' }}'"
+                               ? '{{ Request::is('sdg*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                               : '{{ Request::is('sdg*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                            class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             SDGs
                         </a>

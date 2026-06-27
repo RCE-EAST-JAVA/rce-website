@@ -18,9 +18,9 @@ class HomeController extends Controller
         
         // Ambil statistik
         $stats = [
-            'projects' => Project::count() + 15, // base stats + dummy
-            'years' => 17, // since 2009
-            'staff' => Staff::count() + 85, // base stats + dummy
+            'projects' => Project::count(),
+            'years' => 17,
+            'staff' => Staff::count(),
         ];
 
         $heroPhotos = HeroPhoto::active()->get();

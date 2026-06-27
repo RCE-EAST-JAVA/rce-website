@@ -24,6 +24,9 @@
         .text-primary-green {
             color: #1e4620;
         }
+        .text-accent-orange {
+            color: #d97724;
+        }
         .bg-primary-green {
             background-color: #1e4620;
         }
@@ -60,9 +63,9 @@
             <!-- Logo Header -->
             <div class="relative z-10">
                 <a href="/" class="flex items-center gap-3">
-                    <div class="bg-primary-green text-white p-2 rounded-lg font-bold text-base shadow-md">
-                        RCE
-                    </div>
+                    <img src="{{ asset('logo-new.png') }}" alt="RCE East Java"
+                         class="rounded-lg shadow-md"
+                         style="width: 50px; height: 50px; object-fit: contain;">
                     <span class="font-extrabold text-lg tracking-tight">RCE EAST JAVA</span>
                 </a>
             </div>
@@ -100,7 +103,8 @@
                     <!-- Mobile logo only -->
                     <div class="md:hidden flex justify-center mb-6">
                         <a href="/" class="flex items-center gap-2">
-                            <div class="bg-primary-green text-white p-2 rounded-lg font-bold text-base">RCE</div>
+                            <img src="{{ asset('logo-new.png') }}" alt="RCE East Java"
+                                 style="width: 40px; height: 40px; object-fit: contain;">
                             <span class="font-extrabold text-lg tracking-tight text-primary-green">RCE EAST JAVA</span>
                         </a>
                     </div>
@@ -122,7 +126,7 @@
                     <div>
                         <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Alamat Email</label>
                         <div class="relative">
-                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm @error('email') border-red-500 focus:ring-red-500 @enderror" placeholder="nama@rce-eastjava.org">
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-accent-orange text-sm @error('email') border-red-500 focus:ring-red-500 @enderror" placeholder="nama@rce-eastjava.org">
                             <i class="bi bi-envelope-fill absolute left-3.5 top-3.5 text-gray-400"></i>
                         </div>
                         @error('email')
@@ -141,7 +145,7 @@
                             @endif
                         </div>
                         <div class="relative">
-                            <input type="password" id="password" name="password" required autocomplete="current-password" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm @error('password') border-red-500 focus:ring-red-500 @enderror" placeholder="••••••••">
+                            <input type="password" id="password" name="password" required autocomplete="current-password" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-accent-orange text-sm @error('password') border-red-500 focus:ring-red-500 @enderror" placeholder="••••••••">
                             <i class="bi bi-lock-fill absolute left-3.5 top-3.5 text-gray-400"></i>
                         </div>
                         @error('password')
@@ -151,19 +155,19 @@
 
                     <!-- Remember Me -->
                     <div class="flex items-center">
-                        <input id="remember_me" type="checkbox" name="remember" class="rounded border-zinc-300 text-primary-green focus:ring-primary-green h-4 w-4">
+                        <input id="remember_me" type="checkbox" name="remember" class="rounded border-zinc-300 text-accent-orange focus:ring-accent-orange h-4 w-4">
                         <label for="remember_me" class="ms-2 text-xs text-gray-600 font-medium cursor-pointer">Ingat Saya</label>
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-primary-green hover-bg-primary-green text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition duration-150 ease-in-out mt-2">
+                    <button type="submit" class="w-full bg-accent-orange hover-bg-accent-orange text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition duration-150 ease-in-out mt-2">
                         Masuk
                     </button>
                 </form>
                 
                 <!-- Back Link -->
                 <div class="text-center mt-6">
-                    <a href="/" class="text-xs text-gray-500 hover:text-primary-green font-semibold">
+                    <a href="/" class="text-xs text-gray-500 hover:text-accent-orange font-semibold">
                         <i class="bi bi-arrow-left"></i> Kembali ke Beranda
                     </a>
                 </div>
@@ -175,25 +179,35 @@
 
 <script>
     document.addEventListener('click', function(e) {
-        const pop = document.createElement('div');
-        pop.style.cssText = `
-            position: fixed; left: ${e.clientX}px; top: ${e.clientY}px;
-            width: 8px; height: 8px; border-radius: 50%;
-            background: rgba(30, 70, 32, 0.5);
-            pointer-events: none; transform: translate(-50%, -50%) scale(0);
-            z-index: 9999;
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-            opacity: 0;
-        `;
-        document.body.appendChild(pop);
-        requestAnimationFrame(() => {
-            pop.style.transform = 'translate(-50%, -50%) scale(6)';
-            pop.style.opacity = '0.7';
-        });
-        setTimeout(() => {
-            pop.style.opacity = '0';
-            setTimeout(() => pop.remove(), 300);
-        }, 150);
+        const colors = ['#1e4620', '#d97724', '#34d399', '#10b981', '#fbbf24'];
+        const count = 8;
+        for (let i = 0; i < count; i++) {
+            const drop = document.createElement('div');
+            const angle = (i / count) * 360;
+            const dist = 40 + Math.random() * 30;
+            const rad = angle * (Math.PI / 180);
+            const dx = Math.cos(rad) * dist;
+            const dy = Math.sin(rad) * dist;
+            const size = 4 + Math.random() * 4;
+            drop.style.cssText = `
+                position: fixed; left: ${e.clientX}px; top: ${e.clientY}px;
+                width: ${size}px; height: ${size}px; border-radius: 50%;
+                background: ${colors[i % colors.length]};
+                pointer-events: none; z-index: 9999;
+                transition: transform 0.5s cubic-bezier(.25,.46,.45,.94), opacity 0.5s ease-out;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+            `;
+            document.body.appendChild(drop);
+            requestAnimationFrame(() => {
+                drop.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.3)`;
+                drop.style.opacity = '0.8';
+            });
+            setTimeout(() => {
+                drop.style.opacity = '0';
+                setTimeout(() => drop.remove(), 500);
+            }, 200 + i * 30);
+        }
     });
 </script>
 

@@ -66,7 +66,7 @@
                                 <i class="bi bi-image text-3xl"></i>
                             </div>
                         @endif
-                        <span class="absolute top-4 left-4 bg-primary-green text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-md">
+                        <span class="absolute top-4 left-4 bg-accent-orange text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-md">
                             {{ $project->category }}
                         </span>
                         
@@ -78,7 +78,7 @@
                     <!-- Content -->
                     <div class="p-6">
                         <span class="text-xs text-gray-400 font-semibold block mb-2">{{ $project->date }}</span>
-                        <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2 group-hover:text-primary-green transition-colors">{{ $project->title }}</h3>
+                        <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2 group-hover:text-accent-orange transition-colors">{{ $project->title }}</h3>
                         <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mb-4">
                             {{ $project->description }}
                         </p>

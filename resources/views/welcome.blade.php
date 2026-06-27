@@ -185,6 +185,7 @@
                 <div>
                     <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 block">Visi Utama</span>
                     <h2 class="text-3xl font-bold leading-snug mb-6">Pusat keunggulan regional terkemuka dalam pembangunan berkelanjutan Jawa Timur.</h2>
+                    <div class="w-12 h-1 bg-accent-orange rounded-full mb-6"></div>
                 </div>
                 <div class="border-t border-emerald-800/60 pt-6">
                     <span class="text-sm text-emerald-400/80">RCE East Java Network</span>
@@ -209,15 +210,15 @@
                     <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-2 block">Misi Kami</span>
                     <ul class="space-y-4 text-sm text-gray-600">
                         <li class="flex gap-3">
-                            <span class="bg-emerald-100 text-primary-green w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</span>
+                            <span class="bg-orange-100 text-accent-orange w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</span>
                             <span>Mendorong integrasi prinsip-prinsip SDGs ke dalam kurikulum pendidikan formal maupun informal.</span>
                         </li>
                         <li class="flex gap-3">
-                            <span class="bg-emerald-100 text-primary-green w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</span>
+                            <span class="bg-orange-100 text-accent-orange w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</span>
                             <span>Memfasilitasi riset kolaboratif antar universitas dan praktisi untuk melahirkan solusi nyata di Jawa Timur.</span>
                         </li>
                         <li class="flex gap-3">
-                            <span class="bg-emerald-100 text-primary-green w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</span>
+                            <span class="bg-orange-100 text-accent-orange w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</span>
                             <span>Membangun kesadaran dan kapasitas masyarakat lokal terhadap aksi lingkungan hidup.</span>
                         </li>
                     </ul>
@@ -231,8 +232,9 @@
 <div class="py-20 bg-gradient-to-br from-zinc-50 to-white border-y border-zinc-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div data-aos="fade-up">
-            <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-3 block">Jaringan Mitra Akademik</span>
-            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Mitra & Kolaborator</h2>
+            <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-3 block">Jaringan Mitra Akademik</span>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-2">Mitra & Kolaborator</h2>
+            <div class="w-16 h-1 bg-accent-orange rounded-full mx-auto mb-5"></div>
             <p class="text-gray-500 max-w-2xl mx-auto mb-14 leading-relaxed">
                 Bersama kami mewujudkan riset kolaboratif dan aksi lingkungan berkelanjutan di Jawa Timur.
             </p>
@@ -269,8 +271,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div data-aos="fade-up" class="flex justify-between items-end mb-12">
             <div>
-                <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-2 block">Galeri Aksi</span>
-                <h2 class="text-3xl font-extrabold text-primary-green">Aktivitas Terbaru</h2>
+            <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-2 block">Galeri Aksi</span>
+            <h2 class="text-3xl font-extrabold text-primary-green">Aktivitas Terbaru</h2>
+            <div class="w-12 h-0.5 bg-accent-orange rounded-full mt-3"></div>
             </div>
             <a href="{{ route('projects.index') }}" class="text-sm font-bold text-accent-orange hover:text-amber-700 flex items-center gap-1">
                 Lihat Semua Proyek <i class="bi bi-arrow-right"></i>
@@ -296,13 +299,13 @@
                             <i class="bi bi-image text-5xl"></i>
                         </div>
                     @endif
-                    <span class="absolute top-4 left-4 bg-primary-green text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-md">
+                    <span class="absolute top-4 left-4 bg-accent-orange text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-md">
                         {{ $featured->category }}
                     </span>
                 </div>
                 <div class="p-7 flex flex-col flex-1">
                     <span class="text-xs text-gray-400 font-semibold block mb-2">{{ $featured->date }}</span>
-                    <h3 class="font-extrabold text-xl text-gray-900 mb-3 line-clamp-2 group-hover:text-primary-green transition-colors">{{ $featured->title }}</h3>
+                    <h3 class="font-extrabold text-xl text-gray-900 mb-3 line-clamp-2 group-hover:text-accent-orange transition-colors">{{ $featured->title }}</h3>
                     <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed flex-1">{{ $featured->description }}</p>
                     <div class="flex items-center justify-between mt-5 pt-4 border-t border-zinc-100">
                         <span class="text-xs text-gray-500">Oleh: {{ $featured->author }}</span>
@@ -332,8 +335,8 @@
                         @endif
                     </div>
                     <div class="flex flex-col justify-center min-w-0">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-primary-green mb-1">{{ $project->category }}</span>
-                        <h3 class="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-primary-green transition-colors leading-snug mb-1">{{ $project->title }}</h3>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-accent-orange mb-1">{{ $project->category }}</span>
+                        <h3 class="font-bold text-sm text-gray-900 line-clamp-2 group-hover:text-accent-orange transition-colors leading-snug mb-1">{{ $project->title }}</h3>
                         <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-1">{{ $project->description }}</p>
                         <span class="text-xs text-gray-400">{{ $project->date }}</span>
                         <span class="text-xs text-gray-400 mt-0.5">Oleh: {{ $project->author }}</span>
@@ -355,10 +358,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div data-aos="fade-up" class="flex items-end justify-between mb-10">
             <div>
-                <span class="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-2 block">Dari Blog Kami</span>
+                <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-2 block">Dari Blog Kami</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-zinc-900">Artikel Terbaru</h2>
+                <div class="w-12 h-0.5 bg-accent-orange rounded-full mt-3"></div>
             </div>
-            <a href="{{ route('articles.index') }}" class="text-sm font-semibold text-emerald-700 hover:text-emerald-900 flex items-center gap-1 transition">
+            <a href="{{ route('articles.index') }}" class="text-sm font-semibold text-accent-orange hover:text-amber-700 flex items-center gap-1 transition">
                 Lihat semua
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
@@ -385,10 +389,10 @@
             </div>
             <div class="flex flex-col justify-center p-8 flex-1">
                 <div class="flex items-center gap-2 mb-3">
-                    <span class="text-xs font-semibold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full">{{ $featuredArticle->category }}</span>
+                    <span class="text-xs font-semibold bg-orange-50 text-orange-700 px-2.5 py-1 rounded-full">{{ $featuredArticle->category }}</span>
                     <span class="text-xs text-zinc-400">{{ $featuredArticle->published_at?->format('d M Y') }}</span>
                 </div>
-                <h3 class="font-extrabold text-2xl text-zinc-900 leading-snug mb-3 group-hover:text-emerald-700 transition line-clamp-2">
+                <h3 class="font-extrabold text-2xl text-zinc-900 leading-snug mb-3 group-hover:text-accent-orange transition line-clamp-2">
                     {{ $featuredArticle->title }}
                 </h3>
                 @if($featuredArticle->excerpt)
@@ -423,10 +427,10 @@
                 </div>
                 <div class="flex flex-col justify-center min-w-0">
                     <div class="flex items-center gap-2 mb-1.5">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-600">{{ $article->category }}</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-accent-orange">{{ $article->category }}</span>
                         <span class="text-[10px] text-zinc-400">{{ $article->published_at?->format('d M Y') }}</span>
                     </div>
-                    <h3 class="font-bold text-sm text-zinc-900 line-clamp-2 group-hover:text-emerald-700 transition leading-snug mb-1.5">
+                    <h3 class="font-bold text-sm text-zinc-900 line-clamp-2 group-hover:text-accent-orange transition leading-snug mb-1.5">
                         {{ $article->title }}
                     </h3>
                     @if($article->excerpt)
