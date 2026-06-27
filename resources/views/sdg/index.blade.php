@@ -6,8 +6,9 @@
 <!-- Header -->
 <div class="bg-gradient-to-br from-emerald-950 to-primary-green text-white pt-32 pb-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 block">Agenda 2030</span>
+                <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 block">Agenda 2030</span>
         <h1 class="text-4xl font-extrabold mb-4">Sustainable Development Goals</h1>
+        <div class="w-16 h-1 bg-accent-orange rounded-full mb-6"></div>
         <p class="text-gray-300 max-w-2xl text-sm md:text-base leading-relaxed">
             17 Tujuan Pembangunan Berkelanjutan (SDGs) adalah agenda global PBB untuk mengakhiri kemiskinan, melindungi planet, dan memastikan kesejahteraan semua orang pada tahun 2030.
         </p>
@@ -45,15 +46,15 @@
                         </span>
                         <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">SDG {{ $sdg['number'] }}</span>
                     </div>
-                    <h3 class="font-bold text-zinc-900 text-base leading-snug mb-3 group-hover:text-primary-green transition-colors">
+                    <h3 class="font-bold text-zinc-900 text-base leading-snug mb-3 group-hover:text-accent-orange transition-colors">
                         {{ $sdg['title'] }}
                     </h3>
                     <p class="text-zinc-500 text-sm leading-relaxed mb-4">{{ $sdg['description'] }}</p>
                     <div class="flex items-center justify-between pt-4 border-t border-zinc-100">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-primary-green">
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-orange-50 text-accent-orange">
                             {{ $sdg['targets'] }} Target
                         </span>
-                        <span class="text-xs font-semibold text-zinc-400 group-hover:text-primary-green transition">
+                        <span class="text-xs font-semibold text-zinc-400 group-hover:text-accent-orange transition">
                             Selengkapnya →
                         </span>
                     </div>

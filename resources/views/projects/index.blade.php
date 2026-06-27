@@ -55,7 +55,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @forelse($projects as $project)
             <a href="{{ route('projects.show', $project->id) }}"
-               class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between">
+               class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 hover:border-accent-orange/30 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between">
                 <div>
                     <!-- Project Image -->
                     <div class="relative h-48 bg-zinc-200 overflow-hidden">

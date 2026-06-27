@@ -53,7 +53,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @forelse($articles as $article)
             <a href="{{ route('articles.show', $article->slug) }}"
-               class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col">
+               class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 hover:border-accent-orange/30 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col">
                 <!-- Thumbnail -->
                 <div class="relative h-48 bg-zinc-100 overflow-hidden">
                     @if($article->thumbnail)
