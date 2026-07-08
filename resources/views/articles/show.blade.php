@@ -47,6 +47,41 @@
     .article-body s  { text-decoration: line-through; color: #6b7280; }
     .article-body hr { border: none; border-top: 1px solid #e5e7eb; margin: 2rem 0; }
     .article-body img { max-width: 100%; border-radius: 0.75rem; margin: 1rem 0; }
+    /* Force inline style width to be respected - override Tailwind preflight */
+    .article-body .image-with-caption img[style] { max-width: none !important; }
+    
+    /* Image with Caption - Frontend Display */
+    .article-body .image-caption-wrapper {
+        display: block;
+        text-align: center;
+        margin: 1.5rem 0;
+    }
+    .article-body .image-with-caption {
+        display: inline-block;
+        max-width: 100%;
+        text-align: center;
+    }
+    .article-body .image-with-caption img {
+        display: block;
+        max-width: 100%;
+        height: auto !important;
+        border-radius: 0.75rem;
+        margin: 0 auto;
+    }
+    .article-body .image-with-caption figcaption {
+        margin-top: 0.75rem;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.875rem;
+        color: #6b7280;
+        font-style: italic;
+        text-align: center;
+        background: #f8faf8;
+        border-left: 3px solid #1e4620;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .article-body .image-with-caption figcaption:empty {
+        display: none;
+    }
 </style>
 @endsection
 
@@ -118,10 +153,38 @@
 
     <!-- Body -->
     <div class="bg-white rounded-3xl border border-zinc-100 shadow-sm p-8 md:p-12 mb-10">
-        <div class="article-body text-base">
+        <div class="article-body text-base" id="article-content">
             {!! $article->body !!}
         </div>
     </div>
+    
+    <script>
+        // Remove contenteditable from all figcaptions in article body
+        document.addEventListener('DOMContentLoaded', function() {
+            const captions = document.querySelectorAll('.article-body figcaption');
+            captions.forEach(caption => {
+                caption.removeAttribute('contenteditable');
+                caption.style.cursor = 'default';
+            });
+            
+            // Apply width from width attribute to inline style
+            const images = document.querySelectorAll('.article-body img[width]');
+            console.log('Found images with width attribute:', images.length);
+            
+            images.forEach(img => {
+                const w = img.getAttribute('width');
+                console.log('Processing image, width attribute:', w, 'current computed width:', window.getComputedStyle(img).width);
+                
+                if (w && !isNaN(w)) {
+                    img.style.setProperty('width', w + 'px', 'important');
+                    img.style.setProperty('height', 'auto', 'important');
+                    img.style.setProperty('max-width', w + 'px', 'important');
+                    
+                    console.log('Applied width:', w + 'px', 'new computed width:', window.getComputedStyle(img).width);
+                }
+            });
+        });
+    </script>
 
     <!-- Tags -->
     @if($article->tags)
