@@ -67,8 +67,8 @@
 
                 {{-- Background: photo or gradient --}}
                 @if($staff->image)
-                    <img src="{{ asset($staff->image) }}"
-                         class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                     <img src="{{ asset($staff->image) }}"
+                         class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700">
                 @else
                     <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/60 to-zinc-900"></div>
                 @endif
