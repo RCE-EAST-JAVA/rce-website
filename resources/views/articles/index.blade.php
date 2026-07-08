@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Artikel')
+@section('title', 'Publications')
 
 @section('content')
 <!-- Header -->
@@ -12,11 +12,11 @@
     <div class="absolute bottom-0 left-10 w-56 h-56 rounded-full bg-emerald-400/5 blur-2xl pointer-events-none"></div>
     <!-- Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3 block">Tulisan & Wawasan</span>
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-white">Artikel</h1>
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3 block">Writing & Insights</span>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-white">Publications</h1>
         <div class="w-12 h-1 bg-accent-orange rounded-full mb-5"></div>
         <p class="text-zinc-400 max-w-2xl text-sm md:text-base leading-relaxed">
-            Kumpulan tulisan, riset, dan wawasan seputar keberlanjutan, SDGs, dan inisiatif lingkungan di Jawa Timur.
+            A collection of research, insights, and publications on sustainability, SDGs, and environmental initiatives in East Java.
         </p>
     </div>
 </div>
@@ -27,7 +27,7 @@
         <form action="{{ route('articles.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="md:col-span-2 relative">
                 <input type="text" name="search" value="{{ request('search') }}"
-                    placeholder="Cari artikel, penulis, atau topik..."
+                    placeholder="Search publications, authors, or topics..."
                     class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm">
                 <i class="bi bi-search absolute left-4 top-3.5 text-gray-400"></i>
             </div>
@@ -114,7 +114,7 @@
         @empty
             <div class="col-span-3 text-center py-24 bg-white rounded-3xl border border-zinc-100 text-gray-400">
                 <i class="bi bi-newspaper text-4xl block mb-4"></i>
-                Belum ada artikel yang cocok dengan pencarian Anda.
+                        No publications match your search.
             </div>
         @endforelse
     </div>

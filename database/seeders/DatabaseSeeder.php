@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Project::create([
             'title' => 'Workshop Pengelolaan Sampah Organik Berbasis Komunitas',
             'description' => 'Edukasi dan pelatihan pengolahan sampah organik rumah tangga menjadi pupuk kompos di pemukiman padat penduduk Jawa Timur.',
-            'category' => 'Sampah',
+            'category' => 'Community Development',
             'status' => 'Selesai',
             'image' => 'project1.jpg',
             'sdgs' => 'SDG 12, SDG 13',
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Project::create([
             'title' => 'Penanaman Bakau di Sungai Brantas',
             'description' => 'Inisiatif pemulihan ekosistem pesisir melalui penanaman bibit bakau bersama komunitas dan mahasiswa se-Jawa Timur.',
-            'category' => 'Air',
+            'category' => 'Research',
             'status' => 'Aktif',
             'image' => 'project2.jpg',
             'sdgs' => 'SDG 14, SDG 15',
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Project::create([
             'title' => 'Penerapan Panel Surya untuk Perumahan Rakyat',
             'description' => 'Instalasi panel surya skala mikro untuk mendukung kebutuhan listrik ramah lingkungan di desa tertinggal.',
-            'category' => 'Energi',
+            'category' => 'Capacity Building',
             'status' => 'Aktif',
             'image' => 'project3.jpg',
             'sdgs' => 'SDG 7, SDG 11',

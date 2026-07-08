@@ -216,14 +216,14 @@
                         <li class="sidebar-item {{ Request::is('admin/projects*') ? 'active' : '' }}">
                             <a href="{{ route('admin.projects.index') }}" class="sidebar-link">
                                 <i class="bi bi-kanban-fill"></i>
-                                <span>Kelola Proyek</span>
+                                <span>Manage Programs</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item {{ Request::is('admin/articles*') ? 'active' : '' }}">
                             <a href="{{ route('admin.articles.index') }}" class="sidebar-link">
                                 <i class="bi bi-newspaper"></i>
-                                <span>Kelola Artikel</span>
+                                <span>Manage Publications</span>
                             </a>
                         </li>
 

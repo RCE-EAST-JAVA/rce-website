@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Proyek')
-@section('page-title', 'Kelola Proyek')
+@section('title', 'Manage Programs')
+@section('page-title', 'Manage Programs')
 
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="card-title">Daftar Proyek Berkelanjutan</h4>
+        <h4 class="card-title">Sustainable Programs List</h4>
         <a href="{{ route('admin.projects.create') }}" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-circle"></i> Tambah Proyek
+            <i class="bi bi-plus-circle"></i> Add Program
         </a>
     </div>
     <div class="card-body">
@@ -64,7 +64,7 @@
                                 <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus proyek ini?')">
+                                <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"                                     onsubmit="return confirm('Are you sure you want to delete this program?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
@@ -76,7 +76,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="7" class="text-center py-4 text-muted">Belum ada data proyek.</td>
+                        <td colspan="7" class="text-center py-4 text-muted">No programs yet.</td>
                     </tr>
                     @endforelse
                 </tbody>

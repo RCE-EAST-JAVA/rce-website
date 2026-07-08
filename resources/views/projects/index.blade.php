@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Portofolio Proyek')
+@section('title', 'Our Programs')
 
 @section('content')
 <!-- Header Page -->
@@ -12,11 +12,11 @@
     <div class="absolute bottom-0 left-10 w-56 h-56 rounded-full bg-emerald-400/5 blur-2xl pointer-events-none"></div>
     <!-- Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3 block">Daftar Inisiatif</span>
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-white">Portofolio Proyek</h1>
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3 block">List of Initiatives</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-white">Our Programs</h1>
         <div class="w-12 h-1 bg-accent-orange rounded-full mb-5"></div>
         <p class="text-zinc-400 max-w-2xl text-sm md:text-base leading-relaxed">
-            Temukan berbagai proyek keunggulan regional kami dalam pembangunan berkelanjutan di Jawa Timur, mulai dari pengelolaan sampah, air, hingga energi terbarukan.
+            Explore our regional excellence programs in sustainable development across East Java, from waste management, water, to renewable energy.
         </p>
     </div>
 </div>
@@ -27,18 +27,17 @@
         <form action="{{ route('projects.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <!-- Search Text -->
             <div class="md:col-span-2 relative">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari proyek, lokasi, atau topik..." class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search programs, location, or topic..." class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm">
                 <i class="bi bi-search absolute left-4 top-3.5 text-gray-400"></i>
             </div>
             
             <!-- Category Filter -->
             <div>
                 <select name="category" class="w-full py-3 px-4 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm">
-                    <option value="">Semua Kategori</option>
-                    <option value="Sampah" {{ request('category') === 'Sampah' ? 'selected' : '' }}>Sampah</option>
-                    <option value="Air" {{ request('category') === 'Air' ? 'selected' : '' }}>Air</option>
-                    <option value="Energi" {{ request('category') === 'Energi' ? 'selected' : '' }}>Energi</option>
-                    <option value="Sosial" {{ request('category') === 'Sosial' ? 'selected' : '' }}>Sosial/Edukasi</option>
+                    <option value="">All Categories</option>
+                    <option value="Research" {{ request('category') === 'Research' ? 'selected' : '' }}>Research</option>
+                    <option value="Community Development" {{ request('category') === 'Community Development' ? 'selected' : '' }}>Community Development</option>
+                    <option value="Capacity Building" {{ request('category') === 'Capacity Building' ? 'selected' : '' }}>Capacity Building</option>
                 </select>
             </div>
             
@@ -109,7 +108,7 @@
         @empty
             <div class="col-span-3 text-center py-24 bg-white rounded-3xl border border-zinc-100 text-gray-400">
                 <i class="bi bi-search text-4xl block mb-4"></i>
-                Tidak ditemukan proyek yang cocok dengan kriteria pencarian Anda.
+                No programs found matching your search criteria.
             </div>
         @endforelse
     </div>

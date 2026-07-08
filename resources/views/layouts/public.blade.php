@@ -97,14 +97,14 @@
                                 ? '{{ Request::is('proyek*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
                                 : '{{ Request::is('proyek*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
-                            Portofolio Proyek
+                            Our Programs
                         </a>
                         <a href="{{ route('articles.index') }}"
                             :class="scrolled
                                 ? '{{ Request::is('artikel*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
                                 : '{{ Request::is('artikel*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
-                            Artikel
+                            Publications
                         </a>
                         <a href="{{ route('staff.index') }}"
                             :class="scrolled
@@ -171,11 +171,11 @@
                 </a>
                 <a href="{{ route('projects.index') }}"
                     class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('proyek*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
-                    <i class="bi bi-folder2-open mr-3 text-base"></i> Portofolio Proyek
+                    <i class="bi bi-folder2-open mr-3 text-base"></i> Our Programs
                 </a>
                 <a href="{{ route('articles.index') }}"
                     class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('artikel*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
-                    <i class="bi bi-newspaper mr-3 text-base"></i> Artikel
+                    <i class="bi bi-newspaper mr-3 text-base"></i> Publications
                 </a>
                 <a href="{{ route('staff.index') }}"
                     class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('staf*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
@@ -232,10 +232,9 @@
                     <h3 class="font-bold text-lg mb-6 border-b border-zinc-800 pb-2">Navigasi Cepat</h3>
                     <ul class="space-y-3 text-sm text-gray-400">
                         <li><a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a></li>
-                        <li><a href="{{ route('projects.index') }}" class="hover:text-white transition">Portofolio
-                                Proyek</a></li>
-                        <li><a href="{{ route('articles.index') }}" class="hover:text-white transition">Artikel</a>
-                        </li>
+                        <li><a href="{{ route('projects.index') }}" class="hover:text-white transition">Our Programs</a></li>
+                         <li><a href="{{ route('articles.index') }}" class="hover:text-white transition">Publications</a>
+                         </li>
                         <li><a href="{{ route('sdg.index') }}" class="hover:text-white transition">Sustainable
                                 Development Goals</a></li>
                         <li><a href="{{ route('staff.index') }}" class="hover:text-white transition">Direktori Staf</a>

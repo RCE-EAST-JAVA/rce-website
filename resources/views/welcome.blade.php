@@ -127,7 +127,7 @@
         
         <div data-aos="fade-up" data-aos-delay="150" class="flex flex-wrap gap-4 mb-16">
             <a href="{{ route('projects.index') }}" class="bg-accent-orange hover-bg-accent-orange text-white px-8 py-4 rounded-full font-bold shadow-lg transition duration-200">
-                Jelajahi Proyek
+                Explore Programs
             </a>
             <a href="{{ route('staff.index') }}" class="bg-zinc-800/80 hover:bg-zinc-700 text-white border border-zinc-700 px-8 py-4 rounded-full font-bold backdrop-blur transition duration-200">
                 Hubungi Kami
@@ -138,7 +138,7 @@
         <div data-aos="fade-up" data-aos-delay="200" class="grid grid-cols-3 gap-6 max-w-xl border-t border-zinc-800/80 pt-10">
             <div>
                 <span class="block text-3xl md:text-4xl font-extrabold text-white">{{ $stats['projects'] }}+</span>
-                <span class="text-xs md:text-sm text-gray-500 uppercase tracking-widest font-semibold mt-1 block">Inisiatif Proyek</span>
+                <span class="text-xs md:text-sm text-gray-500 uppercase tracking-widest font-semibold mt-1 block">Program Initiatives</span>
             </div>
             <div>
                 <span class="block text-3xl md:text-4xl font-extrabold text-white">{{ $stats['years'] }}</span>
@@ -276,7 +276,7 @@
             <div class="w-12 h-0.5 bg-accent-orange rounded-full mt-3"></div>
             </div>
             <a href="{{ route('projects.index') }}" class="text-sm font-bold text-accent-orange hover:text-amber-700 flex items-center gap-1">
-                Lihat Semua Proyek <i class="bi bi-arrow-right"></i>
+                View All Programs <i class="bi bi-arrow-right"></i>
             </a>
         </div>
 
@@ -347,19 +347,19 @@
         </div>
 
         @else
-            <div class="text-center py-12 text-gray-400">Belum ada proyek terbaru.</div>
+                <div class="text-center py-12 text-gray-400">No recent programs yet.</div>
         @endif
     </div>
 </div>
 
-<!-- Artikel Terbaru -->
+<!-- Latest Publications -->
 @if($latestArticles->isNotEmpty())
 <div class="py-24 bg-zinc-50 border-t border-zinc-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div data-aos="fade-up" class="flex items-end justify-between mb-10">
             <div>
                 <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-2 block">Dari Blog Kami</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold text-zinc-900">Artikel Terbaru</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-zinc-900">Latest Publications</h2>
                 <div class="w-12 h-0.5 bg-accent-orange rounded-full mt-3"></div>
             </div>
             <a href="{{ route('articles.index') }}" class="text-sm font-semibold text-accent-orange hover:text-amber-700 flex items-center gap-1 transition">

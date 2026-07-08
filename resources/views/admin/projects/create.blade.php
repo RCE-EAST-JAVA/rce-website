@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Proyek')
-@section('page-title', 'Tambah Proyek Baru')
+@section('title', 'Add Program')
+@section('page-title', 'Add New Program')
 
 @section('content')
 <div class="card">
@@ -22,13 +22,12 @@
                 </div>
                 
                 <div class="col-md-6 col-12 mb-3">
-                    <label for="category" class="form-label">Kategori <span class="text-danger">*</span></label>
-                    <select id="category" class="form-select @error('category') is-invalid @enderror" name="category" required>
-                        <option value="">Pilih Kategori</option>
-                        <option value="Sampah" {{ old('category') === 'Sampah' ? 'selected' : '' }}>Sampah</option>
-                        <option value="Air" {{ old('category') === 'Air' ? 'selected' : '' }}>Air</option>
-                        <option value="Energi" {{ old('category') === 'Energi' ? 'selected' : '' }}>Energi</option>
-                        <option value="Sosial" {{ old('category') === 'Sosial' ? 'selected' : '' }}>Sosial/Edukasi</option>
+<label for="category" class="form-label">Category <span class="text-danger">*</span></label>
+<select id="category" class="form-select @error('category') is-invalid @enderror" name="category" required>
+<option value="">-- Select Category --</option>
+<option value="Research" {{ old('category') === 'Research' ? 'selected' : '' }}>Research</option>
+<option value="Community Development" {{ old('category') === 'Community Development' ? 'selected' : '' }}>Community Development</option>
+<option value="Capacity Building" {{ old('category') === 'Capacity Building' ? 'selected' : '' }}>Capacity Building</option>
                     </select>
                     @error('category')
                         <div class="invalid-feedback">{{ $message }}</div>

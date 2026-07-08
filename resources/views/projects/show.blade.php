@@ -15,7 +15,7 @@
         <nav class="flex items-center gap-2 text-xs text-emerald-400 mb-6 font-semibold uppercase tracking-widest">
             <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
             <span class="opacity-50">/</span>
-            <a href="{{ route('projects.index') }}" class="hover:text-white transition">Portofolio Proyek</a>
+                <a href="{{ route('projects.index') }}" class="hover:text-white transition">Our Programs</a>
             <span class="opacity-50">/</span>
             <span class="text-white/60 normal-case font-normal tracking-normal">{{ Str::limit($project->title, 40) }}</span>
         </nav>
@@ -128,7 +128,7 @@
 
             <!-- Description -->
             <div class="bg-white rounded-3xl border border-zinc-100 shadow-sm p-8 md:p-10">
-                <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-3 block">Deskripsi Proyek</span>
+                <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-3 block">Program Description</span>
                 <div class="prose prose-zinc max-w-none text-gray-700 leading-relaxed text-base whitespace-pre-line break-words">
                     {{ $project->description }}
                 </div>
@@ -140,7 +140,7 @@
 
             <!-- Info Card -->
             <div class="bg-white rounded-3xl border border-zinc-100 shadow-sm p-6">
-                <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-4 block">Informasi Proyek</span>
+                <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-4 block">Program Information</span>
                 <ul class="divide-y divide-zinc-100 text-sm">
                     <li class="py-3 flex justify-between gap-4">
                         <span class="text-gray-500 font-medium">Kategori</span>
@@ -180,7 +180,7 @@
             <a href="{{ route('projects.index') }}"
                class="flex items-center justify-center gap-2 bg-white border border-zinc-200 hover:border-primary-green hover:text-primary-green text-gray-600 font-semibold text-sm py-3.5 px-6 rounded-2xl transition-all duration-200">
                 <i class="bi bi-arrow-left"></i>
-                Kembali ke Daftar Proyek
+                    Back to Our Programs
             </a>
         </div>
     </div>
@@ -190,7 +190,7 @@
     <div class="mt-20">
         <div class="mb-8">
             <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-2 block">Kategori Serupa</span>
-            <h2 class="text-2xl font-extrabold text-gray-900">Proyek Terkait</h2>
+                    <h2 class="text-2xl font-extrabold text-gray-900">Related Programs</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

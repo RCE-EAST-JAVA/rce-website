@@ -13,7 +13,7 @@ class ArticleSeeder extends Seeder
         $articles = [
             [
                 'title'        => 'Mengapa Pendidikan untuk Pembangunan Berkelanjutan Penting bagi Generasi Muda',
-                'category'     => 'Edukasi',
+                'category'     => 'Journal',
                 'author'       => 'Dr. Aliyah Purnamasari, M.Hum.',
                 'tags'         => 'ESD, generasi muda, pembangunan berkelanjutan',
                 'excerpt'      => 'Pendidikan untuk Pembangunan Berkelanjutan (ESD) bukan sekadar kurikulum — ia adalah fondasi cara berpikir kritis yang dibutuhkan generasi muda untuk menghadapi krisis iklim dan ketimpangan sosial.',
@@ -23,7 +23,7 @@ class ArticleSeeder extends Seeder
             ],
             [
                 'title'        => 'Inovasi Pengelolaan Sampah Organik di Kampung Hijau Surabaya',
-                'category'     => 'Lingkungan',
+                'category'     => 'Books',
                 'author'       => 'Dr. H. Ahmad Yani, M.T.',
                 'tags'         => 'sampah organik, kompos, komunitas, Surabaya',
                 'excerpt'      => 'Kampung Hijau di kawasan Wonokromo, Surabaya, berhasil mengubah sampah dapur menjadi sumber pendapatan komunitas lewat program bank sampah dan produksi pupuk kompos skala lingkungan.',
@@ -33,7 +33,7 @@ class ArticleSeeder extends Seeder
             ],
             [
                 'title'        => 'Panel Surya Komunitas: Solusi Energi Bersih untuk Desa Terpencil',
-                'category'     => 'Energi',
+                'category'     => 'Intellectual Rights',
                 'author'       => 'Ali Solihin, M.T.',
                 'tags'         => 'energi terbarukan, panel surya, desa, SDG 7',
                 'excerpt'      => 'Proyek pemasangan panel surya komunal di Desa Tanjungbumi, Bangkalan, membuktikan bahwa energi bersih bukan hanya hak kota besar — desa pun bisa mandiri secara energi.',
@@ -43,7 +43,7 @@ class ArticleSeeder extends Seeder
             ],
             [
                 'title'        => 'Pemulihan Ekosistem Mangrove di Pesisir Delta Brantas',
-                'category'     => 'Konservasi',
+                'category'     => 'Journal',
                 'author'       => 'Dr. Shinta Rahayu, M.Si.',
                 'tags'         => 'mangrove, ekosistem pesisir, Brantas, SDG 14',
                 'excerpt'      => 'Kawasan delta Sungai Brantas kehilangan lebih dari 60% tutupan mangrove dalam dua dekade terakhir. Program pemulihan bersama RCE Jawa Timur kini menanam harapan baru di pesisir.',
@@ -53,7 +53,7 @@ class ArticleSeeder extends Seeder
             ],
             [
                 'title'        => 'Forum ESD Jawa Timur 2026: Memperkuat Jaringan Pendidikan Berkelanjutan',
-                'category'     => 'Berita',
+                'category'     => 'Books',
                 'author'       => 'Admin RCE East Java',
                 'tags'         => 'forum, ESD, jaringan, Jawa Timur',
                 'excerpt'      => 'Forum ESD Jawa Timur 2026 mempertemukan lebih dari 150 praktisi pendidikan, peneliti, dan pemangku kebijakan untuk merancang strategi kolaboratif menuju pendidikan berkelanjutan yang inklusif.',
@@ -62,8 +62,8 @@ class ArticleSeeder extends Seeder
                 'published_at' => '2026-05-22',
             ],
             [
-                'title'        => 'Rencana Pengembangan Kurikulum ESD untuk Sekolah Dasar di Jawa Timur',
-                'category'     => 'Edukasi',
+                'title'        => 'Kurikulum ESD Tingkat Sekolah Dasar',
+                'category'     => 'Intellectual Rights',
                 'author'       => 'Dr. Aliyah Purnamasari, M.Hum.',
                 'tags'         => 'kurikulum, sekolah dasar, ESD',
                 'excerpt'      => 'Draft kurikulum ESD untuk tingkat SD sedang dalam tahap penyusunan dan akan diujicobakan di 10 sekolah percontohan mulai semester genap 2026.',
@@ -78,8 +78,8 @@ class ArticleSeeder extends Seeder
                 'title'        => $data['title'],
                 'slug'         => Str::slug($data['title']),
                 'category'     => $data['category'],
-                'author'       => $data['author'],
-                'tags'         => $data['tags'],
+                'author'       => $data['author'] ?? null,
+                'tags'         => $data['tags'] ?? null,
                 'excerpt'      => $data['excerpt'],
                 'body'         => $data['body'],
                 'status'       => $data['status'],

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Artikel')
-@section('page-title', 'Tambah Artikel Baru')
+@section('title', 'Add Publication')
+@section('page-title', 'Add New Publication')
 
 @section('styles')
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
@@ -109,15 +109,15 @@
             <div class="card-body">
                 <p class="form-section-title">Informasi Dasar</p>
                 <div class="mb-3">
-                    <label class="form-label">Judul Artikel <span class="text-danger">*</span></label>
+                    <label class="form-label">Publication Title <span class="text-danger">*</span></label>
                     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                        value="{{ old('title') }}" placeholder="Masukkan judul artikel..." required>
+                        value="{{ old('title') }}" placeholder="Enter publication title..." required>
                     @error('title')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
                 <div class="mb-0">
                     <label class="form-label">Ringkasan / Excerpt</label>
                     <textarea name="excerpt" class="form-control @error('excerpt') is-invalid @enderror"
-                        rows="2" maxlength="500" placeholder="Deskripsi singkat yang tampil di daftar artikel (maks 500 karakter)...">{{ old('excerpt') }}</textarea>
+                        rows="2" maxlength="500" placeholder="Short description for publication listing (max 500 chars)...">{{ old('excerpt') }}</textarea>
                     @error('excerpt')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>
@@ -126,7 +126,7 @@
         <!-- Editor -->
         <div class="card mb-4">
             <div class="card-body">
-                <p class="form-section-title">Isi Artikel <span class="text-danger">*</span></p>
+                <p class="form-section-title">Publication Content <span class="text-danger">*</span></p>
                 @error('body')<div class="alert alert-danger py-2 small mb-3">{{ $message }}</div>@enderror
                 <div id="quill-editor"></div>
                 <textarea name="body" id="body" class="d-none">{{ old('body') }}</textarea>
@@ -143,7 +143,7 @@
             <div class="card-body">
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save me-1"></i> Simpan Artikel
+                        <i class="bi bi-save me-1"></i> Save Publication
                     </button>
                     <a href="{{ route('admin.articles.index') }}" class="btn btn-light">Batal</a>
                 </div>
@@ -153,7 +153,7 @@
         <!-- Meta -->
         <div class="card mb-4">
             <div class="card-body">
-                <p class="form-section-title">Meta Artikel</p>
+                <p class="form-section-title">Publication Meta</p>
 
                 <div class="mb-3">
                     <label class="form-label">Penulis <span class="text-danger">*</span></label>
@@ -163,9 +163,13 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Kategori <span class="text-danger">*</span></label>
-                    <input type="text" name="category" class="form-control @error('category') is-invalid @enderror"
-                        value="{{ old('category') }}" placeholder="Cth: Lingkungan, Energi..." required>
+                    <label class="form-label">Category <span class="text-danger">*</span></label>
+                    <select name="category" class="form-select @error('category') is-invalid @enderror" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="Journal" {{ old('category') == 'Journal' ? 'selected' : '' }}>Journal</option>
+                        <option value="Books" {{ old('category') == 'Books' ? 'selected' : '' }}>Books</option>
+                        <option value="Intellectual Rights" {{ old('category') == 'Intellectual Rights' ? 'selected' : '' }}>Intellectual Rights</option>
+                    </select>
                     @error('category')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
@@ -355,7 +359,7 @@
 
     const quill = new Quill('#quill-editor', {
         theme: 'snow',
-        placeholder: 'Tulis isi artikel di sini...',
+        placeholder: 'Write publication content here...',
         modules: {
             toolbar: {
                 container: [
