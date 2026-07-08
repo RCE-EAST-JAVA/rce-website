@@ -60,11 +60,11 @@
 
 <body class="antialiased text-gray-800">
     <!-- Navbar -->
-    <nav x-data="{ scrolled: window.scrollY > 10 }" @scroll.window="scrolled = window.scrollY > 10"
-        :class="scrolled
-            ?
-            'bg-white border-b border-gray-100 shadow-sm' :
-            'bg-transparent border-b border-transparent shadow-none'"
+    <nav x-data="{ scrolled: window.scrollY > 10, mobileOpen: false }"
+        @scroll.window="scrolled = window.scrollY > 10"
+        :class="scrolled || mobileOpen
+            ? 'bg-white border-b border-gray-100 shadow-sm'
+            : 'bg-transparent border-b border-transparent shadow-none'"
         class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
             <div class="flex justify-between h-20">
@@ -74,83 +74,132 @@
                         <img src="{{ asset('logo-new.png') }}" alt="RCE Logo" class="rounded-lg shadow-md"
                             style="width: 50px; height: 50px; object-fit: contain;">
                         <div>
-                            <span :class="scrolled ? 'text-primary-green' : 'text-white'"
+                            <span :class="scrolled || mobileOpen ? 'text-primary-green' : 'text-white'"
                                 class="font-extrabold text-xl tracking-tight transition-colors duration-300">RCE EAST
                                 JAVA</span>
-                            <span :class="scrolled ? 'text-gray-500' : 'text-white/60'"
+                            <span :class="scrolled || mobileOpen ? 'text-gray-500' : 'text-white/60'"
                                 class="block text-xs uppercase tracking-widest -mt-1 font-semibold transition-colors duration-300">Sustainability
                                 Network</span>
                         </div>
                     </a>
 
-                    <!-- Navigation Links -->
+                    <!-- Desktop Navigation Links -->
                     <div class="hidden md:flex space-x-8 ms-12">
                         <a href="{{ route('home') }}"
                             :class="scrolled
-                                ?
-                                '{{ Request::is('/') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
-                                '{{ Request::is('/') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ? '{{ Request::is('/') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                                : '{{ Request::is('/') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Beranda
                         </a>
                         <a href="{{ route('projects.index') }}"
                             :class="scrolled
-                                ?
-                                '{{ Request::is('proyek*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
-                                '{{ Request::is('proyek*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ? '{{ Request::is('proyek*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                                : '{{ Request::is('proyek*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Portofolio Proyek
                         </a>
-
                         <a href="{{ route('articles.index') }}"
                             :class="scrolled
-                                ?
-                                '{{ Request::is('artikel*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
-                                '{{ Request::is('artikel*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ? '{{ Request::is('artikel*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                                : '{{ Request::is('artikel*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Artikel
                         </a>
-
                         <a href="{{ route('staff.index') }}"
                             :class="scrolled
-                                ?
-                                '{{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
-                                '{{ Request::is('staf*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ? '{{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                                : '{{ Request::is('staf*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Staf
                         </a>
-
                         <a href="{{ route('sdg.index') }}"
                             :class="scrolled
-                                ?
-                                '{{ Request::is('sdg*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
-                                '{{ Request::is('sdg*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ? '{{ Request::is('sdg*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
+                                : '{{ Request::is('sdg*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             SDGs
                         </a>
-
-
-
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4">
-                    @auth
-                        <a href="{{ route('dashboard') }}"
-                            :class="scrolled ? 'bg-primary-green text-white' :
-                                'bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur-sm'"
-                            class="px-5 py-2.5 rounded-full text-sm font-semibold shadow-md transition-all duration-300">
-                            Dashboard
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}"
-                            :class="scrolled ? 'bg-primary-green text-white' :
-                                'bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur-sm'"
-                            class="px-5 py-2.5 rounded-full text-sm font-semibold shadow-md transition-all duration-300">
-                            Masuk
-                        </a>
-                    @endauth
+                <div class="flex items-center gap-3">
+                    <!-- Desktop Login/Dashboard Button -->
+                    <div class="hidden md:flex">
+                        @auth
+                            <a href="{{ route('dashboard') }}"
+                                :class="scrolled ? 'bg-primary-green text-white' :
+                                    'bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur-sm'"
+                                class="px-5 py-2.5 rounded-full text-sm font-semibold shadow-md transition-all duration-300">
+                                Dashboard
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}"
+                                :class="scrolled ? 'bg-primary-green text-white' :
+                                    'bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur-sm'"
+                                class="px-5 py-2.5 rounded-full text-sm font-semibold shadow-md transition-all duration-300">
+                                Masuk
+                            </a>
+                        @endauth
+                    </div>
+
+                    <!-- Hamburger Button (mobile only) -->
+                    <button @click="mobileOpen = !mobileOpen"
+                        :class="scrolled || mobileOpen ? 'text-gray-700 hover:text-primary-green' : 'text-white hover:text-orange-300'"
+                        class="md:hidden p-2 rounded-lg transition-colors duration-200 focus:outline-none"
+                        aria-label="Toggle menu">
+                        <i x-show="!mobileOpen" class="bi bi-list text-2xl"></i>
+                        <i x-show="mobileOpen" class="bi bi-x-lg text-2xl"></i>
+                    </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div class="px-4 py-4 space-y-1">
+                <a href="{{ route('home') }}"
+                    class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('/') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
+                    <i class="bi bi-house-door mr-3 text-base"></i> Beranda
+                </a>
+                <a href="{{ route('projects.index') }}"
+                    class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('proyek*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
+                    <i class="bi bi-folder2-open mr-3 text-base"></i> Portofolio Proyek
+                </a>
+                <a href="{{ route('articles.index') }}"
+                    class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('artikel*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
+                    <i class="bi bi-newspaper mr-3 text-base"></i> Artikel
+                </a>
+                <a href="{{ route('staff.index') }}"
+                    class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('staf*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
+                    <i class="bi bi-people mr-3 text-base"></i> Staf
+                </a>
+                <a href="{{ route('sdg.index') }}"
+                    class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('sdg*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
+                    <i class="bi bi-globe-americas mr-3 text-base"></i> SDGs
+                </a>
+
+                <!-- Divider -->
+                <div class="border-t border-gray-100 my-2"></div>
+
+                @auth
+                    <a href="{{ route('dashboard') }}"
+                        class="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-semibold bg-primary-green text-white transition-colors duration-150">
+                        <i class="bi bi-speedometer2 mr-2"></i> Dashboard
+                    </a>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-semibold bg-primary-green text-white transition-colors duration-150">
+                        <i class="bi bi-box-arrow-in-right mr-2"></i> Masuk
+                    </a>
+                @endauth
             </div>
         </div>
     </nav>
