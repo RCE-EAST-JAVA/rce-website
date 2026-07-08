@@ -77,7 +77,7 @@
 
 <div class="row g-4">
 
-    <!-- Kolom Kiri: Konten Utama -->
+    <!-- Left Column: Main Content -->
     <div class="col-lg-8">
 
         <!-- Judul & Excerpt -->
@@ -120,9 +120,9 @@
             <div class="card-body">
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save me-1"></i> Simpan Perubahan
+                        <i class="bi bi-save me-1"></i> Save Changes
                     </button>
-                    <a href="{{ route('admin.articles.index') }}" class="btn btn-light">Batal</a>
+                    <a href="{{ route('admin.articles.index') }}" class="btn btn-light">Cancel</a>
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
                 <div class="mb-3">
                     <label class="form-label">Tags</label>
                     <input type="text" name="tags" class="form-control @error('tags') is-invalid @enderror"
-                        value="{{ old('tags', $article->tags) }}" placeholder="Pisahkan dengan koma">
+                        value="{{ old('tags', $article->tags) }}" placeholder="Separate with commas">
                     @error('tags')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
@@ -167,10 +167,21 @@
                 </div>
 
                 <div class="mb-0">
-                    <label class="form-label">Tanggal Publish</label>
+                    <label class="form-label">Publish Date</label>
                     <input type="date" name="published_at" class="form-control @error('published_at') is-invalid @enderror"
                         value="{{ old('published_at', $article->published_at?->format('Y-m-d')) }}">
                     @error('published_at')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="is_pinned" id="is_pinned" value="1"
+                            {{ old('is_pinned', $article->is_pinned) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="is_pinned">
+                            <i class="bi bi-pin-fill me-1"></i> Pin to top
+                        </label>
+                    </div>
+                    <div class="form-text">Pinned publications appear first in the listing.</div>
                 </div>
             </div>
         </div>
@@ -189,7 +200,7 @@
                 @endif
 
                 <div id="thumbPreview" class="mb-3 d-none">
-                    <p class="small text-muted mb-1">Preview baru:</p>
+                    <p class="small text-muted mb-1">New preview:</p>
                     <img id="thumbImg" src="#" alt="Preview"
                          class="rounded w-100" style="max-height: 160px; object-fit: cover;">
                 </div>
@@ -198,7 +209,7 @@
                     class="form-control @error('thumbnail') is-invalid @enderror"
                     accept="image/jpeg,image/png,image/jpg,image/webp">
                 @error('thumbnail')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                <div class="form-text mt-1">Kosongkan jika tidak ingin mengganti. JPG, PNG, WEBP. Maks 3MB.</div>
+                <div class="form-text mt-1">Leave blank to keep the current thumbnail. JPG, PNG, WEBP. Max 3MB.</div>
             </div>
         </div>
 
@@ -235,7 +246,7 @@
 
             const cap = document.createElement('figcaption');
             cap.setAttribute('contenteditable', 'true');
-            cap.setAttribute('data-placeholder', 'Tambahkan caption (opsional)...');
+            cap.setAttribute('data-placeholder', 'Add caption (optional)...');
             if (typeof value === 'object' && value.caption) cap.textContent = value.caption;
 
             // Stop all keyboard/mouse events from bubbling to Quill

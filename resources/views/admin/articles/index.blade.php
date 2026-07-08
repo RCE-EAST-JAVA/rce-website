@@ -25,12 +25,13 @@
                 <thead>
                     <tr>
                         <th>Thumbnail</th>
-                        <th>Judul</th>
-                        <th>Kategori</th>
-                        <th>Penulis</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Author</th>
                         <th>Status</th>
-                        <th>Tanggal Publish</th>
-                        <th>Aksi</th>
+                        <th>Pin</th>
+                        <th>Published</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +58,15 @@
                             </span>
                         </td>
                         <td>{{ $article->published_at ? $article->published_at->format('d M Y') : '-' }}</td>
+                        <td>
+                            <form action="{{ route('admin.articles.toggle-pin', $article->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-sm {{ $article->is_pinned ? 'btn-warning' : 'btn-outline-secondary' }}"
+                                    title="{{ $article->is_pinned ? 'Unpin' : 'Pin' }}">
+                                    <i class="bi bi-pin-fill"></i>
+                                </button>
+                            </form>
+                        </td>
                         <td>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('admin.articles.edit', $article->id) }}" class="btn btn-warning btn-sm">

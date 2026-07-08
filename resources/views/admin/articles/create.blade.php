@@ -101,7 +101,7 @@
 
 <div class="row g-4">
 
-    <!-- Kolom Kiri: Konten Utama -->
+    <!-- Left Column: Main Content -->
     <div class="col-lg-8">
 
         <!-- Judul -->
@@ -145,7 +145,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="bi bi-save me-1"></i> Save Publication
                     </button>
-                    <a href="{{ route('admin.articles.index') }}" class="btn btn-light">Batal</a>
+                    <a href="{{ route('admin.articles.index') }}" class="btn btn-light">Cancel</a>
                 </div>
             </div>
         </div>
@@ -176,9 +176,9 @@
                 <div class="mb-3">
                     <label class="form-label">Tags</label>
                     <input type="text" name="tags" class="form-control @error('tags') is-invalid @enderror"
-                        value="{{ old('tags') }}" placeholder="Pisahkan dengan koma">
+                        value="{{ old('tags') }}" placeholder="Separate with commas">
                     @error('tags')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    <div class="form-text">Cth: SDGs, Lingkungan, Air</div>
+                    <div class="form-text">e.g. SDGs, Environment, Water</div>
                 </div>
 
                 <div class="mb-3">
@@ -191,11 +191,22 @@
                 </div>
 
                 <div class="mb-0">
-                    <label class="form-label">Tanggal Publish</label>
+                    <label class="form-label">Publish Date</label>
                     <input type="date" name="published_at" class="form-control @error('published_at') is-invalid @enderror"
                         value="{{ old('published_at') }}">
                     @error('published_at')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    <div class="form-text">Kosongkan untuk menggunakan tanggal sekarang.</div>
+                    <div class="form-text">Leave blank to use today's date.</div>
+                </div>
+
+                <div class="mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="is_pinned" id="is_pinned" value="1"
+                            {{ old('is_pinned') ? 'checked' : '' }}>
+                        <label class="form-check-label" for="is_pinned">
+                            <i class="bi bi-pin-fill me-1"></i> Pin to top
+                        </label>
+                    </div>
+                    <div class="form-text">Pinned publications appear first in the listing.</div>
                 </div>
             </div>
         </div>
@@ -212,7 +223,7 @@
                     class="form-control @error('thumbnail') is-invalid @enderror"
                     accept="image/jpeg,image/png,image/jpg,image/webp">
                 @error('thumbnail')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                <div class="form-text mt-1">JPG, PNG, WEBP. Maks 3MB. Rasio 16:9.</div>
+                <div class="form-text mt-1">JPG, PNG, WEBP. Max 3MB. Aspect ratio 16:9.</div>
             </div>
         </div>
 
@@ -259,7 +270,7 @@
             
             const figcaption = document.createElement('figcaption');
             figcaption.setAttribute('contenteditable', 'true');
-            figcaption.setAttribute('data-placeholder', 'Tambahkan caption (opsional)...');
+            figcaption.setAttribute('data-placeholder', 'Add caption (optional)...');
             if (typeof value === 'object' && value.caption) {
                 figcaption.textContent = value.caption;
             }

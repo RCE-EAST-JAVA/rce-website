@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Mitra')
-@section('page-title', 'Kelola Mitra')
+@section('title', 'Manage Partners')
+@section('page-title', 'Manage Partners')
 
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="card-title mb-0">Daftar Mitra & Kolaborator</h4>
+        <h4 class="card-title mb-0">Partners & Collaborators</h4>
         <a href="{{ route('admin.partners.create') }}" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-circle"></i> Tambah Mitra
+            <i class="bi bi-plus-circle"></i> Add Partner
         </a>
     </div>
     <div class="card-body">
@@ -23,9 +23,9 @@
         @if($partners->isEmpty())
             <div class="text-center py-5 text-muted">
                 <i class="bi bi-building fs-1 d-block mb-3 opacity-25"></i>
-                <p class="mb-1">Belum ada mitra.</p>
+                <p class="mb-1">No partners yet.</p>
                 <a href="{{ route('admin.partners.create') }}" class="btn btn-primary btn-sm mt-2">
-                    <i class="bi bi-plus-circle"></i> Tambah Mitra Pertama
+                    <i class="bi bi-plus-circle"></i> Add First Partner
                 </a>
             </div>
         @else
@@ -34,8 +34,8 @@
                     <thead class="table-light">
                         <tr>
                             <th style="width: 60px;">Logo</th>
-                            <th>Nama Mitra</th>
-                            <th style="width: 180px;" class="text-end">Aksi</th>
+                            <th>Partner Name</th>
+                            <th style="width: 180px;" class="text-end">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,7 +59,7 @@
                                     <i class="bi bi-pencil-fill"></i> Edit
                                 </a>
                                 <form action="{{ route('admin.partners.destroy', $partner->id) }}" method="POST"
-                                    onsubmit="return confirm('Hapus mitra {{ $partner->name }}?')" class="d-inline">
+                                onsubmit="return confirm('Delete partner {{ $partner->name }}?')" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">

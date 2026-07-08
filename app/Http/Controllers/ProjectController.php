@@ -28,7 +28,7 @@ class ProjectController extends Controller
             $query->where('status', $request->status);
         }
 
-        $projects = $query->with('images')->orderBy('published_at', 'desc')->paginate(9);
+        $projects = $query->with('images')->orderByDesc('is_pinned')->orderBy('published_at', 'desc')->paginate(9);
 
         return view('projects.index', compact('projects'));
     }

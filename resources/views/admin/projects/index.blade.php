@@ -16,13 +16,14 @@
             <table class="table table-striped" id="table1">
                 <thead>
                     <tr>
-                        <th>Judul</th>
-                        <th>Kategori</th>
+                        <th>Title</th>
+                        <th>Category</th>
                         <th>Status</th>
-                        <th>Penulis</th>
-                        <th>Tanggal</th>
+                        <th>Author</th>
+                        <th>Date</th>
                         <th>SDGs</th>
-                        <th>Aksi</th>
+                        <th>Pin</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,6 +61,15 @@
                         </td>
                         <td>{{ $project->sdgs }}</td>
                         <td>
+                            <form action="{{ route('admin.projects.toggle-pin', $project->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-sm {{ $project->is_pinned ? 'btn-warning' : 'btn-outline-secondary' }}"
+                                    title="{{ $project->is_pinned ? 'Unpin' : 'Pin' }}">
+                                    <i class="bi bi-pin-fill"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-fill"></i>
@@ -76,7 +86,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="7" class="text-center py-4 text-muted">No programs yet.</td>
+                        <td colspan="8" class="text-center py-4 text-muted">No programs yet.</td>
                     </tr>
                     @endforelse
                 </tbody>

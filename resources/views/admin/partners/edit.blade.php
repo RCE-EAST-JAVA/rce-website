@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Mitra')
-@section('page-title', 'Edit Mitra')
+@section('title', 'Edit Partner')
+@section('page-title', 'Edit Partner')
 
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="card-title mb-0">Edit Mitra</h4>
+        <h4 class="card-title mb-0">Edit Partner</h4>
         <a href="{{ route('admin.partners.index') }}" class="btn btn-secondary btn-sm">
-            <i class="bi bi-arrow-left"></i> Kembali
+            <i class="bi bi-arrow-left"></i> Back
         </a>
     </div>
     <div class="card-body">
@@ -27,9 +27,9 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Nama Mitra <span class="text-danger">*</span></label>
+                <label class="form-label fw-semibold">Partner Name <span class="text-danger">*</span></label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                    value="{{ old('name', $partner->name) }}" placeholder="Contoh: Universitas Negeri Surabaya">
+                    value="{{ old('name', $partner->name) }}" placeholder="e.g. Universitas Negeri Surabaya">
                 @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -40,7 +40,7 @@
 
                 @if($partner->logo)
                     <div class="mb-2">
-                        <p class="small text-muted mb-1">Logo saat ini:</p>
+                        <p class="small text-muted mb-1">Current logo:</p>
                         <img src="{{ asset($partner->logo) }}" alt="{{ $partner->name }}"
                             class="rounded border bg-light p-2" style="max-height: 80px; object-fit: contain;">
                     </div>
@@ -51,7 +51,7 @@
                 @error('logo')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-                <div class="form-text">Kosongkan jika tidak ingin mengganti logo. Format: JPG, PNG, SVG, WEBP. Maks 2MB.</div>
+                <div class="form-text">Leave empty to keep current logo. Format: JPG, PNG, SVG, WEBP. Max 2MB.</div>
 
                 <div id="logoPreview" class="mt-3 d-none">
                     <p class="small text-muted mb-1">Preview logo baru:</p>
@@ -62,9 +62,9 @@
 
             <div class="d-flex gap-2 mt-2">
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save"></i> Simpan Perubahan
+                    <i class="bi bi-save"></i> Save Changes
                 </button>
-                <a href="{{ route('admin.partners.index') }}" class="btn btn-light">Batal</a>
+                <a href="{{ route('admin.partners.index') }}" class="btn btn-light">Cancel</a>
             </div>
         </form>
     </div>

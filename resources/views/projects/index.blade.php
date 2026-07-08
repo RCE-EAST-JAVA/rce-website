@@ -5,11 +5,11 @@
 @section('content')
 <!-- Header Page -->
 <div class="relative bg-zinc-950 text-white overflow-hidden pt-32 pb-20">
-    <!-- Background gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950 via-emerald-950/40 to-zinc-950 pointer-events-none"></div>
-    <!-- Decorative blobs -->
-    <div class="absolute top-10 right-20 w-80 h-80 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-0 left-10 w-56 h-56 rounded-full bg-emerald-400/5 blur-2xl pointer-events-none"></div>
+    <!-- Background photo with opacity -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+         style="background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=1920'); opacity: 0.3;"></div>
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/60 to-zinc-950/90 pointer-events-none"></div>
     <!-- Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3 block">List of Initiatives</span>

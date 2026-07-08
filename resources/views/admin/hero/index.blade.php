@@ -1,22 +1,22 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Foto Hero')
-@section('page-title', 'Kelola Foto Hero')
+@section('title', 'Manage Hero Photos')
+@section('page-title', 'Manage Hero Photos')
 
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <div>
-            <h4 class="card-title mb-0">Foto Slider Hero</h4>
-            <small class="text-muted">Maksimal 5 foto • {{ $heroPhotos->count() }}/5 digunakan</small>
+            <h4 class="card-title mb-0">Hero Slider Photos</h4>
+            <small class="text-muted">Maximum 5 photos • {{ $heroPhotos->count() }}/5 used</small>
         </div>
         @if($heroPhotos->count() < 5)
             <a href="{{ route('admin.hero.create') }}" class="btn btn-primary btn-sm">
-                <i class="bi bi-plus-circle"></i> Tambah Foto
+                <i class="bi bi-plus-circle"></i> Add Photo
             </a>
         @else
             <button class="btn btn-secondary btn-sm" disabled>
-                <i class="bi bi-slash-circle"></i> Batas 5 Foto Tercapai
+                <i class="bi bi-slash-circle"></i> 5 Photo Limit Reached
             </button>
         @endif
     </div>
@@ -46,15 +46,15 @@
                     {{ $i }}
                 </div>
             @endfor
-            <span class="text-muted small align-self-center ms-1">slot foto hero</span>
+            <span class="text-muted small align-self-center ms-1">hero photo slots</span>
         </div>
 
         @if($heroPhotos->isEmpty())
             <div class="text-center py-5 text-muted">
                 <i class="bi bi-images fs-1 d-block mb-3 opacity-25"></i>
-                <p class="mb-1">Belum ada foto hero.</p>
+                <p class="mb-1">No hero photos yet.</p>
                 <a href="{{ route('admin.hero.create') }}" class="btn btn-primary btn-sm mt-2">
-                    <i class="bi bi-plus-circle"></i> Tambah Foto Pertama
+                    <i class="bi bi-plus-circle"></i> Add First Photo
                 </a>
             </div>
         @else
@@ -84,7 +84,7 @@
                                 <i class="bi bi-pencil-fill"></i> Edit
                             </a>
                             <form action="{{ route('admin.hero.destroy', $photo->id) }}" method="POST"
-                                onsubmit="return confirm('Hapus foto hero ini?')">
+                                onsubmit="return confirm('Delete this hero photo?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">

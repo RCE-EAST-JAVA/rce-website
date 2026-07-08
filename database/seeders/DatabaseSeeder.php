@@ -16,19 +16,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Akun Dummy
-        User::create([
-            'name' => 'Admin RCE East Java',
-            'email' => 'admin@rce-eastjava.org',
-            'password' => bcrypt('password'),
-            'role' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@rce-eastjava.org'],
+            ['name' => 'Admin RCE East Java', 'password' => bcrypt('password'), 'role' => 'admin']
+        );
 
-        User::create([
-            'name' => 'User RCE East Java',
-            'email' => 'user@rce-eastjava.org',
-            'password' => bcrypt('password'),
-            'role' => 'user',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'user@rce-eastjava.org'],
+            ['name' => 'User RCE East Java', 'password' => bcrypt('password'), 'role' => 'user']
+        );
 
         // 2. Data Dummy Proyek
         \App\Models\Project::create([
@@ -68,7 +64,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Staff::create([
             'name' => 'Dr. H. Ahmad Yani, M.T.',
             'role' => 'Koordinator Bidang Energi',
-            'affiliation' => 'Institut Teknologi Sepuluh Nopember',
+            'category' => 'Researcher',
             'expertise' => 'Eco-design, Energi Terbarukan',
             'image' => 'staff1.jpg',
             'email' => 'ahmad.yani@rce-eastjava.org',
@@ -78,7 +74,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Staff::create([
             'name' => 'Dr. Shinta Rahayu, M.Si.',
             'role' => 'Koordinator Lingkungan Hidup',
-            'affiliation' => 'Universitas Negeri Surabaya',
+            'category' => 'Researcher',
             'expertise' => 'Ekologi Air, Konservasi Mangrove',
             'image' => 'staff2.jpg',
             'email' => 'shinta.r@rce-eastjava.org',
@@ -88,7 +84,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Staff::create([
             'name' => 'Ali Solihin, M.T.',
             'role' => 'Peneliti Teknologi Tepat Guna',
-            'affiliation' => 'Universitas Brawijaya',
+            'category' => 'Research Assistant',
             'expertise' => 'Energi Terbarukan, Panel Surya',
             'image' => 'staff3.jpg',
             'email' => 'ali.solihin@rce-eastjava.org',
@@ -98,7 +94,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Staff::create([
             'name' => 'Dr. Aliyah Purnamasari, M.Hum.',
             'role' => 'Koordinator Edukasi Publik',
-            'affiliation' => 'Universitas Airlangga',
+            'category' => 'Researcher',
             'expertise' => 'Pendidikan Lingkungan, Sosiologi Komunitas',
             'image' => 'staff4.jpg',
             'email' => 'aliyah.p@rce-eastjava.org',

@@ -36,7 +36,7 @@ class AdminPartnerController extends Controller
 
         Partner::create($data);
 
-        return redirect()->route('admin.partners.index')->with('success', 'Mitra berhasil ditambahkan.');
+        return redirect()->route('admin.partners.index')->with('success', 'Partner added successfully.');
     }
 
     public function edit(Partner $partner)
@@ -64,7 +64,7 @@ class AdminPartnerController extends Controller
 
         $partner->update($data);
 
-        return redirect()->route('admin.partners.index')->with('success', 'Mitra berhasil diperbarui.');
+        return redirect()->route('admin.partners.index')->with('success', 'Partner updated successfully.');
     }
 
     public function destroy(Partner $partner)
@@ -75,6 +75,6 @@ class AdminPartnerController extends Controller
 
         $partner->delete();
 
-        return redirect()->route('admin.partners.index')->with('success', 'Mitra berhasil dihapus.');
+        return redirect()->route('admin.partners.index')->with('success', 'Partner deleted successfully.');
     }
 }

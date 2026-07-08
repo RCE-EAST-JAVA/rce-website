@@ -13,7 +13,7 @@
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 text-xs text-emerald-400 mb-6 font-semibold uppercase tracking-widest">
-            <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
+            <a href="{{ route('home') }}" class="hover:text-white transition">Home</a>
             <span class="opacity-50">/</span>
                 <a href="{{ route('projects.index') }}" class="hover:text-white transition">Our Programs</a>
             <span class="opacity-50">/</span>
@@ -158,7 +158,7 @@
                         <span class="font-semibold text-gray-800 text-right">{{ $project->author }}</span>
                     </li>
                     <li class="py-3 flex justify-between gap-4">
-                        <span class="text-gray-500 font-medium">Tanggal</span>
+                        <span class="text-gray-500 font-medium">Date</span>
                         <span class="font-semibold text-gray-800 text-right">{{ $project->date }}</span>
                     </li>
                     @if($project->sdgs)
@@ -217,7 +217,7 @@
                     </h3>
                     <p class="text-sm text-gray-500 line-clamp-2 flex-1">{{ $rel->description }}</p>
                     <span class="mt-4 text-xs font-semibold text-primary-green flex items-center gap-1">
-                        Lihat Detail <i class="bi bi-arrow-right"></i>
+                        View Detail <i class="bi bi-arrow-right"></i>
                     </span>
                 </div>
             </a>

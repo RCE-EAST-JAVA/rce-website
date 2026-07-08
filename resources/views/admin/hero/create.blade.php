@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Foto Hero')
-@section('page-title', 'Tambah Foto Hero')
+@section('title', 'Add Hero Photo')
+@section('page-title', 'Add Hero Photo')
 
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="card-title mb-0">Tambah Foto Hero</h4>
+        <h4 class="card-title mb-0">Add Hero Photo</h4>
         <a href="{{ route('admin.hero.index') }}" class="btn btn-secondary btn-sm">
-            <i class="bi bi-arrow-left"></i> Kembali
+            <i class="bi bi-arrow-left"></i> Back
         </a>
     </div>
     <div class="card-body">
@@ -26,13 +26,13 @@
             @csrf
 
             <div class="mb-4">
-                <label class="form-label fw-semibold">Foto Hero <span class="text-danger">*</span></label>
+                <label class="form-label fw-semibold">Hero Photo <span class="text-danger">*</span></label>
                 <input type="file" name="image" id="imageInput" class="form-control @error('image') is-invalid @enderror"
                     accept="image/jpeg,image/png,image/jpg,image/webp" required>
                 @error('image')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-                <div class="form-text">Format: JPG, PNG, WEBP. Maks 3MB. Disarankan rasio 16:9 (misal 1920x1080px).</div>
+                <div class="form-text">Format: JPG, PNG, WEBP. Max 3MB. Recommended 16:9 ratio (e.g. 1920x1080px).</div>
 
                 {{-- Preview --}}
                 <div id="imagePreview" class="mt-3 d-none">
@@ -43,9 +43,9 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Caption <span class="text-muted fw-normal">(opsional)</span></label>
+                <label class="form-label fw-semibold">Caption <span class="text-muted fw-normal">(optional)</span></label>
                 <input type="text" name="caption" class="form-control @error('caption') is-invalid @enderror"
-                    value="{{ old('caption') }}" placeholder="Contoh: Kegiatan RCE di Surabaya...">
+                    value="{{ old('caption') }}" placeholder="e.g. RCE East Java activity in Surabaya...">
                 @error('caption')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -65,16 +65,16 @@
                     <div class="form-check form-switch mt-3">
                         <input class="form-check-input" type="checkbox" name="is_active" id="isActive" value="1"
                             {{ old('is_active', true) ? 'checked' : '' }}>
-                        <label class="form-check-label fw-semibold" for="isActive">Aktifkan Foto</label>
+                        <label class="form-check-label fw-semibold" for="isActive">Activate Photo</label>
                     </div>
                 </div>
             </div>
 
             <div class="d-flex gap-2 mt-2">
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save"></i> Simpan Foto
+                    <i class="bi bi-save"></i> Save Photo
                 </button>
-                <a href="{{ route('admin.hero.index') }}" class="btn btn-light">Batal</a>
+                <a href="{{ route('admin.hero.index') }}" class="btn btn-light">Cancel</a>
             </div>
         </form>
     </div>

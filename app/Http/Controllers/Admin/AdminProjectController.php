@@ -11,8 +11,14 @@ class AdminProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::with('images')->orderBy('published_at', 'desc')->paginate(10);
+        $projects = Project::with('images')->orderByDesc('is_pinned')->orderBy('published_at', 'desc')->paginate(10);
         return view('admin.projects.index', compact('projects'));
+    }
+
+    public function togglePin(Project $project)
+    {
+        $project->update(['is_pinned' => !$project->is_pinned]);
+        return back()->with('success', $project->is_pinned ? 'Proyek di-pin.' : 'Proyek di-unpin.');
     }
 
     public function create()
@@ -37,6 +43,7 @@ class AdminProjectController extends Controller
         ]);
 
         $data = $request->except('images');
+        $data['is_pinned'] = $request->boolean('is_pinned');
 
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -58,7 +65,7 @@ class AdminProjectController extends Controller
             }
         }
 
-        return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil ditambahkan.');
+        return redirect()->route('admin.projects.index')->with('success', 'Program added successfully.');
     }
 
     public function edit(Project $project)
@@ -86,6 +93,7 @@ class AdminProjectController extends Controller
         ]);
 
         $data = $request->except('images');
+        $data['is_pinned'] = $request->boolean('is_pinned');
 
         if ($request->hasFile('image')) {
             if ($project->image && file_exists(public_path($project->image))) {
@@ -125,7 +133,7 @@ class AdminProjectController extends Controller
             }
         }
 
-        return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil diperbarui.');
+        return redirect()->route('admin.projects.index')->with('success', 'Program updated successfully.');
     }
 
     public function destroy(Project $project)
@@ -142,6 +150,6 @@ class AdminProjectController extends Controller
 
         $project->delete();
 
-        return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil dihapus.');
+        return redirect()->route('admin.projects.index')->with('success', 'Program deleted successfully.');
     }
 }

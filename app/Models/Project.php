@@ -16,10 +16,12 @@ class Project extends Model
         'author',
         'date',
         'published_at',
+        'is_pinned',
     ];
 
     protected $casts = [
         'published_at' => 'date',
+        'is_pinned'    => 'boolean',
     ];
 
     public function scopeOrderByPublished($query)

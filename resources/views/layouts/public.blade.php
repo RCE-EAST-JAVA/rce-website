@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -60,11 +60,10 @@
 
 <body class="antialiased text-gray-800">
     <!-- Navbar -->
-    <nav x-data="{ scrolled: window.scrollY > 10, mobileOpen: false }"
-        @scroll.window="scrolled = window.scrollY > 10"
-        :class="scrolled || mobileOpen
-            ? 'bg-white border-b border-gray-100 shadow-sm'
-            : 'bg-transparent border-b border-transparent shadow-none'"
+    <nav x-data="{ scrolled: window.scrollY > 10, mobileOpen: false }" @scroll.window="scrolled = window.scrollY > 10"
+        :class="scrolled || mobileOpen ?
+            'bg-white border-b border-gray-100 shadow-sm' :
+            'bg-transparent border-b border-transparent shadow-none'"
         class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
             <div class="flex justify-between h-20">
@@ -87,36 +86,41 @@
                     <div class="hidden md:flex space-x-8 ms-12">
                         <a href="{{ route('home') }}"
                             :class="scrolled
-                                ? '{{ Request::is('/') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
-                                : '{{ Request::is('/') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ?
+                                '{{ Request::is('/') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
+                                '{{ Request::is('/') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
-                            Beranda
+                            Home
                         </a>
                         <a href="{{ route('projects.index') }}"
                             :class="scrolled
-                                ? '{{ Request::is('proyek*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
-                                : '{{ Request::is('proyek*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ?
+                                '{{ Request::is('proyek*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
+                                '{{ Request::is('proyek*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             Our Programs
                         </a>
                         <a href="{{ route('articles.index') }}"
                             :class="scrolled
-                                ? '{{ Request::is('artikel*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
-                                : '{{ Request::is('artikel*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ?
+                                '{{ Request::is('artikel*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
+                                '{{ Request::is('artikel*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
-                            Publications
+                            Our Publications
                         </a>
                         <a href="{{ route('staff.index') }}"
                             :class="scrolled
-                                ? '{{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
-                                : '{{ Request::is('staf*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ?
+                                '{{ Request::is('staf*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
+                                '{{ Request::is('staf*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
-                            Staf
+                            Our People
                         </a>
                         <a href="{{ route('sdg.index') }}"
                             :class="scrolled
-                                ? '{{ Request::is('sdg*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}'
-                                : '{{ Request::is('sdg*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
+                                ?
+                                '{{ Request::is('sdg*') ? 'border-primary-green text-primary-green font-bold' : 'border-transparent text-gray-500 hover:text-accent-orange hover:border-accent-orange/30' }}' :
+                                '{{ Request::is('sdg*') ? 'border-white text-white font-bold' : 'border-transparent text-white/80 hover:text-orange-300 hover:border-orange-300/50' }}'"
                             class="inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition duration-150 ease-in-out">
                             SDGs
                         </a>
@@ -145,7 +149,8 @@
 
                     <!-- Hamburger Button (mobile only) -->
                     <button @click="mobileOpen = !mobileOpen"
-                        :class="scrolled || mobileOpen ? 'text-gray-700 hover:text-primary-green' : 'text-white hover:text-orange-300'"
+                        :class="scrolled || mobileOpen ? 'text-gray-700 hover:text-primary-green' :
+                            'text-white hover:text-orange-300'"
                         class="md:hidden p-2 rounded-lg transition-colors duration-200 focus:outline-none"
                         aria-label="Toggle menu">
                         <i x-show="!mobileOpen" class="bi bi-list text-2xl"></i>
@@ -156,18 +161,15 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div x-show="mobileOpen"
-            x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 -translate-y-2"
-            x-transition:enter-end="opacity-100 translate-y-0"
-            x-transition:leave="transition ease-in duration-150"
-            x-transition:leave-start="opacity-100 translate-y-0"
+        <div x-show="mobileOpen" x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
             x-transition:leave-end="opacity-0 -translate-y-2"
             class="md:hidden bg-white border-t border-gray-100 shadow-lg">
             <div class="px-4 py-4 space-y-1">
                 <a href="{{ route('home') }}"
                     class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('/') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
-                    <i class="bi bi-house-door mr-3 text-base"></i> Beranda
+                    <i class="bi bi-house-door mr-3 text-base"></i> Home
                 </a>
                 <a href="{{ route('projects.index') }}"
                     class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('proyek*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
@@ -179,7 +181,7 @@
                 </a>
                 <a href="{{ route('staff.index') }}"
                     class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('staf*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
-                    <i class="bi bi-people mr-3 text-base"></i> Staf
+                    <i class="bi bi-people mr-3 text-base"></i> Staff
                 </a>
                 <a href="{{ route('sdg.index') }}"
                     class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('sdg*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
@@ -222,29 +224,32 @@
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed">
                         Regional Centre of Expertise on Education for Sustainable Development East Java (RCE East Java)
-                        adalah wadah kolaborasi untuk mendorong pembangunan berkelanjutan melalui pendidikan dan aksi
-                        nyata di Jawa Timur.
+                        is a collaborative platform to drive sustainable development through education and real action
+                        in East Java.
                     </p>
                 </div>
 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="font-bold text-lg mb-6 border-b border-zinc-800 pb-2">Navigasi Cepat</h3>
+                    <h3 class="font-bold text-lg mb-6 border-b border-zinc-800 pb-2">Quick Links</h3>
                     <ul class="space-y-3 text-sm text-gray-400">
-                        <li><a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a></li>
-                        <li><a href="{{ route('projects.index') }}" class="hover:text-white transition">Our Programs</a></li>
-                         <li><a href="{{ route('articles.index') }}" class="hover:text-white transition">Publications</a>
-                         </li>
+                        <li><a href="{{ route('home') }}" class="hover:text-white transition">Home</a></li>
+                        <li><a href="{{ route('projects.index') }}" class="hover:text-white transition">Our
+                                Programs</a></li>
+                        <li><a href="{{ route('articles.index') }}"
+                                class="hover:text-white transition">Publications</a>
+                        </li>
                         <li><a href="{{ route('sdg.index') }}" class="hover:text-white transition">Sustainable
                                 Development Goals</a></li>
-                        <li><a href="{{ route('staff.index') }}" class="hover:text-white transition">Direktori Staf</a>
+                        <li><a href="{{ route('staff.index') }}" class="hover:text-white transition">Staff
+                                Directory</a>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Contact Info -->
                 <div>
-                    <h3 class="font-bold text-lg mb-6 border-b border-zinc-800 pb-2">Hubungi Kami</h3>
+                    <h3 class="font-bold text-lg mb-6 border-b border-zinc-800 pb-2">Contact Us</h3>
                     <ul class="space-y-4 text-sm text-gray-400">
                         <li class="flex gap-3">
                             <i class="bi bi-geo-alt-fill text-accent-orange text-lg"></i>
@@ -264,7 +269,7 @@
 
             <div
                 class="border-t border-zinc-800 mt-12 pt-8 text-center text-sm text-gray-500 flex justify-between items-center flex-wrap gap-4">
-                <p>&copy; 2026 RCE East Java. Semua Hak Cipta Dilindungi.</p>
+                <p>&copy; 2026 RCE East Java. All Rights Reserved.</p>
                 <p>Designed for Sustainable Development Goals (SDGs)</p>
             </div>
         </div>

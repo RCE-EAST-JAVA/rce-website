@@ -96,7 +96,7 @@
     <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 text-xs text-emerald-400 mb-6 font-semibold uppercase tracking-widest flex-wrap">
-            <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
+            <a href="{{ route('home') }}" class="hover:text-white transition">Home</a>
             <span class="opacity-50">/</span>
                 <a href="{{ route('articles.index') }}" class="hover:text-white transition">Publications</a>
             <span class="opacity-50">/</span>

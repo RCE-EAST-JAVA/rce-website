@@ -10,7 +10,7 @@ class AdminStaffController extends Controller
 {
     public function index()
     {
-        $staffs = Staff::latest()->paginate(10);
+        $staffs = Staff::orderBy('sort_order')->orderBy('name')->paginate(10);
         return view('admin.staff.index', compact('staffs'));
     }
 
@@ -22,16 +22,19 @@ class AdminStaffController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'affiliation' => 'required|string|max:255',
-            'expertise' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'email' => 'nullable|email|max:255',
-            'linkedin' => 'nullable|string|max:255',
+            'name'        => 'required|string|max:255',
+            'role'        => 'required|string|max:255',
+            'category'    => 'required|in:Research Assistant,Researcher',
+            'expertise'   => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'email'       => 'nullable|email|max:255',
+            'linkedin'    => 'nullable|string|max:255',
+            'sort_order'  => 'nullable|integer|min:0',
         ]);
 
-        $data = $request->all();
+        $data = $request->only(['name', 'role', 'category', 'expertise', 'description', 'email', 'linkedin', 'sort_order']);
+        $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -41,7 +44,7 @@ class AdminStaffController extends Controller
 
         Staff::create($data);
 
-        return redirect()->route('admin.staff.index')->with('success', 'Staf berhasil ditambahkan.');
+        return redirect()->route('admin.staff.index')->with('success', 'Person added successfully.');
     }
 
     public function edit(Staff $staff)
@@ -52,16 +55,19 @@ class AdminStaffController extends Controller
     public function update(Request $request, Staff $staff)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'role' => 'required|string|max:255',
-            'affiliation' => 'required|string|max:255',
-            'expertise' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'email' => 'nullable|email|max:255',
-            'linkedin' => 'nullable|string|max:255',
+            'name'        => 'required|string|max:255',
+            'role'        => 'required|string|max:255',
+            'category'    => 'required|in:Research Assistant,Researcher',
+            'expertise'   => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'email'       => 'nullable|email|max:255',
+            'linkedin'    => 'nullable|string|max:255',
+            'sort_order'  => 'nullable|integer|min:0',
         ]);
 
-        $data = $request->all();
+        $data = $request->only(['name', 'role', 'category', 'expertise', 'description', 'email', 'linkedin', 'sort_order']);
+        $data['sort_order'] = $data['sort_order'] ?? 0;
 
         if ($request->hasFile('image')) {
             if ($staff->image && file_exists(public_path($staff->image))) {
@@ -75,7 +81,7 @@ class AdminStaffController extends Controller
 
         $staff->update($data);
 
-        return redirect()->route('admin.staff.index')->with('success', 'Profil staf berhasil diperbarui.');
+        return redirect()->route('admin.staff.index')->with('success', 'Person profile updated successfully.');
     }
 
     public function destroy(Staff $staff)
@@ -86,6 +92,6 @@ class AdminStaffController extends Controller
 
         $staff->delete();
 
-        return redirect()->route('admin.staff.index')->with('success', 'Staf berhasil dihapus.');
+        return redirect()->route('admin.staff.index')->with('success', 'Person deleted successfully.');
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -230,7 +230,7 @@
                         <li class="sidebar-item {{ Request::is('admin/staff*') ? 'active' : '' }}">
                             <a href="{{ route('admin.staff.index') }}" class="sidebar-link">
                                 <i class="bi bi-people-fill"></i>
-                                <span>Kelola Staf</span>
+                                <span>Manage Staff</span>
                             </a>
                         </li>
 

@@ -24,7 +24,7 @@ class ArticleController extends Controller
             $query->where('category', $request->category);
         }
 
-        $articles = $query->paginate(9)->withQueryString();
+        $articles = $query->orderByDesc('is_pinned')->paginate(9)->withQueryString();
         $categories = Article::where('status', 'published')->distinct()->pluck('category')->sort()->values();
 
         return view('articles.index', compact('articles', 'categories'));

@@ -15,7 +15,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
             </svg>
-            Kembali ke Daftar SDGs
+            Back to SDGs List
         </a>
         <div class="flex items-center gap-5">
             <span class="bg-white/15 text-white text-4xl font-extrabold w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0 backdrop-blur-sm border border-white/20 shadow-lg">
@@ -53,7 +53,7 @@
 
                 <!-- Key Targets -->
                 <div class="bg-white rounded-3xl border border-zinc-100 shadow-sm p-8">
-                    <h2 class="text-xl font-extrabold text-zinc-900 mb-6">Target Utama</h2>
+                    <h2 class="text-xl font-extrabold text-zinc-900 mb-6">Key Targets</h2>
                     <ul class="space-y-4">
                         @foreach($sdg['points'] as $i => $point)
                         <li class="flex gap-4">
@@ -68,11 +68,11 @@
 
                 <!-- RCE Action -->
                 <div class="bg-emerald-950 rounded-3xl p-8 text-white">
-                    <h2 class="text-xl font-extrabold mb-4">Aksi RCE Jawa Timur</h2>
+                    <h2 class="text-xl font-extrabold mb-4">RCE East Java Action</h2>
                     <p class="text-gray-300 text-sm leading-relaxed">{{ $sdg['rce_action'] }}</p>
                     <a href="{{ route('projects.index') }}"
                        class="inline-flex items-center gap-2 mt-6 bg-accent-orange hover-bg-accent-orange text-white text-sm font-bold px-6 py-3 rounded-full transition shadow-md">
-                        Lihat Proyek Terkait
+                        View Related Projects
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                         </svg>

@@ -11,21 +11,28 @@ class StaffController extends Controller
     {
         $query = Staff::query();
 
-        // Filter pencarian
-        if ($request->has('search') && $request->search != '') {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('role', 'like', '%' . $request->search . '%')
-                  ->orWhere('affiliation', 'like', '%' . $request->search . '%')
-                  ->orWhere('expertise', 'like', '%' . $request->search . '%');
+        // Search filter
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('role', 'like', '%' . $search . '%')
+                  ->orWhere('expertise', 'like', '%' . $search . '%');
+            });
         }
 
-        // Filter afiliasi/klasifikasi universitas
-        if ($request->has('affiliation') && $request->affiliation != '') {
-            $query->where('affiliation', 'like', '%' . $request->affiliation . '%');
+        // Category filter
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
         }
 
-        $staffs = $query->latest()->paginate(8);
+        $staffs = $query->orderBy('sort_order')->orderBy('name')->paginate(8);
 
         return view('staff.index', compact('staffs'));
+    }
+
+    public function show(Staff $staff)
+    {
+        return view('staff.show', compact('staff'));
     }
 }

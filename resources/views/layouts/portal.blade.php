@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -180,7 +180,7 @@
                             <p>2026 &copy; RCE East Java</p>
                         </div>
                         <div class="float-end">
-                            <p>Portal Anggota RCE East Java</p>
+                            <p>Member Portal RCE East Java</p>
                         </div>
                     </div>
                 </footer>

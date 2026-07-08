@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk - RCE East Java</title>
+    <title>Sign In - RCE East Java</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,9 +72,9 @@
 
             <!-- Content Middle/Bottom -->
             <div class="relative z-10 max-w-md">
-                <h2 class="text-3xl font-extrabold mb-4 leading-tight">Mewujudkan Masa Depan yang Berkelanjutan di Jawa Timur</h2>
+                <h2 class="text-3xl font-extrabold mb-4 leading-tight">Building a Sustainable Future in East Java</h2>
                 <p class="text-gray-300 text-sm leading-relaxed">
-                    Masuk ke portal Anda untuk mengelola profil, berpartisipasi dalam proyek, dan terhubung dengan jaringan keahlian kami.
+                    Sign in to your portal to manage your profile, participate in projects, and connect with our expertise network.
                 </p>
             </div>
 
@@ -108,8 +108,8 @@
                             <span class="font-extrabold text-lg tracking-tight text-primary-green">RCE EAST JAVA</span>
                         </a>
                     </div>
-                    <h3 class="text-2xl font-extrabold text-gray-900 mb-2">Selamat Datang Kembali</h3>
-                    <p class="text-gray-500 text-sm">Silakan masuk menggunakan akun terdaftar Anda.</p>
+                    <h3 class="text-2xl font-extrabold text-gray-900 mb-2">Welcome Back</h3>
+                    <p class="text-gray-500 text-sm">Please sign in with your registered account.</p>
                 </div>
 
                 <!-- Session Status Alert -->
@@ -124,9 +124,9 @@
 
                     <!-- Email Address -->
                     <div>
-                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Alamat Email</label>
+                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
                         <div class="relative">
-                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-accent-orange text-sm @error('email') border-red-500 focus:ring-red-500 @enderror" placeholder="nama@rce-eastjava.org">
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-accent-orange text-sm @error('email') border-red-500 focus:ring-red-500 @enderror" placeholder="name@rce-eastjava.org">
                             <i class="bi bi-envelope-fill absolute left-3.5 top-3.5 text-gray-400"></i>
                         </div>
                         @error('email')
@@ -140,7 +140,7 @@
                             <label for="password" class="block text-sm font-semibold text-gray-700">Password</label>
                             @if (Route::has('password.request'))
                                 <a class="text-xs text-accent-orange hover:underline font-semibold" href="{{ route('password.request') }}">
-                                    Lupa Password?
+                                    Forgot Password?
                                 </a>
                             @endif
                         </div>
@@ -156,7 +156,7 @@
                     <!-- Remember Me -->
                     <div class="flex items-center">
                         <input id="remember_me" type="checkbox" name="remember" class="rounded border-zinc-300 text-accent-orange focus:ring-accent-orange h-4 w-4">
-                        <label for="remember_me" class="ms-2 text-xs text-gray-600 font-medium cursor-pointer">Ingat Saya</label>
+                        <label for="remember_me" class="ms-2 text-xs text-gray-600 font-medium cursor-pointer">Remember Me</label>
                     </div>
 
                     <!-- Submit Button -->
@@ -168,7 +168,7 @@
                 <!-- Back Link -->
                 <div class="text-center mt-6">
                     <a href="/" class="text-xs text-gray-500 hover:text-accent-orange font-semibold">
-                        <i class="bi bi-arrow-left"></i> Kembali ke Beranda
+                        <i class="bi bi-arrow-left"></i> Back to Home
                     </a>
                 </div>
 
