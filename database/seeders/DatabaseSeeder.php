@@ -16,25 +16,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Akun Dummy
-        User::create([
-            'name' => 'Admin RCE East Java',
-            'email' => 'admin@rce-eastjava.org',
-            'password' => bcrypt('password'),
-            'role' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@rce-eastjava.org'],
+            ['name' => 'Admin RCE East Java', 'password' => bcrypt('password'), 'role' => 'admin']
+        );
 
-        User::create([
-            'name' => 'User RCE East Java',
-            'email' => 'user@rce-eastjava.org',
-            'password' => bcrypt('password'),
-            'role' => 'user',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'user@rce-eastjava.org'],
+            ['name' => 'User RCE East Java', 'password' => bcrypt('password'), 'role' => 'user']
+        );
 
         // 2. Data Dummy Proyek
         \App\Models\Project::create([
             'title' => 'Workshop Pengelolaan Sampah Organik Berbasis Komunitas',
             'description' => 'Edukasi dan pelatihan pengolahan sampah organik rumah tangga menjadi pupuk kompos di pemukiman padat penduduk Jawa Timur.',
-            'category' => 'Sampah',
+            'category' => 'Community Development',
             'status' => 'Selesai',
             'image' => 'project1.jpg',
             'sdgs' => 'SDG 12, SDG 13',
@@ -45,7 +41,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Project::create([
             'title' => 'Penanaman Bakau di Sungai Brantas',
             'description' => 'Inisiatif pemulihan ekosistem pesisir melalui penanaman bibit bakau bersama komunitas dan mahasiswa se-Jawa Timur.',
-            'category' => 'Air',
+            'category' => 'Research',
             'status' => 'Aktif',
             'image' => 'project2.jpg',
             'sdgs' => 'SDG 14, SDG 15',
@@ -56,7 +52,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Project::create([
             'title' => 'Penerapan Panel Surya untuk Perumahan Rakyat',
             'description' => 'Instalasi panel surya skala mikro untuk mendukung kebutuhan listrik ramah lingkungan di desa tertinggal.',
-            'category' => 'Energi',
+            'category' => 'Capacity Building',
             'status' => 'Aktif',
             'image' => 'project3.jpg',
             'sdgs' => 'SDG 7, SDG 11',
@@ -68,7 +64,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Staff::create([
             'name' => 'Dr. H. Ahmad Yani, M.T.',
             'role' => 'Koordinator Bidang Energi',
-            'affiliation' => 'Institut Teknologi Sepuluh Nopember',
+            'category' => 'Researcher',
             'expertise' => 'Eco-design, Energi Terbarukan',
             'image' => 'staff1.jpg',
             'email' => 'ahmad.yani@rce-eastjava.org',
@@ -78,7 +74,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Staff::create([
             'name' => 'Dr. Shinta Rahayu, M.Si.',
             'role' => 'Koordinator Lingkungan Hidup',
-            'affiliation' => 'Universitas Negeri Surabaya',
+            'category' => 'Researcher',
             'expertise' => 'Ekologi Air, Konservasi Mangrove',
             'image' => 'staff2.jpg',
             'email' => 'shinta.r@rce-eastjava.org',
@@ -88,7 +84,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Staff::create([
             'name' => 'Ali Solihin, M.T.',
             'role' => 'Peneliti Teknologi Tepat Guna',
-            'affiliation' => 'Universitas Brawijaya',
+            'category' => 'Research Assistant',
             'expertise' => 'Energi Terbarukan, Panel Surya',
             'image' => 'staff3.jpg',
             'email' => 'ali.solihin@rce-eastjava.org',
@@ -98,12 +94,19 @@ class DatabaseSeeder extends Seeder
         \App\Models\Staff::create([
             'name' => 'Dr. Aliyah Purnamasari, M.Hum.',
             'role' => 'Koordinator Edukasi Publik',
-            'affiliation' => 'Universitas Airlangga',
+            'category' => 'Researcher',
             'expertise' => 'Pendidikan Lingkungan, Sosiologi Komunitas',
             'image' => 'staff4.jpg',
             'email' => 'aliyah.p@rce-eastjava.org',
             'linkedin' => 'linkedin.com/in/aliyahp',
         ]);
+        // 4. Data Mitra & Kolaborator
+        \App\Models\Partner::create(['name' => 'UNESA']);
+        \App\Models\Partner::create(['name' => 'ITS']);
+        \App\Models\Partner::create(['name' => 'UNAIR']);
+        \App\Models\Partner::create(['name' => 'UNIVERSITAS BRAWIJAYA']);
+        \App\Models\Partner::create(['name' => 'UIN SUNAN AMPEL']);
+
         $this->call(ArticleSeeder::class);
     }
 }

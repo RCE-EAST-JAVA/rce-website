@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                <h6 class="text-muted font-semibold">Total Proyek</h6>
+                                <h6 class="text-muted font-semibold">Total Programs</h6>
                                 <h6 class="font-extrabold mb-0">{{ \App\Models\Project::count() }}</h6>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                <h6 class="text-muted font-semibold">Total Staf</h6>
+                                <h6 class="text-muted font-semibold">Total People</h6>
                                 <h6 class="font-extrabold mb-0">{{ \App\Models\Staff::count() }}</h6>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                <h6 class="text-muted font-semibold">Total Pengguna</h6>
+                                <h6 class="text-muted font-semibold">Total Users</h6>
                                 <h6 class="font-extrabold mb-0">{{ \App\Models\User::count() }}</h6>
                             </div>
                         </div>
@@ -64,16 +64,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Selamat Datang di Panel Admin RCE East Java</h4>
+                        <h4>Welcome to RCE East Java Admin Panel</h4>
                     </div>
                     <div class="card-body">
-                        <p>Melalui dashboard ini, Anda memiliki kuasa penuh untuk mengontrol konten website publik, termasuk:</p>
+                        <p>From this dashboard, you have full control over the public website content, including:</p>
                         <ul>
-                            <li>Menambahkan, mengedit, atau menghapus <strong>Portofolio Proyek</strong>.</li>
-                            <li>Mengelola profil para akademisi, peneliti, dan praktisi di <strong>Direktori Staf</strong>.</li>
-                            <li>Memantau data pengguna yang terdaftar di portal.</li>
+                            <li>Adding, editing, or deleting <strong>Program Portfolio</strong>.</li>
+                            <li>Managing profiles of academics, researchers, and practitioners in the <strong>People Directory</strong>.</li>
+                            <li>Monitoring registered users in the portal.</li>
                         </ul>
-                        <p class="text-muted mt-4">Gunakan menu di sebelah kiri untuk menavigasi ke fitur pengelolaan konten.</p>
+                        <p class="text-muted mt-4">Use the left menu to navigate to content management features.</p>
                     </div>
                 </div>
             </div>

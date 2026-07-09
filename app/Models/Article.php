@@ -9,7 +9,7 @@ class Article extends Model
 {
     protected $fillable = [
         'title', 'slug', 'thumbnail', 'excerpt', 'body',
-        'author', 'category', 'status', 'tags', 'published_at',
+        'author', 'category', 'status', 'tags', 'published_at', 'is_pinned',
     ];
 
     protected $casts = [

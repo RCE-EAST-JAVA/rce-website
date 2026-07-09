@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk - RCE East Java</title>
+    <title>Sign In - RCE East Java</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +24,9 @@
         .text-primary-green {
             color: #1e4620;
         }
+        .text-accent-orange {
+            color: #d97724;
+        }
         .bg-primary-green {
             background-color: #1e4620;
         }
@@ -39,35 +42,55 @@
     </style>
 </head>
 
-<body class="bg-zinc-50 antialiased text-gray-800">
+<body x-data="{
+    slides: {{ $heroPhotos->isNotEmpty() ? $heroPhotos->map(fn($p) => asset($p->image))->values()->toJson() : json_encode(['https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=800']) }},
+    current: 0,
+    timer: null,
+    init() { this.timer = setInterval(() => { this.current = (this.current + 1) % this.slides.length; }, 5000); }
+}" class="bg-zinc-50 antialiased text-gray-800">
     <div class="min-h-screen flex flex-col md:flex-row">
-        <!-- Left Pane: Branding & Visual (Split layout) -->
+        <!-- Left Pane: Hero slider -->
         <div class="hidden md:flex md:w-1/2 bg-zinc-950 relative overflow-hidden flex-col justify-between p-12 text-white">
-            <!-- Background Image with Overlay -->
-            <div class="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=800');"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent"></div>
+            <!-- Slider images -->
+            <template x-for="(slide, index) in slides" :key="index">
+                <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+                     :style="'background-image: url(' + slide + ')'"
+                     :class="current === index ? 'opacity-40' : 'opacity-0'">
+                </div>
+            </template>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"></div>
             
             <!-- Logo Header -->
             <div class="relative z-10">
                 <a href="/" class="flex items-center gap-3">
-                    <div class="bg-primary-green text-white p-2 rounded-lg font-bold text-base shadow-md">
-                        RCE
-                    </div>
+                    <img src="{{ asset('logo-new.png') }}" alt="RCE East Java"
+                         class="rounded-lg shadow-md"
+                         style="width: 50px; height: 50px; object-fit: contain;">
                     <span class="font-extrabold text-lg tracking-tight">RCE EAST JAVA</span>
                 </a>
             </div>
 
             <!-- Content Middle/Bottom -->
             <div class="relative z-10 max-w-md">
-                <h2 class="text-3xl font-extrabold mb-4 leading-tight">Mewujudkan Masa Depan yang Berkelanjutan di Jawa Timur</h2>
+                <h2 class="text-3xl font-extrabold mb-4 leading-tight">Building a Sustainable Future in East Java</h2>
                 <p class="text-gray-300 text-sm leading-relaxed">
-                    Masuk ke portal Anda untuk mengelola profil, berpartisipasi dalam proyek, dan terhubung dengan jaringan keahlian kami.
+                    Sign in to your portal to manage your profile, participate in projects, and connect with our expertise network.
                 </p>
             </div>
 
             <!-- Footer Quote -->
-            <div class="relative z-10 text-xs text-gray-500">
-                &copy; 2026 RCE East Java Network. All rights reserved.
+            <div class="relative z-10">
+                <template x-if="slides.length > 1">
+                    <div class="flex gap-1.5 mb-4">
+                        <template x-for="(slide, index) in slides" :key="index">
+                            <button @click="current = index; clearInterval(timer); timer = setInterval(() => { current = (current + 1) % slides.length; }, 5000);"
+                                class="rounded-full transition-all duration-300"
+                                :class="current === index ? 'bg-white w-5 h-1.5' : 'bg-white/40 w-1.5 h-1.5'">
+                            </button>
+                        </template>
+                    </div>
+                </template>
+                <p class="text-xs text-gray-500">&copy; 2026 RCE East Java Network. All rights reserved.</p>
             </div>
         </div>
 
@@ -80,12 +103,13 @@
                     <!-- Mobile logo only -->
                     <div class="md:hidden flex justify-center mb-6">
                         <a href="/" class="flex items-center gap-2">
-                            <div class="bg-primary-green text-white p-2 rounded-lg font-bold text-base">RCE</div>
+                            <img src="{{ asset('logo-new.png') }}" alt="RCE East Java"
+                                 style="width: 40px; height: 40px; object-fit: contain;">
                             <span class="font-extrabold text-lg tracking-tight text-primary-green">RCE EAST JAVA</span>
                         </a>
                     </div>
-                    <h3 class="text-2xl font-extrabold text-gray-900 mb-2">Selamat Datang Kembali</h3>
-                    <p class="text-gray-500 text-sm">Silakan masuk menggunakan akun terdaftar Anda.</p>
+                    <h3 class="text-2xl font-extrabold text-gray-900 mb-2">Welcome Back</h3>
+                    <p class="text-gray-500 text-sm">Please sign in with your registered account.</p>
                 </div>
 
                 <!-- Session Status Alert -->
@@ -100,9 +124,9 @@
 
                     <!-- Email Address -->
                     <div>
-                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Alamat Email</label>
+                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
                         <div class="relative">
-                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm @error('email') border-red-500 focus:ring-red-500 @enderror" placeholder="nama@rce-eastjava.org">
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-accent-orange text-sm @error('email') border-red-500 focus:ring-red-500 @enderror" placeholder="name@rce-eastjava.org">
                             <i class="bi bi-envelope-fill absolute left-3.5 top-3.5 text-gray-400"></i>
                         </div>
                         @error('email')
@@ -116,12 +140,12 @@
                             <label for="password" class="block text-sm font-semibold text-gray-700">Password</label>
                             @if (Route::has('password.request'))
                                 <a class="text-xs text-accent-orange hover:underline font-semibold" href="{{ route('password.request') }}">
-                                    Lupa Password?
+                                    Forgot Password?
                                 </a>
                             @endif
                         </div>
                         <div class="relative">
-                            <input type="password" id="password" name="password" required autocomplete="current-password" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm @error('password') border-red-500 focus:ring-red-500 @enderror" placeholder="••••••••">
+                            <input type="password" id="password" name="password" required autocomplete="current-password" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-accent-orange text-sm @error('password') border-red-500 focus:ring-red-500 @enderror" placeholder="••••••••">
                             <i class="bi bi-lock-fill absolute left-3.5 top-3.5 text-gray-400"></i>
                         </div>
                         @error('password')
@@ -131,20 +155,20 @@
 
                     <!-- Remember Me -->
                     <div class="flex items-center">
-                        <input id="remember_me" type="checkbox" name="remember" class="rounded border-zinc-300 text-primary-green focus:ring-primary-green h-4 w-4">
-                        <label for="remember_me" class="ms-2 text-xs text-gray-600 font-medium cursor-pointer">Ingat Saya</label>
+                        <input id="remember_me" type="checkbox" name="remember" class="rounded border-zinc-300 text-accent-orange focus:ring-accent-orange h-4 w-4">
+                        <label for="remember_me" class="ms-2 text-xs text-gray-600 font-medium cursor-pointer">Remember Me</label>
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-primary-green hover-bg-primary-green text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition duration-150 ease-in-out mt-2">
+                    <button type="submit" class="w-full bg-accent-orange hover-bg-accent-orange text-white py-3.5 rounded-2xl font-bold text-sm shadow-md transition duration-150 ease-in-out mt-2">
                         Masuk
                     </button>
                 </form>
                 
                 <!-- Back Link -->
                 <div class="text-center mt-6">
-                    <a href="/" class="text-xs text-gray-500 hover:text-primary-green font-semibold">
-                        <i class="bi bi-arrow-left"></i> Kembali ke Beranda
+                    <a href="/" class="text-xs text-gray-500 hover:text-accent-orange font-semibold">
+                        <i class="bi bi-arrow-left"></i> Back to Home
                     </a>
                 </div>
 
@@ -152,5 +176,39 @@
         </div>
     </div>
 </body>
+
+<script>
+    document.addEventListener('click', function(e) {
+        const colors = ['#1e4620', '#d97724', '#34d399', '#10b981', '#fbbf24'];
+        const count = 8;
+        for (let i = 0; i < count; i++) {
+            const drop = document.createElement('div');
+            const angle = (i / count) * 360;
+            const dist = 40 + Math.random() * 30;
+            const rad = angle * (Math.PI / 180);
+            const dx = Math.cos(rad) * dist;
+            const dy = Math.sin(rad) * dist;
+            const size = 4 + Math.random() * 4;
+            drop.style.cssText = `
+                position: fixed; left: ${e.clientX}px; top: ${e.clientY}px;
+                width: ${size}px; height: ${size}px; border-radius: 50%;
+                background: ${colors[i % colors.length]};
+                pointer-events: none; z-index: 9999;
+                transition: transform 0.5s cubic-bezier(.25,.46,.45,.94), opacity 0.5s ease-out;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+            `;
+            document.body.appendChild(drop);
+            requestAnimationFrame(() => {
+                drop.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.3)`;
+                drop.style.opacity = '0.8';
+            });
+            setTimeout(() => {
+                drop.style.opacity = '0';
+                setTimeout(() => drop.remove(), 500);
+            }, 200 + i * 30);
+        }
+    });
+</script>
 
 </html>

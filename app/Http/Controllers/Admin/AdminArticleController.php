@@ -11,8 +11,14 @@ class AdminArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::latest()->paginate(10);
+        $articles = Article::orderByDesc('is_pinned')->latest()->paginate(10);
         return view('admin.articles.index', compact('articles'));
+    }
+
+    public function togglePin(Article $article)
+    {
+        $article->update(['is_pinned' => !$article->is_pinned]);
+        return back()->with('success', $article->is_pinned ? 'Artikel di-pin.' : 'Artikel di-unpin.');
     }
 
     public function create()
@@ -36,6 +42,7 @@ class AdminArticleController extends Controller
 
         $data = $request->except('thumbnail');
         $data['slug'] = $this->uniqueSlug($request->title);
+        $data['is_pinned'] = $request->boolean('is_pinned');
         $data['published_at'] = $request->status === 'published'
             ? ($request->published_at ?? now())
             : null;
@@ -48,7 +55,7 @@ class AdminArticleController extends Controller
 
         Article::create($data);
 
-        return redirect()->route('admin.articles.index')->with('success', 'Artikel berhasil ditambahkan.');
+        return redirect()->route('admin.articles.index')->with('success', 'Publication added successfully.');
     }
 
     public function edit(Article $article)
@@ -71,6 +78,7 @@ class AdminArticleController extends Controller
         ]);
 
         $data = $request->except('thumbnail');
+        $data['is_pinned'] = $request->boolean('is_pinned');
 
         // Re-slug only if title changed
         if ($request->title !== $article->title) {
@@ -92,7 +100,7 @@ class AdminArticleController extends Controller
 
         $article->update($data);
 
-        return redirect()->route('admin.articles.index')->with('success', 'Artikel berhasil diperbarui.');
+        return redirect()->route('admin.articles.index')->with('success', 'Publication updated successfully.');
     }
 
     public function destroy(Article $article)
@@ -102,7 +110,7 @@ class AdminArticleController extends Controller
         }
         $article->delete();
 
-        return redirect()->route('admin.articles.index')->with('success', 'Artikel berhasil dihapus.');
+        return redirect()->route('admin.articles.index')->with('success', 'Publication deleted successfully.');
     }
 
     public function uploadImage(Request $request)

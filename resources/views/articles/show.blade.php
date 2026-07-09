@@ -47,18 +47,58 @@
     .article-body s  { text-decoration: line-through; color: #6b7280; }
     .article-body hr { border: none; border-top: 1px solid #e5e7eb; margin: 2rem 0; }
     .article-body img { max-width: 100%; border-radius: 0.75rem; margin: 1rem 0; }
+    /* Force inline style width to be respected - override Tailwind preflight */
+    .article-body .image-with-caption img[style] { max-width: none !important; }
+    
+    /* Image with Caption - Frontend Display */
+    .article-body .image-caption-wrapper {
+        display: block;
+        text-align: center;
+        margin: 1.5rem 0;
+    }
+    .article-body .image-with-caption {
+        display: inline-block;
+        max-width: 100%;
+        text-align: center;
+    }
+    .article-body .image-with-caption img {
+        display: block;
+        max-width: 100%;
+        height: auto !important;
+        border-radius: 0.75rem;
+        margin: 0 auto;
+    }
+    .article-body .image-with-caption figcaption {
+        margin-top: 0.75rem;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.875rem;
+        color: #6b7280;
+        font-style: italic;
+        text-align: center;
+        background: #f8faf8;
+        border-left: 3px solid #1e4620;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .article-body .image-with-caption figcaption:empty {
+        display: none;
+    }
 </style>
 @endsection
 
 @section('content')
 <!-- Hero Header -->
-<div class="bg-gradient-to-br from-emerald-950 to-primary-green text-white pt-36 pb-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="relative bg-zinc-950 text-white overflow-hidden pt-36 pb-16">
+    <!-- Background gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950 via-emerald-950/40 to-zinc-950 pointer-events-none"></div>
+    <!-- Decorative blobs -->
+    <div class="absolute top-10 right-20 w-80 h-80 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 left-10 w-56 h-56 rounded-full bg-emerald-400/5 blur-2xl pointer-events-none"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 text-xs text-emerald-400 mb-6 font-semibold uppercase tracking-widest flex-wrap">
-            <a href="{{ route('home') }}" class="hover:text-white transition">Beranda</a>
+            <a href="{{ route('home') }}" class="hover:text-white transition">Home</a>
             <span class="opacity-50">/</span>
-            <a href="{{ route('articles.index') }}" class="hover:text-white transition">Artikel</a>
+                <a href="{{ route('articles.index') }}" class="hover:text-white transition">Publications</a>
             <span class="opacity-50">/</span>
             <span class="text-white/60 normal-case font-normal tracking-normal">{{ Str::limit($article->title, 40) }}</span>
         </nav>
@@ -97,10 +137,47 @@
 
     <!-- Thumbnail -->
     @if($article->thumbnail)
-        <div class="rounded-3xl overflow-hidden mb-10 shadow-lg border border-zinc-100">
+        <div class="rounded-3xl overflow-hidden mb-10 shadow-lg border border-zinc-100 cursor-zoom-in group relative"
+             onclick="openLightbox('{{ asset($article->thumbnail) }}', '{{ $article->title }}')">
             <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}"
-                 class="w-full object-cover max-h-[500px]">
+                 class="w-full object-cover max-h-[500px] transition-transform duration-300 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3 shadow-lg">
+                    <i class="bi bi-zoom-in text-2xl text-gray-700"></i>
+                </div>
+            </div>
         </div>
+
+        <!-- Lightbox -->
+        <div id="lightbox" class="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4 hidden"
+             onclick="closeLightbox(event)">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10">
+                <i class="bi bi-x-lg text-3xl"></i>
+            </button>
+            <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl">
+        </div>
+
+        <script>
+            function openLightbox(src, alt) {
+                const lb = document.getElementById('lightbox');
+                const img = document.getElementById('lightbox-img');
+                img.src = src;
+                img.alt = alt;
+                lb.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeLightbox(event) {
+                if (event && event.target !== document.getElementById('lightbox') && !event.target.closest('button')) return;
+                document.getElementById('lightbox').classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.getElementById('lightbox').classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+        </script>
     @endif
 
     <!-- Excerpt -->
@@ -113,10 +190,38 @@
 
     <!-- Body -->
     <div class="bg-white rounded-3xl border border-zinc-100 shadow-sm p-8 md:p-12 mb-10">
-        <div class="article-body text-base">
+        <div class="article-body text-base" id="article-content">
             {!! $article->body !!}
         </div>
     </div>
+    
+    <script>
+        // Remove contenteditable from all figcaptions in article body
+        document.addEventListener('DOMContentLoaded', function() {
+            const captions = document.querySelectorAll('.article-body figcaption');
+            captions.forEach(caption => {
+                caption.removeAttribute('contenteditable');
+                caption.style.cursor = 'default';
+            });
+            
+            // Apply width from width attribute to inline style
+            const images = document.querySelectorAll('.article-body img[width]');
+            console.log('Found images with width attribute:', images.length);
+            
+            images.forEach(img => {
+                const w = img.getAttribute('width');
+                console.log('Processing image, width attribute:', w, 'current computed width:', window.getComputedStyle(img).width);
+                
+                if (w && !isNaN(w)) {
+                    img.style.setProperty('width', w + 'px', 'important');
+                    img.style.setProperty('height', 'auto', 'important');
+                    img.style.setProperty('max-width', w + 'px', 'important');
+                    
+                    console.log('Applied width:', w + 'px', 'new computed width:', window.getComputedStyle(img).width);
+                }
+            });
+        });
+    </script>
 
     <!-- Tags -->
     @if($article->tags)
@@ -137,7 +242,7 @@
         <a href="{{ route('articles.index') }}"
            class="flex items-center gap-2 text-gray-500 hover:text-primary-green font-semibold text-sm transition">
             <i class="bi bi-arrow-left"></i>
-            Kembali ke Daftar Artikel
+                        Back to Publications List
         </a>
         <div class="flex items-center gap-4 text-xs text-gray-400">
             <span class="flex items-center gap-1">
@@ -157,7 +262,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-8">
             <span class="text-xs font-bold uppercase tracking-widest mb-2 block" style="color:#1e4620;">Kategori Serupa</span>
-            <h2 class="text-2xl font-extrabold text-gray-900">Artikel Terkait</h2>
+                    <h2 class="text-2xl font-extrabold text-gray-900">Related Publications</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -186,7 +291,7 @@
                         {{ $rel->excerpt ?? Str::limit(strip_tags($rel->body), 100) }}
                     </p>
                     <span class="mt-4 text-xs font-semibold flex items-center gap-1" style="color:#1e4620;">
-                        Baca Artikel <i class="bi bi-arrow-right"></i>
+                            Read Publication <i class="bi bi-arrow-right"></i>
                     </span>
                 </div>
             </a>

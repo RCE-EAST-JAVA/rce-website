@@ -11,10 +11,12 @@ class Staff extends Model
     protected $fillable = [
         'name',
         'role',
-        'affiliation',
+        'category',
         'expertise',
+        'description',
         'image',
         'email',
         'linkedin',
+        'sort_order',
     ];
 }

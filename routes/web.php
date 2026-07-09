@@ -4,12 +4,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\SdgController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminStaffController;
 use App\Http\Controllers\Admin\AdminHeroController;
 use App\Http\Controllers\Admin\AdminArticleController;
+use App\Http\Controllers\Admin\AdminPartnerController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Publik
@@ -19,6 +21,9 @@ Route::get('/proyek/{project}', [ProjectController::class, 'show'])->name('proje
 Route::get('/artikel', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/staf', [StaffController::class, 'index'])->name('staff.index');
+Route::get('/staf/{staff}', [StaffController::class, 'show'])->name('staff.show');
+Route::get('/sdg', [SdgController::class, 'index'])->name('sdg.index');
+Route::get('/sdg/{number}', [SdgController::class, 'show'])->name('sdg.show')->where('number', '[0-9]+');
 
 // Redirect Dashboard Dinamis Berdasarkan Role
 Route::get('/dashboard', function () {
@@ -43,6 +48,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::resource('hero', AdminHeroController::class)->names('admin.hero')->except(['show']);
     Route::resource('articles', AdminArticleController::class)->names('admin.articles')->except(['show']);
     Route::post('articles/upload-image', [AdminArticleController::class, 'uploadImage'])->name('admin.articles.upload-image');
+    Route::post('articles/{article}/toggle-pin', [AdminArticleController::class, 'togglePin'])->name('admin.articles.toggle-pin');
+    Route::post('projects/{project}/toggle-pin', [AdminProjectController::class, 'togglePin'])->name('admin.projects.toggle-pin');
+    Route::resource('partners', AdminPartnerController::class)->names('admin.partners')->except(['show']);
 });
 
 require __DIR__.'/auth.php';

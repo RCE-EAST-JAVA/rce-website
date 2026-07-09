@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Foto Hero')
-@section('page-title', 'Edit Foto Hero')
+@section('title', 'Edit Hero Photo')
+@section('page-title', 'Edit Hero Photo')
 
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="card-title mb-0">Edit Foto Hero</h4>
+        <h4 class="card-title mb-0">Edit Hero Photo</h4>
         <a href="{{ route('admin.hero.index') }}" class="btn btn-secondary btn-sm">
-            <i class="bi bi-arrow-left"></i> Kembali
+            <i class="bi bi-arrow-left"></i> Back
         </a>
     </div>
     <div class="card-body">
@@ -31,7 +31,7 @@
 
                 {{-- Current photo --}}
                 <div class="mb-2">
-                    <p class="small text-muted mb-1">Foto saat ini:</p>
+                    <p class="small text-muted mb-1">Current photo:</p>
                     <img src="{{ asset($hero->image) }}" alt="Current Hero Photo"
                         class="rounded border" style="max-height: 180px; object-fit: cover;">
                 </div>
@@ -41,18 +41,18 @@
                 @error('image')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-                <div class="form-text">Kosongkan jika tidak ingin mengganti foto. Format: JPG, PNG, WEBP. Maks 3MB.</div>
+                <div class="form-text">Leave empty to keep current photo. Format: JPG, PNG, WEBP. Max 3MB.</div>
 
                 {{-- New preview --}}
                 <div id="imagePreview" class="mt-3 d-none">
-                    <p class="small text-muted mb-1">Preview foto baru:</p>
+                    <p class="small text-muted mb-1">New photo preview:</p>
                     <img id="previewImg" src="#" alt="Preview"
                         class="rounded border" style="max-height: 180px; object-fit: cover;">
                 </div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Caption <span class="text-muted fw-normal">(opsional)</span></label>
+                <label class="form-label fw-semibold">Caption <span class="text-muted fw-normal">(optional)</span></label>
                 <input type="text" name="caption" class="form-control @error('caption') is-invalid @enderror"
                     value="{{ old('caption', $hero->caption) }}" placeholder="Contoh: Kegiatan RCE di Surabaya...">
                 @error('caption')
@@ -74,16 +74,16 @@
                     <div class="form-check form-switch mt-3">
                         <input class="form-check-input" type="checkbox" name="is_active" id="isActive" value="1"
                             {{ old('is_active', $hero->is_active) ? 'checked' : '' }}>
-                        <label class="form-check-label fw-semibold" for="isActive">Aktifkan Foto</label>
+                        <label class="form-check-label fw-semibold" for="isActive">Activate Photo</label>
                     </div>
                 </div>
             </div>
 
             <div class="d-flex gap-2 mt-2">
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save"></i> Simpan Perubahan
+                    <i class="bi bi-save"></i> Save Changes
                 </button>
-                <a href="{{ route('admin.hero.index') }}" class="btn btn-light">Batal</a>
+                <a href="{{ route('admin.hero.index') }}" class="btn btn-light">Cancel</a>
             </div>
         </form>
     </div>

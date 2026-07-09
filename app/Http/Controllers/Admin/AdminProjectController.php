@@ -4,14 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\ProjectImage;
 use Illuminate\Http\Request;
 
 class AdminProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::latest()->paginate(10);
+        $projects = Project::with('images')->orderByDesc('is_pinned')->orderBy('published_at', 'desc')->paginate(10);
         return view('admin.projects.index', compact('projects'));
+    }
+
+    public function togglePin(Project $project)
+    {
+        $project->update(['is_pinned' => !$project->is_pinned]);
+        return back()->with('success', $project->is_pinned ? 'Proyek di-pin.' : 'Proyek di-unpin.');
     }
 
     public function create()
@@ -26,13 +33,17 @@ class AdminProjectController extends Controller
             'description' => 'required|string',
             'category' => 'required|string|max:255',
             'status' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:3072',
             'sdgs' => 'nullable|string|max:255',
             'author' => 'required|string|max:255',
             'date' => 'required|string|max:255',
+            'published_at' => 'required|date',
         ]);
 
-        $data = $request->all();
+        $data = $request->except('images');
+        $data['is_pinned'] = $request->boolean('is_pinned');
 
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -40,13 +51,26 @@ class AdminProjectController extends Controller
             $data['image'] = 'uploads/projects/' . $imageName;
         }
 
-        Project::create($data);
+        $project = Project::create($data);
 
-        return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil ditambahkan.');
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $i => $file) {
+                $name = time() . '_' . uniqid() . '.' . $file->extension();
+                $file->move(public_path('uploads/projects'), $name);
+                ProjectImage::create([
+                    'project_id' => $project->id,
+                    'image' => 'uploads/projects/' . $name,
+                    'order' => $i,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.projects.index')->with('success', 'Program added successfully.');
     }
 
     public function edit(Project $project)
     {
+        $project->load('images');
         return view('admin.projects.edit', compact('project'));
     }
 
@@ -57,20 +81,24 @@ class AdminProjectController extends Controller
             'description' => 'required|string',
             'category' => 'required|string|max:255',
             'status' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:3072',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:3072',
+            'delete_images' => 'nullable|array',
+            'delete_images.*' => 'integer|exists:project_images,id',
             'sdgs' => 'nullable|string|max:255',
             'author' => 'required|string|max:255',
             'date' => 'required|string|max:255',
+            'published_at' => 'required|date',
         ]);
 
-        $data = $request->all();
+        $data = $request->except('images');
+        $data['is_pinned'] = $request->boolean('is_pinned');
 
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($project->image && file_exists(public_path($project->image))) {
                 @unlink(public_path($project->image));
             }
-
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('uploads/projects'), $imageName);
             $data['image'] = 'uploads/projects/' . $imageName;
@@ -78,7 +106,34 @@ class AdminProjectController extends Controller
 
         $project->update($data);
 
-        return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil diperbarui.');
+        // Delete selected gallery images
+        if ($request->filled('delete_images')) {
+            $toDelete = ProjectImage::whereIn('id', $request->delete_images)
+                ->where('project_id', $project->id)
+                ->get();
+            foreach ($toDelete as $pi) {
+                if (file_exists(public_path($pi->image))) {
+                    @unlink(public_path($pi->image));
+                }
+                $pi->delete();
+            }
+        }
+
+        // Upload new gallery images
+        if ($request->hasFile('images')) {
+            $maxOrder = ProjectImage::where('project_id', $project->id)->max('order') ?? -1;
+            foreach ($request->file('images') as $i => $file) {
+                $name = time() . '_' . uniqid() . '.' . $file->extension();
+                $file->move(public_path('uploads/projects'), $name);
+                ProjectImage::create([
+                    'project_id' => $project->id,
+                    'image' => 'uploads/projects/' . $name,
+                    'order' => $maxOrder + 1 + $i,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.projects.index')->with('success', 'Program updated successfully.');
     }
 
     public function destroy(Project $project)
@@ -87,8 +142,14 @@ class AdminProjectController extends Controller
             @unlink(public_path($project->image));
         }
 
+        foreach ($project->images as $pi) {
+            if (file_exists(public_path($pi->image))) {
+                @unlink(public_path($pi->image));
+            }
+        }
+
         $project->delete();
 
-        return redirect()->route('admin.projects.index')->with('success', 'Proyek berhasil dihapus.');
+        return redirect()->route('admin.projects.index')->with('success', 'Program deleted successfully.');
     }
 }

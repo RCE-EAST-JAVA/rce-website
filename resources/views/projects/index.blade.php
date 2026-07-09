@@ -1,15 +1,22 @@
 @extends('layouts.public')
 
-@section('title', 'Portofolio Proyek')
+@section('title', 'Our Programs')
 
 @section('content')
 <!-- Header Page -->
-<div class="bg-gradient-to-br from-emerald-950 to-primary-green text-white pt-32 pb-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 block">Daftar Inisiatif</span>
-        <h1 class="text-4xl font-extrabold mb-4">Portofolio Proyek</h1>
-        <p class="text-gray-300 max-w-2xl text-sm md:text-base leading-relaxed">
-            Temukan berbagai proyek keunggulan regional kami dalam pembangunan berkelanjutan di Jawa Timur, mulai dari pengelolaan sampah, air, hingga energi terbarukan.
+<div class="relative bg-zinc-950 text-white overflow-hidden pt-32 pb-20">
+    <!-- Background photo with opacity -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+         style="background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&q=80&w=1920'); opacity: 0.3;"></div>
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/80 via-zinc-950/60 to-zinc-950/90 pointer-events-none"></div>
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 mb-3 block">List of Initiatives</span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-white">Our Programs</h1>
+        <div class="w-12 h-1 bg-accent-orange rounded-full mb-5"></div>
+        <p class="text-zinc-400 max-w-2xl text-sm md:text-base leading-relaxed">
+            Explore our regional excellence programs in sustainable development across East Java, from waste management, water, to renewable energy.
         </p>
     </div>
 </div>
@@ -20,18 +27,17 @@
         <form action="{{ route('projects.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <!-- Search Text -->
             <div class="md:col-span-2 relative">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari proyek, lokasi, atau topik..." class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search programs, location, or topic..." class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm">
                 <i class="bi bi-search absolute left-4 top-3.5 text-gray-400"></i>
             </div>
             
             <!-- Category Filter -->
             <div>
                 <select name="category" class="w-full py-3 px-4 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm">
-                    <option value="">Semua Kategori</option>
-                    <option value="Sampah" {{ request('category') === 'Sampah' ? 'selected' : '' }}>Sampah</option>
-                    <option value="Air" {{ request('category') === 'Air' ? 'selected' : '' }}>Air</option>
-                    <option value="Energi" {{ request('category') === 'Energi' ? 'selected' : '' }}>Energi</option>
-                    <option value="Sosial" {{ request('category') === 'Sosial' ? 'selected' : '' }}>Sosial/Edukasi</option>
+                    <option value="">All Categories</option>
+                    <option value="Research" {{ request('category') === 'Research' ? 'selected' : '' }}>Research</option>
+                    <option value="Community Development" {{ request('category') === 'Community Development' ? 'selected' : '' }}>Community Development</option>
+                    <option value="Capacity Building" {{ request('category') === 'Capacity Building' ? 'selected' : '' }}>Capacity Building</option>
                 </select>
             </div>
             
@@ -55,18 +61,18 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @forelse($projects as $project)
             <a href="{{ route('projects.show', $project->id) }}"
-               class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between">
+               class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 hover:border-accent-orange/30 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between">
                 <div>
                     <!-- Project Image -->
                     <div class="relative h-48 bg-zinc-200 overflow-hidden">
-                        @if($project->image)
-                            <img src="{{ asset($project->image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @if($project->display_image)
+                            <img src="{{ asset($project->display_image) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         @else
                             <div class="w-full h-full flex items-center justify-center bg-emerald-950/10 text-primary-green">
                                 <i class="bi bi-image text-3xl"></i>
                             </div>
                         @endif
-                        <span class="absolute top-4 left-4 bg-primary-green text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-md">
+                        <span class="absolute top-4 left-4 bg-accent-orange text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-md">
                             {{ $project->category }}
                         </span>
                         
@@ -78,7 +84,7 @@
                     <!-- Content -->
                     <div class="p-6">
                         <span class="text-xs text-gray-400 font-semibold block mb-2">{{ $project->date }}</span>
-                        <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2 group-hover:text-primary-green transition-colors">{{ $project->title }}</h3>
+                        <h3 class="font-bold text-lg text-gray-900 mb-3 line-clamp-2 group-hover:text-accent-orange transition-colors">{{ $project->title }}</h3>
                         <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed mb-4">
                             {{ $project->description }}
                         </p>
@@ -102,7 +108,7 @@
         @empty
             <div class="col-span-3 text-center py-24 bg-white rounded-3xl border border-zinc-100 text-gray-400">
                 <i class="bi bi-search text-4xl block mb-4"></i>
-                Tidak ditemukan proyek yang cocok dengan kriteria pencarian Anda.
+                No programs found matching your search criteria.
             </div>
         @endforelse
     </div>

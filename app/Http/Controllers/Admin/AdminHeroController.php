@@ -20,7 +20,7 @@ class AdminHeroController extends Controller
     {
         if (HeroPhoto::count() >= self::MAX_PHOTOS) {
             return redirect()->route('admin.hero.index')
-                ->with('error', 'Maksimal ' . self::MAX_PHOTOS . ' foto hero. Hapus salah satu terlebih dahulu.');
+                ->with('error', 'Maximum ' . self::MAX_PHOTOS . ' hero photos allowed. Please delete one first.');
         }
         return view('admin.hero.create');
     }
@@ -29,7 +29,7 @@ class AdminHeroController extends Controller
     {
         if (HeroPhoto::count() >= self::MAX_PHOTOS) {
             return redirect()->route('admin.hero.index')
-                ->with('error', 'Maksimal ' . self::MAX_PHOTOS . ' foto hero. Hapus salah satu terlebih dahulu.');
+                ->with('error', 'Maximum ' . self::MAX_PHOTOS . ' hero photos allowed. Please delete one first.');
         }
 
         $request->validate([
@@ -48,7 +48,7 @@ class AdminHeroController extends Controller
             'is_active' => $request->boolean('is_active', true),
         ]);
 
-        return redirect()->route('admin.hero.index')->with('success', 'Foto hero berhasil ditambahkan.');
+        return redirect()->route('admin.hero.index')->with('success', 'Hero photo added successfully.');
     }
 
     public function edit(HeroPhoto $hero)
@@ -81,7 +81,7 @@ class AdminHeroController extends Controller
 
         $hero->update($data);
 
-        return redirect()->route('admin.hero.index')->with('success', 'Foto hero berhasil diperbarui.');
+        return redirect()->route('admin.hero.index')->with('success', 'Hero photo updated successfully.');
     }
 
     public function destroy(HeroPhoto $hero)
@@ -92,6 +92,6 @@ class AdminHeroController extends Controller
 
         $hero->delete();
 
-        return redirect()->route('admin.hero.index')->with('success', 'Foto hero berhasil dihapus.');
+        return redirect()->route('admin.hero.index')->with('success', 'Hero photo deleted successfully.');
     }
 }

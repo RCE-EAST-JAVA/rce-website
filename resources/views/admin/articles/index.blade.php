@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Artikel')
-@section('page-title', 'Kelola Artikel')
+@section('title', 'Manage Publications')
+@section('page-title', 'Manage Publications')
 
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="card-title mb-0">Daftar Artikel</h4>
+        <h4 class="card-title mb-0">Publications List</h4>
         <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-circle"></i> Tambah Artikel
+            <i class="bi bi-plus-circle"></i> Add Publication
         </a>
     </div>
     <div class="card-body">
@@ -25,12 +25,13 @@
                 <thead>
                     <tr>
                         <th>Thumbnail</th>
-                        <th>Judul</th>
-                        <th>Kategori</th>
-                        <th>Penulis</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Author</th>
                         <th>Status</th>
-                        <th>Tanggal Publish</th>
-                        <th>Aksi</th>
+                        <th>Pin</th>
+                        <th>Published</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,12 +59,21 @@
                         </td>
                         <td>{{ $article->published_at ? $article->published_at->format('d M Y') : '-' }}</td>
                         <td>
+                            <form action="{{ route('admin.articles.toggle-pin', $article->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-sm {{ $article->is_pinned ? 'btn-warning' : 'btn-outline-secondary' }}"
+                                    title="{{ $article->is_pinned ? 'Unpin' : 'Pin' }}">
+                                    <i class="bi bi-pin-fill"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('admin.articles.edit', $article->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
                                 <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST"
-                                    onsubmit="return confirm('Hapus artikel ini?')">
+                                    onsubmit="return confirm('Delete this publication?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
@@ -75,7 +85,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="7" class="text-center py-4 text-muted">Belum ada artikel.</td>
+                        <td colspan="7" class="text-center py-4 text-muted">No publications yet.</td>
                     </tr>
                     @endforelse
                 </tbody>

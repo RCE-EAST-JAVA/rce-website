@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Staf')
-@section('page-title', 'Kelola Staf')
+@section('title', 'Manage People')
+@section('page-title', 'Manage People')
 
 @section('content')
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h4 class="card-title">Direktori Anggota & Staf RCE East Java</h4>
+        <h4 class="card-title">RCE East Java People Directory</h4>
         <a href="{{ route('admin.staff.create') }}" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-circle"></i> Tambah Staf
+            <i class="bi bi-plus-circle"></i> Add People
         </a>
     </div>
     <div class="card-body">
@@ -16,17 +16,19 @@
             <table class="table table-striped" id="table1">
                 <thead>
                     <tr>
-                        <th>Nama</th>
-                        <th>Peran / Jabatan</th>
-                        <th>Afiliasi</th>
-                        <th>Keahlian</th>
-                        <th>Kontak</th>
-                        <th>Aksi</th>
+                        <th>Order</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Category</th>
+                        <th>Expertise</th>
+                        <th>Contact</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($staffs as $staff)
                     <tr>
+                        <td><span class="badge bg-secondary">{{ $staff->sort_order }}</span></td>
                         <td>
                             <div class="d-flex align-items-center">
                                 @if($staff->image)
@@ -40,7 +42,7 @@
                             </div>
                         </td>
                         <td>{{ $staff->role }}</td>
-                        <td>{{ $staff->affiliation }}</td>
+                        <td><span class="badge bg-info">{{ $staff->category }}</span></td>
                         <td>
                             @if($staff->expertise)
                                 @foreach(explode(',', $staff->expertise) as $exp)
@@ -61,7 +63,7 @@
                                 <a href="{{ route('admin.staff.edit', $staff->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <form action="{{ route('admin.staff.destroy', $staff->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus staf ini?')">
+                                <form action="{{ route('admin.staff.destroy', $staff->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this person?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
@@ -73,7 +75,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="text-center py-4 text-muted">Belum ada data staf.</td>
+                        <td colspan="7" class="text-center py-4 text-muted">No people found.</td>
                     </tr>
                     @endforelse
                 </tbody>

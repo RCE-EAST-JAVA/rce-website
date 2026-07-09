@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -58,7 +58,7 @@
             letter-spacing: -0.01em;
         }
 
-        /* Card polish */
+        /* Card polish - light */
         .card {
             border-radius: 1rem !important;
             border: 1px solid #f1f5f1 !important;
@@ -72,7 +72,7 @@
         }
         .card-body { padding: 1.4rem !important; }
 
-        /* Table polish */
+        /* Table polish - light */
         .table thead th {
             background: #f8faf8;
             font-size: 0.78rem;
@@ -115,6 +115,53 @@
 
         /* Footer */
         footer .footer { font-size: 0.8rem; }
+
+        /* ── Dark mode overrides ── */
+        body.dark .sidebar-brand-name {
+            color: #6ee27b;
+        }
+        body.dark .topbar-page-title {
+            color: #6ee27b;
+        }
+        body.dark .card {
+            border: 1px solid #2a2f2a !important;
+            box-shadow: 0 1px 8px 0 rgba(0,0,0,.25) !important;
+        }
+        body.dark .card-header {
+            background: transparent !important;
+            border-bottom: 1px solid #2a2f2a !important;
+        }
+        body.dark .table thead th {
+            background: transparent;
+            color: #9ca3af;
+            border-bottom: 1px solid #2a2f2a !important;
+        }
+        body.dark .table tbody tr:hover {
+            background: rgba(255,255,255,.04);
+        }
+        body.dark .form-control,
+        body.dark .form-select {
+            border-color: #374137 !important;
+        }
+        body.dark .form-control:focus,
+        body.dark .form-select:focus {
+            border-color: #4ade80 !important;
+            box-shadow: 0 0 0 0.2rem rgba(74,222,128,.12) !important;
+        }
+        body.dark .dropdown-menu {
+            background: #1e2320 !important;
+            border: 1px solid #2a2f2a !important;
+        }
+        body.dark .dropdown-item {
+            color: #d1d5db !important;
+        }
+        body.dark .dropdown-item:hover {
+            background: #2a2f2a !important;
+            color: #fff !important;
+        }
+        body.dark .dropdown-divider {
+            border-color: #2a2f2a !important;
+        }
     </style>
 
     @yield('styles')
@@ -133,7 +180,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
                             <a href="{{ route('home') }}" class="d-flex align-items-center gap-2 text-decoration-none">
-                                <img src="{{ asset('rce_logo.png') }}" alt="RCE Logo"
+                                <img src="{{ asset('logo-new.png') }}" alt="RCE Logo"
                                      class="rounded"
                                      style="width: 34px; height: 34px; object-fit: cover;">
                                 <div class="d-flex flex-column text-start">
@@ -141,22 +188,6 @@
                                     <span class="sidebar-brand-sub">Admin Panel</span>
                                 </div>
                             </a>
-                        </div>
-
-                        <!-- Dark mode toggle -->
-                        <div class="theme-toggle d-flex gap-2 align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="18" height="18" viewBox="0 0 21 21">
-                                <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 1.5v2m0 14v2" opacity=".3"/>
-                                    <g transform="translate(-210 -1)"><path d="M220.5 2.5v2m0 14v2m-7-7h2m14 0h2m-12.071-5.657l1.414 1.414m8.486 8.486l1.414 1.414m-12.071 5.657l1.414-1.414m8.486-8.486l1.414-1.414"/></g>
-                                </g>
-                            </svg>
-                            <div class="form-check form-switch fs-6 mb-0">
-                                <input class="form-check-input me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.11 20 12 20 9.88 17.88C7.4 15.4 7.4 11.4 9.88 8.92a7.6 7.6 0 0 1 2.23-1.48c.88-.41 1.84.47 1.5 1.36a6.002 6.002 0 0 0 3.86 7.68m-1.77 1.03a8.006 8.006 0 0 1-5.74-7.46C9.13 11 8.82 12.82 9.5 14.5c.88 2.23 3 3.75 5.5 3.75c.62 0 1.24-.1 1.83-.3z"/>
-                            </svg>
                         </div>
 
                         <div class="sidebar-toggler x">
@@ -185,21 +216,28 @@
                         <li class="sidebar-item {{ Request::is('admin/projects*') ? 'active' : '' }}">
                             <a href="{{ route('admin.projects.index') }}" class="sidebar-link">
                                 <i class="bi bi-kanban-fill"></i>
-                                <span>Kelola Proyek</span>
+                                <span>Manage Programs</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item {{ Request::is('admin/articles*') ? 'active' : '' }}">
                             <a href="{{ route('admin.articles.index') }}" class="sidebar-link">
                                 <i class="bi bi-newspaper"></i>
-                                <span>Kelola Artikel</span>
+                                <span>Manage Publications</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item {{ Request::is('admin/staff*') ? 'active' : '' }}">
                             <a href="{{ route('admin.staff.index') }}" class="sidebar-link">
                                 <i class="bi bi-people-fill"></i>
-                                <span>Kelola Staf</span>
+                                <span>Manage Staff</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item {{ Request::is('admin/partners*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.partners.index') }}" class="sidebar-link">
+                                <i class="bi bi-building"></i>
+                                <span>Mitra & Kolaborator</span>
                             </a>
                         </li>
 
@@ -251,6 +289,22 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mb-lg-0 me-3">
+                                <!-- Dark mode toggle -->
+                                <li class="nav-item d-flex align-items-center me-2">
+                                    <div class="theme-toggle d-flex gap-2 align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16" height="16" viewBox="0 0 21 21" class="text-muted">
+                                            <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 1.5v2m0 14v2" opacity=".3"/>
+                                            </g>
+                                        </svg>
+                                        <div class="form-check form-switch fs-6 mb-0">
+                                            <input class="form-check-input me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" class="text-muted">
+                                            <path fill="currentColor" d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.11 20 12 20 9.88 17.88C7.4 15.4 7.4 11.4 9.88 8.92a7.6 7.6 0 0 1 2.23-1.48c.88-.41 1.84.47 1.5 1.36a6.002 6.002 0 0 0 3.86 7.68m-1.77 1.03a8.006 8.006 0 0 1-5.74-7.46C9.13 11 8.82 12.82 9.5 14.5c.88 2.23 3 3.75 5.5 3.75c.62 0 1.24-.1 1.83-.3z"/>
+                                        </svg>
+                                    </div>
+                                </li>
                                 <!-- Shortcut: View Site -->
                                 <li class="nav-item">
                                     <a href="{{ route('home') }}" target="_blank"
