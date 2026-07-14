@@ -25,7 +25,7 @@
                 {{ $project->category }}
             </span>
             <span class="text-xs font-bold px-3 py-1 rounded-full
-                {{ $project->status === 'Aktif' ? 'bg-emerald-400/20 text-emerald-300' : 'bg-zinc-400/20 text-zinc-300' }}">
+                {{ $project->status === 'Active' ? 'bg-emerald-400/20 text-emerald-300' : 'bg-zinc-400/20 text-zinc-300' }}">
                 {{ $project->status }}
             </span>
         </div>
@@ -143,18 +143,18 @@
                 <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-4 block">Program Information</span>
                 <ul class="divide-y divide-zinc-100 text-sm">
                     <li class="py-3 flex justify-between gap-4">
-                        <span class="text-gray-500 font-medium">Kategori</span>
+                        <span class="text-gray-500 font-medium">Category</span>
                         <span class="font-semibold text-gray-800 text-right">{{ $project->category }}</span>
                     </li>
                     <li class="py-3 flex justify-between gap-4">
                         <span class="text-gray-500 font-medium">Status</span>
                         <span class="font-semibold text-right
-                            {{ $project->status === 'Aktif' ? 'text-emerald-600' : 'text-zinc-500' }}">
+                            {{ $project->status === 'Active' ? 'text-emerald-600' : 'text-zinc-500' }}">
                             {{ $project->status }}
                         </span>
                     </li>
                     <li class="py-3 flex justify-between gap-4">
-                        <span class="text-gray-500 font-medium">Penulis</span>
+                        <span class="text-gray-500 font-medium">Author</span>
                         <span class="font-semibold text-gray-800 text-right">{{ $project->author }}</span>
                     </li>
                     <li class="py-3 flex justify-between gap-4">
@@ -163,7 +163,7 @@
                     </li>
                     @if($project->sdgs)
                     <li class="py-3 flex flex-col gap-2">
-                        <span class="text-gray-500 font-medium">SDGs Terkait</span>
+                        <span class="text-gray-500 font-medium">Related SDGs</span>
                         <div class="flex flex-wrap gap-1.5">
                             @foreach(explode(',', $project->sdgs) as $sdg)
                                 <span class="text-xs bg-accent-orange/10 text-accent-orange font-bold px-2.5 py-1 rounded-full">
@@ -189,7 +189,7 @@
     @if($related->isNotEmpty())
     <div class="mt-20">
         <div class="mb-8">
-            <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-2 block">Kategori Serupa</span>
+            <span class="text-xs font-bold uppercase tracking-widest text-primary-green mb-2 block">Similar Category</span>
                     <h2 class="text-2xl font-extrabold text-gray-900">Related Programs</h2>
         </div>
 

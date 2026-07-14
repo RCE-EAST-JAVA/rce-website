@@ -44,7 +44,7 @@
             <!-- Button Submit -->
             <div class="flex gap-2">
                 <button type="submit" class="flex-1 bg-primary-green hover-bg-primary-green text-white py-3 px-6 rounded-2xl font-semibold text-sm transition">
-                    Cari & Filter
+                    Search & Filter
                 </button>
                 @if(request()->anyFilled(['search', 'category']))
                     <a href="{{ route('projects.index') }}" class="bg-zinc-100 hover:bg-zinc-200 text-gray-700 py-3 px-4 rounded-2xl font-semibold text-sm flex items-center justify-center transition">
@@ -93,7 +93,7 @@
                 
                 <!-- Footer Info -->
                 <div class="px-6 pb-6 pt-4 border-t border-zinc-100 flex justify-between items-center bg-zinc-50/50">
-                    <span class="text-xs text-gray-500 font-medium">Oleh: {{ $project->author }}</span>
+                    <span class="text-xs text-gray-500 font-medium">By: {{ $project->author }}</span>
                     @if($project->sdgs)
                         <div class="flex gap-1">
                             @foreach(explode(',', $project->sdgs) as $sdg)

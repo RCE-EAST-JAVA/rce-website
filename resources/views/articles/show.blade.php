@@ -261,7 +261,7 @@
 <div class="bg-zinc-50 border-t border-zinc-100 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-8">
-            <span class="text-xs font-bold uppercase tracking-widest mb-2 block" style="color:#1e4620;">Kategori Serupa</span>
+            <span class="text-xs font-bold uppercase tracking-widest mb-2 block" style="color:#1e4620;">Similar Category</span>
                     <h2 class="text-2xl font-extrabold text-gray-900">Related Publications</h2>
         </div>
 
