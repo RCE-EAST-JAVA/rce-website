@@ -190,11 +190,7 @@
                             </a>
                         </div>
 
-                        <div class="sidebar-toggler x">
-                            <a href="#" class="sidebar-hide d-xl-none d-block">
-                                <i class="bi bi-x bi-middle"></i>
-                            </a>
-                        </div>
+
                     </div>
                 </div>
 
