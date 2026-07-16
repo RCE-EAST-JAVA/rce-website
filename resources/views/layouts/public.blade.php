@@ -181,7 +181,7 @@
                 </a>
                 <a href="{{ route('staff.index') }}"
                     class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('staf*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
-                    <i class="bi bi-people mr-3 text-base"></i> Staff
+                    <i class="bi bi-people mr-3 text-base"></i> Our People
                 </a>
                 <a href="{{ route('sdg.index') }}"
                     class="flex items-center px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-150 {{ Request::is('sdg*') ? 'bg-green-50 text-primary-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary-green' }}">
@@ -241,8 +241,7 @@
                         </li>
                         <li><a href="{{ route('sdg.index') }}" class="hover:text-white transition">Sustainable
                                 Development Goals</a></li>
-                        <li><a href="{{ route('staff.index') }}" class="hover:text-white transition">Staff
-                                Directory</a>
+                        <li><a href="{{ route('staff.index') }}" class="hover:text-white transition">Our People</a>
                         </li>
                     </ul>
                 </div>
@@ -253,15 +252,15 @@
                     <ul class="space-y-4 text-sm text-gray-400">
                         <li class="flex gap-3">
                             <i class="bi bi-geo-alt-fill text-accent-orange text-lg"></i>
-                            <span>Surabaya, Jawa Timur, Indonesia</span>
+                            <span>Jember, Jawa Timur, Indonesia</span>
                         </li>
                         <li class="flex gap-3">
                             <i class="bi bi-envelope-fill text-accent-orange text-lg"></i>
-                            <span>info@rce-eastjava.org</span>
+                            <span>rceeastjava.unej@gmail.com</span>
                         </li>
                         <li class="flex gap-3">
                             <i class="bi bi-telephone-fill text-accent-orange text-lg"></i>
-                            <span>+62 31 1234 5678</span>
+                            <span>+62 811-370-030</span>
                         </li>
                     </ul>
                 </div>
