@@ -32,7 +32,7 @@
         </p>
         <div class="mt-6">
             <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-full">
-                {{ $sdg['targets'] }} Target Global
+                {{ $sdg['targets'] }} Global Targets
             </span>
         </div>
     </div>
@@ -47,7 +47,7 @@
             <div class="lg:col-span-2 space-y-8">
                 <!-- Detail -->
                 <div class="bg-white rounded-3xl border border-zinc-100 shadow-sm p-8">
-                    <h2 class="text-xl font-extrabold text-zinc-900 mb-4">Tentang Tujuan Ini</h2>
+                    <h2 class="text-xl font-extrabold text-zinc-900 mb-4">About This Goal</h2>
                     <p class="text-zinc-600 text-sm leading-relaxed">{{ $sdg['detail'] }}</p>
                 </div>
 

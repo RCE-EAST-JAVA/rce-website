@@ -16,22 +16,22 @@
         <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-white">Sustainable Development Goals</h1>
         <div class="w-12 h-1 bg-accent-orange rounded-full mb-5"></div>
         <p class="text-zinc-400 max-w-2xl text-sm md:text-base leading-relaxed">
-            17 Tujuan Pembangunan Berkelanjutan (SDGs) adalah agenda global PBB untuk mengakhiri kemiskinan, melindungi planet, dan memastikan kesejahteraan semua orang pada tahun 2030.
+            The 17 Sustainable Development Goals (SDGs) are the UN's global agenda to end poverty, protect the planet, and ensure prosperity for all people by 2030.
         </p>
         <div class="flex gap-6 mt-8">
             <div class="text-center">
                 <span class="block text-3xl font-extrabold text-white">17</span>
-                <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold">Tujuan</span>
+                <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold">Goals</span>
             </div>
             <div class="w-px bg-zinc-700"></div>
             <div class="text-center">
                 <span class="block text-3xl font-extrabold text-white">169</span>
-                <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold">Target</span>
+                <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold">Targets</span>
             </div>
             <div class="w-px bg-zinc-700"></div>
             <div class="text-center">
                 <span class="block text-3xl font-extrabold text-white">2030</span>
-                <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold">Tenggat</span>
+                <span class="text-xs text-emerald-400 uppercase tracking-widest font-semibold">Deadline</span>
             </div>
         </div>
     </div>

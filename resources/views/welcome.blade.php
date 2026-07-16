@@ -178,7 +178,7 @@
                     'COLLABORATION',
                     'UNESCO',
                     'GREEN FUTURE',
-                    'KEBERLANJUTAN',
+                    'SUSTAINABILITY',
                 ];
                 $separator = '<span class="mx-4 text-amber-200">●</span>';
             @endphp
@@ -303,7 +303,7 @@
                 @empty
                     <div class="col-span-5 text-center py-10 text-gray-400">
                         <i class="bi bi-building text-4xl block mb-3 opacity-50"></i>
-                        <p>Belum ada mitra ditambahkan.</p>
+                        <p>No partners added yet.</p>
                     </div>
                 @endforelse
             </div>
@@ -315,9 +315,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div data-aos="fade-up" class="flex justify-between items-end mb-12">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-2 block">Galeri
-                        Aksi</span>
-                    <h2 class="text-3xl font-extrabold text-primary-green">Aktivitas Terbaru</h2>
+                    <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-2 block">Action
+                        Gallery</span>
+                    <h2 class="text-3xl font-extrabold text-primary-green">Latest Activities</h2>
                     <div class="w-12 h-0.5 bg-accent-orange rounded-full mt-3"></div>
                 </div>
                 <a href="{{ route('projects.index') }}"
@@ -360,7 +360,7 @@
                             <p class="text-sm text-gray-600 line-clamp-3 leading-relaxed flex-1">
                                 {{ $featured->description }}</p>
                             <div class="flex items-center justify-between mt-5 pt-4 border-t border-zinc-100">
-                                <span class="text-xs text-gray-500">Oleh: {{ $featured->author }}</span>
+                                <span class="text-xs text-gray-500">By: {{ $featured->author }}</span>
                                 @if ($featured->sdgs)
                                     <div class="flex gap-1">
                                         @foreach (explode(',', $featured->sdgs) as $sdg)
@@ -398,7 +398,7 @@
                                     <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-1">
                                         {{ $project->description }}</p>
                                     <span class="text-xs text-gray-400">{{ $project->date }}</span>
-                                    <span class="text-xs text-gray-400 mt-0.5">Oleh: {{ $project->author }}</span>
+                                    <span class="text-xs text-gray-400 mt-0.5">By: {{ $project->author }}</span>
                                 </div>
                             </a>
                         @endforeach
@@ -423,7 +423,7 @@
                     </div>
                     <a href="{{ route('articles.index') }}"
                         class="text-sm font-semibold text-accent-orange hover:text-amber-700 flex items-center gap-1 transition">
-                        Lihat semua
+                        View all
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -546,7 +546,7 @@
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-accent-orange rounded-full"></div>
                 <div class="relative z-10 max-w-2xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">Join the Movement for
-                        Keberlanjutan</h2>
+                        Sustainability</h2>
                     <p class="text-zinc-400 text-sm md:text-base mb-8 leading-relaxed">
                         We invite universities, researchers, NGOs, government agencies, and volunteers to collaborate
                         on environmental and social projects across East Java.

@@ -142,7 +142,7 @@
                                 :class="scrolled ? 'bg-primary-green text-white' :
                                     'bg-white/15 hover:bg-white/25 text-white border border-white/30 backdrop-blur-sm'"
                                 class="px-5 py-2.5 rounded-full text-sm font-semibold shadow-md transition-all duration-300">
-                                Masuk
+                                Login
                             </a>
                         @endauth
                     </div>
@@ -199,7 +199,7 @@
                 @else
                     <a href="{{ route('login') }}"
                         class="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-semibold bg-primary-green text-white transition-colors duration-150">
-                        <i class="bi bi-box-arrow-in-right mr-2"></i> Masuk
+                        <i class="bi bi-box-arrow-in-right mr-2"></i> Login
                     </a>
                 @endauth
             </div>

@@ -43,7 +43,7 @@
 
             <div class="flex gap-2">
                 <button type="submit" class="flex-1 bg-primary-green hover-bg-primary-green text-white py-3 px-6 rounded-2xl font-semibold text-sm transition">
-                    Cari & Filter
+                    Search & Filter
                 </button>
                 @if(request('search') || request('category'))
                     <a href="{{ route('articles.index') }}" class="bg-zinc-100 hover:bg-zinc-200 text-gray-600 py-3 px-4 rounded-2xl font-semibold text-sm transition">
