@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\AdminHeroController;
 use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminPartnerController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Project;
+use App\Models\Article;
 
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -51,6 +53,16 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('articles/{article}/toggle-pin', [AdminArticleController::class, 'togglePin'])->name('admin.articles.toggle-pin');
     Route::post('projects/{project}/toggle-pin', [AdminProjectController::class, 'togglePin'])->name('admin.projects.toggle-pin');
     Route::resource('partners', AdminPartnerController::class)->names('admin.partners')->except(['show']);
+});
+
+// Route untuk sitemap XML
+Route::get('/sitemap.xml', function () {
+    $projects = Project::all();
+    $articles = Article::published()->get();
+    return response()->view('sitemap', [
+        'projects' => $projects,
+        'articles' => $articles,
+    ])->header('Content-Type', 'text/xml');
 });
 
 require __DIR__.'/auth.php';

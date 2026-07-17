@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://rce-eastjava.org/sitemap.xml
