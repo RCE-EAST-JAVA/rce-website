@@ -33,8 +33,18 @@ class ProjectController extends Controller
         return view('projects.index', compact('projects'));
     }
 
-    public function show(Project $project)
+    public function show($projectSlugOrId)
     {
+        // 1. Jika parameter berupa angka (ID lama), redirect 301 ke slug baru
+        if (is_numeric($projectSlugOrId)) {
+            $project = Project::find($projectSlugOrId);
+            if ($project && $project->slug) {
+                return redirect()->route('projects.show', $project->slug, 301);
+            }
+        }
+
+        // 2. Cari project berdasarkan slug
+        $project = Project::where('slug', $projectSlugOrId)->firstOrFail();
         $project->load('images');
 
         $related = Project::with('images')->where('category', $project->category)
