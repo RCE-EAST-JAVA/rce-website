@@ -43,6 +43,7 @@ class AdminProjectController extends Controller
         ]);
 
         $data = $request->except('images');
+        $data['slug'] = $this->uniqueSlug($request->title);
         $data['is_pinned'] = $request->boolean('is_pinned');
 
         if ($request->hasFile('image')) {
@@ -94,6 +95,11 @@ class AdminProjectController extends Controller
 
         $data = $request->except('images');
         $data['is_pinned'] = $request->boolean('is_pinned');
+
+        // Re-slug only if title changed or if slug is empty
+        if ($request->title !== $project->title || empty($project->slug)) {
+            $data['slug'] = $this->uniqueSlug($request->title, $project->id);
+        }
 
         if ($request->hasFile('image')) {
             if ($project->image && file_exists(public_path($project->image))) {
@@ -151,5 +157,20 @@ class AdminProjectController extends Controller
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('success', 'Program deleted successfully.');
+    }
+
+    private function uniqueSlug(string $title, ?int $ignoreId = null): string
+    {
+        $slug = \Illuminate\Support\Str::slug($title);
+        $original = $slug;
+        $i = 1;
+        while (
+            Project::where('slug', $slug)
+                ->when($ignoreId, fn($q) => $q->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
+            $slug = $original . '-' . $i++;
+        }
+        return $slug;
     }
 }

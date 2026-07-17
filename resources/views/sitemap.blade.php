@@ -25,7 +25,7 @@
     <!-- Halaman Dinamis: Projects (Our Programs) -->
     @foreach ($projects as $project)
         <url>
-            <loc>{{ route('projects.show', $project->id) }}</loc>
+            <loc>{{ route('projects.show', $project->slug) }}</loc>
             <lastmod>{{ $project->updated_at->tz('UTC')->toAtomString() }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.7</priority>

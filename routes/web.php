@@ -19,7 +19,7 @@ use App\Models\Article;
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/proyek', [ProjectController::class, 'index'])->name('projects.index');
-Route::get('/proyek/{project}', [ProjectController::class, 'show'])->name('projects.show');
+Route::get('/proyek/{project:slug}', [ProjectController::class, 'show'])->name('projects.show');
 Route::get('/artikel', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/staf', [StaffController::class, 'index'])->name('staff.index');
