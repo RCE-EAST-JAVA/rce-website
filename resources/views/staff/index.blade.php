@@ -76,12 +76,7 @@
                 {{-- Gradient overlay --}}
                 <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/30 to-transparent"></div>
 
-                {{-- Role badge top-left --}}
-                <div class="absolute top-4 left-4 z-10">
-                    <span class="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1.5 rounded-full bg-primary-green text-white shadow">
-                        {{ $staff->role }}
-                    </span>
-                </div>
+
 
                 {{-- Info at bottom --}}
                 <div class="absolute bottom-0 left-0 right-0 z-10 p-5">
