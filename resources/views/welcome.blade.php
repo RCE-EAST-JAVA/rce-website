@@ -265,6 +265,16 @@
 
     <!-- Section 02: Partners & Collaborators -->
     @php
+        $logoMapping = [
+            'unesa' => 'https://upload.wikimedia.org/wikipedia/commons/f/f4/State_University_of_Surabaya_logo.png',
+            'its' => 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_ITS.png',
+            'unair' => 'https://upload.wikimedia.org/wikipedia/commons/6/65/Logo-Branding-UNAIR-biru.png',
+            'universitas airlangga' => 'https://upload.wikimedia.org/wikipedia/commons/6/65/Logo-Branding-UNAIR-biru.png',
+            'universitas brawijaya' => 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Logo_Universitas_Brawijaya.svg',
+            'uin sunan ampel' => 'https://upload.wikimedia.org/wikipedia/id/b/b4/UIN_SUNAN_AMPEL.jpg',
+            'uin sunan ampel surabaya' => 'https://upload.wikimedia.org/wikipedia/id/b/b4/UIN_SUNAN_AMPEL.jpg',
+        ];
+
         $extraPartners = [
             [
                 'name' => 'United Nations University',
@@ -308,12 +318,21 @@
             ]
         ];
 
-        $allPartners = collect($partners)->map(function($p) {
+        $allPartners = collect($partners)->map(function($p) use ($logoMapping) {
+            $logo = $p->logo ? asset($p->logo) : null;
+            if (!$logo) {
+                $lowerName = strtolower(trim($p->name));
+                if (isset($logoMapping[$lowerName])) {
+                    $logo = $logoMapping[$lowerName];
+                }
+            }
             return [
                 'name' => $p->name,
-                'logo' => $p->logo ? asset($p->logo) : null
+                'logo' => $logo
             ];
-        })->concat($extraPartners);
+        })
+        ->concat($extraPartners)
+        ->filter(fn($p) => !empty($p['logo']));
     @endphp
 
     <div class="py-16 bg-white border-y border-zinc-100 overflow-hidden relative">
@@ -336,42 +355,30 @@
                 {{-- Part 1 --}}
                 <div class="marquee-content flex items-center gap-16 pr-16">
                     @foreach($allPartners as $mitra)
-                        <div class="flex flex-col items-center justify-center min-w-[120px] max-w-[180px]">
-                            @if($mitra['logo'])
-                                <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
-                                     class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                     title="{{ $mitra['name'] }}">
-                            @else
-                                <span class="text-zinc-400 font-bold text-sm hover:text-emerald-800 transition-colors uppercase tracking-wider text-center break-words max-w-[140px]">{{ $mitra['name'] }}</span>
-                            @endif
+                        <div class="flex items-center justify-center shrink-0">
+                            <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
+                                 class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                 title="{{ $mitra['name'] }}">
                         </div>
                     @endforeach
                 </div>
                 {{-- Part 2 --}}
                 <div class="marquee-content flex items-center gap-16 pr-16">
                     @foreach($allPartners as $mitra)
-                        <div class="flex flex-col items-center justify-center min-w-[120px] max-w-[180px]">
-                            @if($mitra['logo'])
-                                <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
-                                     class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                     title="{{ $mitra['name'] }}">
-                            @else
-                                <span class="text-zinc-400 font-bold text-sm hover:text-emerald-800 transition-colors uppercase tracking-wider text-center break-words max-w-[140px]">{{ $mitra['name'] }}</span>
-                            @endif
+                        <div class="flex items-center justify-center shrink-0">
+                            <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
+                                 class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                 title="{{ $mitra['name'] }}">
                         </div>
                     @endforeach
                 </div>
                 {{-- Part 3 --}}
                 <div class="marquee-content flex items-center gap-16 pr-16">
                     @foreach($allPartners as $mitra)
-                        <div class="flex flex-col items-center justify-center min-w-[120px] max-w-[180px]">
-                            @if($mitra['logo'])
-                                <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
-                                     class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                     title="{{ $mitra['name'] }}">
-                            @else
-                                <span class="text-zinc-400 font-bold text-sm hover:text-emerald-800 transition-colors uppercase tracking-wider text-center break-words max-w-[140px]">{{ $mitra['name'] }}</span>
-                            @endif
+                        <div class="flex items-center justify-center shrink-0">
+                            <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
+                                 class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                 title="{{ $mitra['name'] }}">
                         </div>
                     @endforeach
                 </div>
