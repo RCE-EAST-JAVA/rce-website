@@ -268,43 +268,43 @@
         $extraPartners = [
             [
                 'name' => 'United Nations University',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/United_Nations_University_logo.svg/512px-United_Nations_University_logo.svg.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/6/6e/UNU-logo.svg'
             ],
             [
                 'name' => 'Australian Government',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Australian_Government_Crest.svg/512px-Australian_Government_Crest.svg.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_the_Commonwealth_of_Australia.svg'
             ],
             [
                 'name' => 'East Java Provincial Government',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Coat_of_arms_of_East_Java.svg/336px-Coat_of_arms_of_East_Java.svg.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/7/74/Coat_of_arms_of_East_Java.svg'
             ],
             [
                 'name' => 'Bondowoso District Government',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Lambang_Kabupaten_Bondowoso.png/375px-Lambang_Kabupaten_Bondowoso.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Seal_of_Bondowoso_Regency.svg'
             ],
             [
                 'name' => 'Jember District Government',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Lambang_Kabupaten_Jember.png/393px-Lambang_Kabupaten_Jember.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Seal_of_Jember_Regency.svg'
             ],
             [
                 'name' => 'Universitas Jember',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Logo_UNEJ_1.png/504px-Logo_UNEJ_1.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Logo_unej.png'
             ],
             [
                 'name' => 'Australian National University',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Australian_National_University_logo.svg/512px-Australian_National_University_logo.svg.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/4/4c/Australian_National_University_%28emblem%29.svg'
             ],
             [
                 'name' => 'Johns Hopkins University',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Johns_Hopkins_University_Logo.svg/512px-Johns_Hopkins_University_Logo.svg.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/f/fb/Johns_Hopkins_University_logo.svg'
             ],
             [
                 'name' => 'Universitas Indonesia',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Logo_Universitas_Indonesia.svg/512px-Logo_Universitas_Indonesia.svg.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/id/d/da/Universitas_Indonesia_logo.svg'
             ],
             [
                 'name' => 'COMCEC - OIC',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Organisation_of_Islamic_Cooperation_Logo.svg/512px-Organisation_of_Islamic_Cooperation_Logo.svg.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/2/25/Organisation_of_Islamic_Cooperation_Logo.svg'
             ]
         ];
 
