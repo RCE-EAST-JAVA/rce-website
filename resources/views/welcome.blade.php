@@ -353,9 +353,9 @@
 
             <div class="marquee-track flex whitespace-nowrap items-center hover:[animation-play-state:paused]">
                 {{-- Part 1 --}}
-                <div class="marquee-content flex items-center" style="display: flex; align-items: center; gap: 4rem; padding-right: 4rem;">
+                <div class="marquee-content flex items-center" style="display: flex; align-items: center; gap: 2rem; padding-right: 2rem;">
                     @foreach($allPartners as $mitra)
-                        <div class="flex items-center justify-center shrink-0" style="margin: 0 2rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <div class="flex items-center justify-center shrink-0" style="margin: 0 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                             <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
                                  class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                                  title="{{ $mitra['name'] }}">
@@ -363,9 +363,9 @@
                     @endforeach
                 </div>
                 {{-- Part 2 --}}
-                <div class="marquee-content flex items-center" style="display: flex; align-items: center; gap: 4rem; padding-right: 4rem;">
+                <div class="marquee-content flex items-center" style="display: flex; align-items: center; gap: 2rem; padding-right: 2rem;">
                     @foreach($allPartners as $mitra)
-                        <div class="flex items-center justify-center shrink-0" style="margin: 0 2rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <div class="flex items-center justify-center shrink-0" style="margin: 0 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                             <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
                                  class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                                  title="{{ $mitra['name'] }}">
@@ -373,9 +373,9 @@
                     @endforeach
                 </div>
                 {{-- Part 3 --}}
-                <div class="marquee-content flex items-center" style="display: flex; align-items: center; gap: 4rem; padding-right: 4rem;">
+                <div class="marquee-content flex items-center" style="display: flex; align-items: center; gap: 2rem; padding-right: 2rem;">
                     @foreach($allPartners as $mitra)
-                        <div class="flex items-center justify-center shrink-0" style="margin: 0 2rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <div class="flex items-center justify-center shrink-0" style="margin: 0 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                             <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
                                  class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                                  title="{{ $mitra['name'] }}">
