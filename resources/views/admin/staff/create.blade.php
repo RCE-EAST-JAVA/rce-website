@@ -33,11 +33,13 @@
 
                 <div class="col-md-6 col-12 mb-3">
                     <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
-                    <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" required>
-                        <option value="">-- Select Category --</option>
-                        <option value="Researcher" {{ old('category') === 'Researcher' ? 'selected' : '' }}>Researcher</option>
-                        <option value="Research Assistant" {{ old('category') === 'Research Assistant' ? 'selected' : '' }}>Research Assistant</option>
-                    </select>
+                    <input type="text" id="category" class="form-control @error('category') is-invalid @enderror"
+                        name="category" value="{{ old('category', 'Researcher') }}" list="category-options"
+                        placeholder="e.g. Researcher, Research Assistant" required>
+                    <datalist id="category-options">
+                        <option value="Researcher">
+                        <option value="Research Assistant">
+                    </datalist>
                     @error('category')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

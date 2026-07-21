@@ -24,7 +24,7 @@ class AdminStaffController extends Controller
         $request->validate([
             'name'        => 'required|string|max:255',
             'role'        => 'required|string|max:255',
-            'category'    => 'required|in:Research Assistant,Researcher',
+            'category'    => 'required|string|max:255',
             'expertise'   => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -57,7 +57,7 @@ class AdminStaffController extends Controller
         $request->validate([
             'name'        => 'required|string|max:255',
             'role'        => 'required|string|max:255',
-            'category'    => 'required|in:Research Assistant,Researcher',
+            'category'    => 'required|string|max:255',
             'expertise'   => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

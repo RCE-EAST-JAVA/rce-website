@@ -37,8 +37,9 @@
             <div>
                 <select name="category" class="w-full py-3 px-4 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-primary-green text-sm">
                     <option value="">All Categories</option>
-                    <option value="Researcher" {{ request('category') === 'Researcher' ? 'selected' : '' }}>Researcher</option>
-                    <option value="Research Assistant" {{ request('category') === 'Research Assistant' ? 'selected' : '' }}>Research Assistant</option>
+                    @foreach($categories as $cat)
+                        <option value="{{ $cat }}" {{ request('category') === $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                    @endforeach
                 </select>
             </div>
 

@@ -27,8 +27,9 @@ class StaffController extends Controller
         }
 
         $staffs = $query->orderBy('sort_order')->orderBy('name')->paginate(8);
+        $categories = Staff::whereNotNull('category')->where('category', '!=', '')->distinct()->pluck('category');
 
-        return view('staff.index', compact('staffs'));
+        return view('staff.index', compact('staffs', 'categories'));
     }
 
     public function show(Staff $staff)
