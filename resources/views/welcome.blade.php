@@ -264,47 +264,117 @@
     </div>
 
     <!-- Section 02: Partners & Collaborators -->
-    <div class="py-20 bg-gradient-to-br from-zinc-50 to-white border-y border-zinc-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div data-aos="fade-up">
-                <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-3 block">Academic Partner
-                    Network</span>
-                <h2 class="text-4xl font-extrabold text-gray-900 mb-2">Partners &amp; Collaborators</h2>
-                <div class="w-16 h-1 bg-accent-orange rounded-full mx-auto mb-5"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto mb-14 leading-relaxed">
-                    Together we advance collaborative research and sustainable environmental action in East Java.
-                </p>
-            </div>
+    @php
+        $extraPartners = [
+            [
+                'name' => 'United Nations University',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/United_Nations_University_logo.svg/512px-United_Nations_University_logo.svg.png'
+            ],
+            [
+                'name' => 'Australian Government',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Australian_Government_Crest.svg/512px-Australian_Government_Crest.svg.png'
+            ],
+            [
+                'name' => 'East Java Provincial Government',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Coat_of_arms_of_East_Java.svg/336px-Coat_of_arms_of_East_Java.svg.png'
+            ],
+            [
+                'name' => 'Bondowoso District Government',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Lambang_Kabupaten_Bondowoso.png/375px-Lambang_Kabupaten_Bondowoso.png'
+            ],
+            [
+                'name' => 'Jember District Government',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Lambang_Kabupaten_Jember.png/393px-Lambang_Kabupaten_Jember.png'
+            ],
+            [
+                'name' => 'Universitas Jember',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Logo_UNEJ_1.png/504px-Logo_UNEJ_1.png'
+            ],
+            [
+                'name' => 'Australian National University',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Australian_National_University_logo.svg/512px-Australian_National_University_logo.svg.png'
+            ],
+            [
+                'name' => 'Johns Hopkins University',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Johns_Hopkins_University_Logo.svg/512px-Johns_Hopkins_University_Logo.svg.png'
+            ],
+            [
+                'name' => 'Universitas Indonesia',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Logo_Universitas_Indonesia.svg/512px-Logo_Universitas_Indonesia.svg.png'
+            ],
+            [
+                'name' => 'COMCEC - OIC',
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Organisation_of_Islamic_Cooperation_Logo.svg/512px-Organisation_of_Islamic_Cooperation_Logo.svg.png'
+            ]
+        ];
 
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-5">
-                @forelse($partners as $i => $mitra)
-                    <div data-aos="fade-up" data-aos-delay="{{ $i * 50 }}"
-                        class="group relative bg-white p-6 rounded-3xl shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-zinc-100">
-                        <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                            @if ($mitra->logo)
-                                <img src="{{ asset($mitra->logo) }}" alt="{{ $mitra->name }}"
-                                    class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300">
+        $allPartners = collect($partners)->map(function($p) {
+            return [
+                'name' => $p->name,
+                'logo' => $p->logo ? asset($p->logo) : null
+            ];
+        })->concat($extraPartners);
+    @endphp
+
+    <div class="py-16 bg-white border-y border-zinc-100 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
+            <div data-aos="fade-up">
+                <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-3 block">Academic Partner Network</span>
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Partners &amp; Collaborators</h2>
+                <div class="w-16 h-1 bg-accent-orange rounded-full mx-auto"></div>
+            </div>
+        </div>
+
+        <!-- Marquee Container with Left & Right Gradient Shadows -->
+        <div class="relative w-full overflow-hidden select-none">
+            <!-- Left Gradient Shadow -->
+            <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+            <!-- Right Gradient Shadow -->
+            <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+            <div class="marquee-track flex whitespace-nowrap items-center hover:[animation-play-state:paused]">
+                {{-- Part 1 --}}
+                <div class="marquee-content flex items-center gap-16 pr-16">
+                    @foreach($allPartners as $mitra)
+                        <div class="flex flex-col items-center justify-center min-w-[120px] max-w-[180px]">
+                            @if($mitra['logo'])
+                                <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
+                                     class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                     title="{{ $mitra['name'] }}">
                             @else
-                                <div
-                                    class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-green/10 to-emerald-50 flex items-center justify-center group-hover:from-primary-green group-hover:to-emerald-600 transition-all duration-300">
-                                    <i
-                                        class="bi bi-building text-2xl text-primary-green group-hover:text-white transition-colors duration-300"></i>
-                                </div>
+                                <span class="text-zinc-400 font-bold text-sm hover:text-emerald-800 transition-colors uppercase tracking-wider text-center break-words max-w-[140px]">{{ $mitra['name'] }}</span>
                             @endif
                         </div>
-                        <h3
-                            class="font-extrabold text-gray-700 text-sm tracking-wide group-hover:text-primary-green transition-colors duration-200">
-                            {{ $mitra->name }}</h3>
-                        <div
-                            class="mt-3 w-8 h-1 bg-zinc-200 rounded-full mx-auto group-hover:w-12 group-hover:bg-primary-green transition-all duration-300">
+                    @endforeach
+                </div>
+                {{-- Part 2 --}}
+                <div class="marquee-content flex items-center gap-16 pr-16">
+                    @foreach($allPartners as $mitra)
+                        <div class="flex flex-col items-center justify-center min-w-[120px] max-w-[180px]">
+                            @if($mitra['logo'])
+                                <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
+                                     class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                     title="{{ $mitra['name'] }}">
+                            @else
+                                <span class="text-zinc-400 font-bold text-sm hover:text-emerald-800 transition-colors uppercase tracking-wider text-center break-words max-w-[140px]">{{ $mitra['name'] }}</span>
+                            @endif
                         </div>
-                    </div>
-                @empty
-                    <div class="col-span-5 text-center py-10 text-gray-400">
-                        <i class="bi bi-building text-4xl block mb-3 opacity-50"></i>
-                        <p>No partners added yet.</p>
-                    </div>
-                @endforelse
+                    @endforeach
+                </div>
+                {{-- Part 3 --}}
+                <div class="marquee-content flex items-center gap-16 pr-16">
+                    @foreach($allPartners as $mitra)
+                        <div class="flex flex-col items-center justify-center min-w-[120px] max-w-[180px]">
+                            @if($mitra['logo'])
+                                <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
+                                     class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                     title="{{ $mitra['name'] }}">
+                            @else
+                                <span class="text-zinc-400 font-bold text-sm hover:text-emerald-800 transition-colors uppercase tracking-wider text-center break-words max-w-[140px]">{{ $mitra['name'] }}</span>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
