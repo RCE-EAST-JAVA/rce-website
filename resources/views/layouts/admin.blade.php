@@ -284,33 +284,7 @@
                         </span>
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mb-lg-0 me-3">
-                                <!-- Dark mode toggle -->
-                                <li class="nav-item d-flex align-items-center me-2">
-                                    <div class="theme-toggle d-flex gap-2 align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16" height="16" viewBox="0 0 21 21" class="text-muted">
-                                            <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 1.5v2m0 14v2" opacity=".3"/>
-                                            </g>
-                                        </svg>
-                                        <div class="form-check form-switch fs-6 mb-0">
-                                            <input class="form-check-input me-0" type="checkbox" id="toggle-dark" style="cursor: pointer">
-                                        </div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" class="text-muted">
-                                            <path fill="currentColor" d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.11 20 12 20 9.88 17.88C7.4 15.4 7.4 11.4 9.88 8.92a7.6 7.6 0 0 1 2.23-1.48c.88-.41 1.84.47 1.5 1.36a6.002 6.002 0 0 0 3.86 7.68m-1.77 1.03a8.006 8.006 0 0 1-5.74-7.46C9.13 11 8.82 12.82 9.5 14.5c.88 2.23 3 3.75 5.5 3.75c.62 0 1.24-.1 1.83-.3z"/>
-                                        </svg>
-                                    </div>
-                                </li>
-                                <!-- Shortcut: View Site -->
-                                <li class="nav-item">
-                                    <a href="{{ route('home') }}" target="_blank"
-                                       class="nav-link d-flex align-items-center gap-1 text-muted"
-                                       title="Lihat website">
-                                        <i class="bi bi-box-arrow-up-right fs-6"></i>
-                                        <span class="d-none d-md-inline small">Lihat Website</span>
-                                    </a>
-                                </li>
-                            </ul>
+
 
                             <!-- User Dropdown -->
                             <div class="dropdown">

@@ -9,25 +9,29 @@ class ArticleController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Article::published();
+        $search = $request->input('search');
 
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
+        $booksQuery = Article::published()->whereIn('category', ['Books', 'Buku']);
+        $journalsQuery = Article::published()->whereNotIn('category', ['Books', 'Buku']);
+
+        if ($search) {
+            $booksQuery->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('excerpt', 'like', '%' . $search . '%')
+                  ->orWhere('author', 'like', '%' . $search . '%');
+            });
+
+            $journalsQuery->where(function ($q) use ($search) {
                 $q->where('title', 'like', '%' . $search . '%')
                   ->orWhere('excerpt', 'like', '%' . $search . '%')
                   ->orWhere('author', 'like', '%' . $search . '%');
             });
         }
 
-        if ($request->filled('category')) {
-            $query->where('category', $request->category);
-        }
+        $books = $booksQuery->orderByDesc('is_pinned')->paginate(6, ['*'], 'books_page')->withQueryString();
+        $journals = $journalsQuery->orderByDesc('is_pinned')->paginate(10, ['*'], 'journals_page')->withQueryString();
 
-        $articles = $query->orderByDesc('is_pinned')->paginate(9)->withQueryString();
-        $categories = Article::where('status', 'published')->distinct()->pluck('category')->sort()->values();
-
-        return view('articles.index', compact('articles', 'categories'));
+        return view('articles.index', compact('books', 'journals'));
     }
 
     public function show(Article $article)
