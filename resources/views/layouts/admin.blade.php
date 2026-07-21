@@ -162,6 +162,85 @@
         body.dark .dropdown-divider {
             border-color: #2a2f2a !important;
         }
+
+        /* Laravel Tailwind Pagination Fix in Admin */
+        nav[role="navigation"] {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        nav[role="navigation"] svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        nav[role="navigation"] .hidden {
+            display: none !important;
+        }
+        @media (min-width: 640px) {
+            nav[role="navigation"] .sm\:flex-1 {
+                flex: 1 1 0% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+            }
+            nav[role="navigation"] .sm\:hidden {
+                display: none !important;
+            }
+            nav[role="navigation"] .hidden {
+                display: flex !important;
+            }
+        }
+        nav[role="navigation"] .relative.z-0 {
+            display: inline-flex;
+            border-radius: 0.375rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        nav[role="navigation"] .relative.z-0 a,
+        nav[role="navigation"] .relative.z-0 span[aria-current="page"] > span,
+        nav[role="navigation"] .relative.z-0 span[disabled] > span {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid #d1d5db;
+            background-color: #fff;
+            color: #374151;
+            text-decoration: none;
+            margin-left: -1px;
+        }
+        nav[role="navigation"] .relative.z-0 a:first-child,
+        nav[role="navigation"] .relative.z-0 span:first-child > span {
+            border-top-left-radius: 0.375rem;
+            border-bottom-left-radius: 0.375rem;
+        }
+        nav[role="navigation"] .relative.z-0 a:last-child,
+        nav[role="navigation"] .relative.z-0 span:last-child > span {
+            border-top-right-radius: 0.375rem;
+            border-bottom-right-radius: 0.375rem;
+        }
+        nav[role="navigation"] .relative.z-0 a:hover {
+            background-color: #f9fafb;
+            color: #111827;
+        }
+        nav[role="navigation"] .relative.z-0 span[aria-current="page"] > span {
+            background-color: #1e4620;
+            color: #fff;
+            border-color: #1e4620;
+            z-index: 10;
+        }
+        nav[role="navigation"] p.text-sm {
+            margin-bottom: 0;
+            color: #4b5563;
+            font-size: 0.875rem;
+        }
+        nav[role="navigation"] p.text-sm span {
+            font-weight: 600;
+        }
     </style>
 
     @yield('styles')
@@ -287,7 +366,7 @@
 
 
                             <!-- User Dropdown -->
-                            <div class="dropdown">
+                            <div class="dropdown ms-auto">
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="text-decoration-none">
                                     <div class="user-menu d-flex align-items-center gap-2">
                                         <div class="text-end d-none d-md-block">
