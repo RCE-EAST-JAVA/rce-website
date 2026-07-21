@@ -118,8 +118,7 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 md:pt-52 md:pb-48 flex flex-col justify-center min-h-screen"
             :style="'transform: translateY(' + (scrollY * -0.08) + 'px)'">
             <span data-aos="fade-up"
-                class="text-accent-orange font-bold text-sm tracking-widest uppercase mb-4 block">Regional Centre of
-                Expertise - East Java</span>
+                class="text-accent-orange font-bold text-sm tracking-widest uppercase mb-4 block">Regional Centre of Expertise (RCE) on Education for Sustainable Development (ESD)</span>
             <h1 data-aos="fade-up" data-aos-delay="50" class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
                 RCE <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500">EAST JAVA</span>
