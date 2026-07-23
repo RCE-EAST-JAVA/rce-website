@@ -43,12 +43,12 @@ class AuthenticatedSessionController extends Controller
         ]);
 
         if ($user && strtolower($user->role) === 'admin') {
-            \Illuminate\Support\Facades\Log::info('REDIRECTING TO ADMIN DASHBOARD');
-            return redirect()->route('admin.dashboard');
+            \Illuminate\Support\Facades\Log::info('REDIRECTING TO /admin RELATIVE');
+            return redirect('/admin');
         }
 
-        \Illuminate\Support\Facades\Log::info('REDIRECTING TO PORTAL PROFILE');
-        return redirect()->route('portal.profile');
+        \Illuminate\Support\Facades\Log::info('REDIRECTING TO /portal/profile RELATIVE');
+        return redirect('/portal/profile');
     }
 
     /**
