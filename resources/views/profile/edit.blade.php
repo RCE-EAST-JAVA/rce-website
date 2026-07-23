@@ -5,6 +5,22 @@
 
 @section('content')
 <div class="row">
+    @if(session('info'))
+        <div class="col-12 mb-3">
+            <div class="alert alert-info d-flex align-items-center gap-2">
+                <i class="bi bi-info-circle-fill fs-5"></i>
+                <span>{{ session('info') }}</span>
+            </div>
+        </div>
+    @endif
+    @if(session('status') === 'profile-updated')
+        <div class="col-12 mb-3">
+            <div class="alert alert-success d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill fs-5"></i>
+                <span>Informasi profil & konfigurasi Webmail berhasil diperbarui!</span>
+            </div>
+        </div>
+    @endif
     <!-- Card 1: Informasi Profil -->
     <div class="col-md-6 col-12 mb-4">
         <div class="card">
@@ -47,11 +63,35 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="email" class="form-label">Email Address</label>
+                        <label for="email" class="form-label">Email Address (Portal)</label>
                         <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}" required autocomplete="username">
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    <hr class="my-4">
+                    <h5 class="fw-bold text-dark mb-1 d-flex align-items-center gap-2">
+                        <i class="bi bi-envelope-at-fill text-danger"></i>
+                        <span>Konfigurasi Webmail Direct Login</span>
+                    </h5>
+                    <p class="text-muted text-xs mb-3">Setup kredensial email resmi RCE (mail.rce-eastjava.org) agar dapat langsung login otomatis 1-klik tanpa ketik password lagi.</p>
+
+                    <div class="mb-3">
+                        <label for="webmail_username" class="form-label">Email Webmail</label>
+                        <input type="email" id="webmail_username" name="webmail_username" class="form-control @error('webmail_username') is-invalid @enderror" value="{{ old('webmail_username', $user->webmail_username ?? $user->email) }}" placeholder="nama@rce-eastjava.org">
+                        @error('webmail_username')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="webmail_password" class="form-label">Password Webmail</label>
+                        <input type="password" id="webmail_password" name="webmail_password" class="form-control @error('webmail_password') is-invalid @enderror" placeholder="{{ $user->webmail_password ? '•••••••• (Tersimpan - Kosongkan jika tidak diubah)' : 'Masukkan Password Webmail' }}">
+                        @error('webmail_password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <span class="text-muted text-xs d-block mt-1"><i class="bi bi-shield-lock-fill text-success"></i> Password tersimpan terenkripsi aman (AES-256-GCM).</span>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Changes</button>

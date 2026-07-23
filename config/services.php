@@ -36,7 +36,7 @@ return [
     ],
 
     'cpanel' => [
-        'host' => env('CPANEL_HOST', 'mail.rce-eastjava.com'),
+        'host' => env('CPANEL_HOST', 'mail.rce-eastjava.org'),
         'username' => env('CPANEL_USERNAME'),
         'api_token' => env('CPANEL_API_TOKEN'),
         'port' => env('CPANEL_PORT', '2083'),

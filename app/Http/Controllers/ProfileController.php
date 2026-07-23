@@ -29,11 +29,16 @@ class ProfileController extends Controller
         $user = $request->user();
         $validated = $request->validated();
         
-        // Simpan data selain avatar
+        // Simpan data profil
         $user->fill([
             'name' => $validated['name'],
             'email' => $validated['email'],
+            'webmail_username' => $request->input('webmail_username'),
         ]);
+
+        if ($request->filled('webmail_password')) {
+            $user->webmail_password = $request->input('webmail_password');
+        }
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;

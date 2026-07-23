@@ -333,7 +333,22 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-title">Akun</li>
+                        <li class="sidebar-item">
+                            <a href="https://bimbingan.rce-eastjava.org/admin" target="_blank" rel="noopener noreferrer" class="sidebar-link">
+                                <i class="bi bi-mortarboard-fill text-warning"></i>
+                                <span>Sistem Bimbingan</span>
+                                <i class="bi bi-box-arrow-up-right ms-auto font-size-xs opacity-50" style="font-size: 0.75rem;"></i>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-title">Pengaturan & Akun</li>
+
+                        <li class="sidebar-item {{ Request::is('admin/users*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.users.index') }}" class="sidebar-link">
+                                <i class="bi bi-shield-lock-fill text-primary"></i>
+                                <span>Kelola Pengguna (RBAC)</span>
+                            </a>
+                        </li>
 
                         <li class="sidebar-item">
                             <form method="POST" action="{{ route('logout') }}" id="logout-form" class="d-none">

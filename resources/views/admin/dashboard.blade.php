@@ -106,7 +106,7 @@
                     </div>
                     <div>
                         <h6 class="font-bold mb-0" style="font-size: 0.95rem;">Webmail Access</h6>
-                        <small class="text-muted" style="font-size: 0.75rem;">mail.rce-eastjava.com</small>
+                        <small class="text-muted" style="font-size: 0.75rem;">mail.rce-eastjava.org</small>
                     </div>
                 </div>
                 <p class="text-muted" style="font-size: 0.825rem; line-height: 1.4;">Akses cepat layanan email resmi RCE East Java.</p>
@@ -114,6 +114,26 @@
                     <i class="bi bi-envelope-at"></i>
                     <span>Buka Webmail</span>
                     <i class="bi bi-box-arrow-up-right ms-auto"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body py-4 px-4">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="stats-icon yellow me-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: rgba(255, 193, 7, 0.18); border-radius: 0.75rem;">
+                        <i class="bi bi-mortarboard-fill text-warning fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="font-bold mb-0" style="font-size: 0.95rem;">Sistem Bimbingan</h6>
+                        <small class="text-muted" style="font-size: 0.75rem;">bimbingan.rce-eastjava.org</small>
+                    </div>
+                </div>
+                <p class="text-muted" style="font-size: 0.825rem; line-height: 1.4;">Portal bimbingan dosen, admin, dan konfirmasi mahasiswa.</p>
+                <a href="https://bimbingan.rce-eastjava.org/admin" target="_blank" rel="noopener noreferrer" class="btn btn-warning text-dark font-bold w-100 d-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                    <span>Portal Bimbingan</span>
+                    <i class="bi bi-chevron-right ms-auto"></i>
                 </a>
             </div>
         </div>

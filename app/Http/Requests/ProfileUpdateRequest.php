@@ -27,6 +27,8 @@ class ProfileUpdateRequest extends FormRequest
                 Rule::unique(User::class)->ignore($this->user()->id),
             ],
             'avatar' => ['nullable', 'image', 'max:5120'],
+            'webmail_username' => ['nullable', 'string', 'max:255'],
+            'webmail_password' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

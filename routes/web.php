@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminStaffController;
 use App\Http\Controllers\Admin\AdminHeroController;
 use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminPartnerController;
+use App\Http\Controllers\Admin\AdminUserController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Project;
 use App\Models\Article;
@@ -57,6 +58,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('articles/{article}/toggle-pin', [AdminArticleController::class, 'togglePin'])->name('admin.articles.toggle-pin');
     Route::post('projects/{project}/toggle-pin', [AdminProjectController::class, 'togglePin'])->name('admin.projects.toggle-pin');
     Route::resource('partners', AdminPartnerController::class)->names('admin.partners')->except(['show']);
+    Route::resource('users', AdminUserController::class)->names('admin.users');
 });
 
 // Route untuk sitemap XML

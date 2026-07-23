@@ -122,14 +122,14 @@
                 <form method="POST" action="{{ route('login') }}" class="space-y-5">
                     @csrf
 
-                    <!-- Email Address -->
+                    <!-- Username or Email Address -->
                     <div>
-                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
+                        <label for="login" class="block text-sm font-semibold text-gray-700 mb-1.5">Username / Email</label>
                         <div class="relative">
-                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-accent-orange text-sm @error('email') border-red-500 focus:ring-red-500 @enderror" placeholder="name@rce-eastjava.org">
-                            <i class="bi bi-envelope-fill absolute left-3.5 top-3.5 text-gray-400"></i>
+                            <input type="text" id="login" name="login" value="{{ old('login') }}" required autofocus autocomplete="username" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-accent-orange text-sm @error('login') border-red-500 focus:ring-red-500 @enderror" placeholder="Username atau email">
+                            <i class="bi bi-person-fill absolute left-3.5 top-3.5 text-gray-400"></i>
                         </div>
-                        @error('email')
+                        @error('login')
                             <p class="mt-1.5 text-xs text-red-600 font-medium">{{ $message }}</p>
                         @enderror
                     </div>
