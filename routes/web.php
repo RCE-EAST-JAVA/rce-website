@@ -18,6 +18,29 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Project;
 use App\Models\Article;
 
+// Temporary Debug Routes
+Route::get('/do-login', function () {
+    auth()->loginUsingId(1);
+    session()->put('debug_test', 'session_saved_ok');
+    return response('<h2>Logged in User ID 1</h2><p><a href="/debug-session">Click here to test session persistence</a></p>');
+});
+
+Route::get('/debug-session', function () {
+    return response()->json([
+        'auth_check' => auth()->check(),
+        'auth_user' => auth()->user(),
+        'session_id' => session()->getId(),
+        'debug_test' => session('debug_test'),
+        'cookies' => request()->cookie(),
+        'session_config' => [
+            'driver' => config('session.driver'),
+            'domain' => config('session.domain'),
+            'secure' => config('session.secure'),
+            'same_site' => config('session.same_site'),
+        ]
+    ]);
+});
+
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/proyek', [ProjectController::class, 'index'])->name('projects.index');
