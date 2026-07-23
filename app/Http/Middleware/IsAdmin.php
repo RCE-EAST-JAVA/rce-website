@@ -26,7 +26,7 @@ class IsAdmin
             'session_id' => $request->session()->getId(),
         ]);
 
-        if ($check && strtolower($user->role) === 'admin') {
+        if ($check && $user->hasAdminAccess()) {
             return $next($request);
         }
 

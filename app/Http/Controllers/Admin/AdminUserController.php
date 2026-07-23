@@ -11,6 +11,19 @@ use Illuminate\Validation\Rule;
 class AdminUserController extends Controller
 {
     /**
+     * Module list for permission matrix
+     */
+    public static array $modules = [
+        'projects' => 'Program Portfolio',
+        'articles' => 'Publikasi & Artikel',
+        'staff' => 'Direktori Staf',
+        'partners' => 'Mitra & Kolaborator',
+        'hero' => 'Foto Hero Banner',
+        'users' => 'Manajemen Pengguna',
+        'bimbingan' => 'Direct Portal Bimbingan',
+    ];
+
+    /**
      * Display a listing of the users.
      */
     public function index(Request $request)
@@ -40,7 +53,8 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $modules = self::$modules;
+        return view('admin.users.create', compact('modules'));
     }
 
     /**
@@ -53,8 +67,13 @@ class AdminUserController extends Controller
             'username' => ['required', 'string', 'alpha_dash', 'max:255', 'unique:users,username'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8'],
-            'role' => ['required', 'string', Rule::in(['admin', 'user'])],
+            'role' => ['required', 'string', Rule::in(['admin', 'staff', 'dosen', 'user', 'custom'])],
+            'permissions' => ['nullable', 'array'],
+            'sync_bimbingan' => ['nullable', 'boolean'],
         ]);
+
+        $permissions = $request->input('permissions', []);
+        $syncBimbingan = $request->boolean('sync_bimbingan');
 
         User::create([
             'name' => $validated['name'],
@@ -62,9 +81,12 @@ class AdminUserController extends Controller
             'email' => strtolower($validated['email']),
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
+            'permissions' => $permissions,
+            'sync_bimbingan' => $syncBimbingan,
+            'email_verified_at' => now(),
         ]);
 
-        return redirect()->route('admin.users.index')->with('success', 'Pengguna baru berhasil ditambahkan.');
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna baru & matriks hak akses berhasil disimpan.');
     }
 
     /**
@@ -72,7 +94,8 @@ class AdminUserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $modules = self::$modules;
+        return view('admin.users.edit', compact('user', 'modules'));
     }
 
     /**
@@ -85,13 +108,17 @@ class AdminUserController extends Controller
             'username' => ['required', 'string', 'alpha_dash', 'max:255', Rule::unique('users', 'username')->ignore($user->id)],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
             'password' => ['nullable', 'string', 'min:8'],
-            'role' => ['required', 'string', Rule::in(['admin', 'user'])],
+            'role' => ['required', 'string', Rule::in(['admin', 'staff', 'dosen', 'user', 'custom'])],
+            'permissions' => ['nullable', 'array'],
+            'sync_bimbingan' => ['nullable', 'boolean'],
         ]);
 
         $user->name = $validated['name'];
         $user->username = strtolower($validated['username']);
         $user->email = strtolower($validated['email']);
         $user->role = $validated['role'];
+        $user->permissions = $request->input('permissions', []);
+        $user->sync_bimbingan = $request->boolean('sync_bimbingan');
 
         if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
@@ -99,7 +126,7 @@ class AdminUserController extends Controller
 
         $user->save();
 
-        return redirect()->route('admin.users.index')->with('success', 'Data pengguna berhasil diperbarui.');
+        return redirect()->route('admin.users.index')->with('success', 'Data pengguna & hak akses berhasil diperbarui.');
     }
 
     /**

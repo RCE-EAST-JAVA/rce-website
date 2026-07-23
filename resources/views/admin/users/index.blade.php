@@ -23,8 +23,8 @@
         <div class="card">
             <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-3">
                 <div>
-                    <h4 class="card-title mb-1">Daftar Pengguna & Peran</h4>
-                    <p class="text-muted text-sm mb-0">Kelola anggota RCE, hak akses admin, dan kredensial login.</p>
+                    <h4 class="card-title mb-1">Daftar Pengguna & Hak Akses Modular</h4>
+                    <p class="text-muted text-sm mb-0">Kelola akun pengguna, kredensial login, dan matriks hak akses CRUD.</p>
                 </div>
                 <a href="{{ route('admin.users.create') }}" class="btn btn-primary d-inline-flex align-items-center gap-2">
                     <i class="bi bi-person-plus-fill"></i>
@@ -44,7 +44,9 @@
                     <div class="col-12 col-md-4 col-lg-3">
                         <select name="role" class="form-select" onchange="this.form.submit()">
                             <option value="">-- Semua Role --</option>
-                            <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin (Superuser)</option>
+                            <option value="staff" {{ request('role') === 'staff' ? 'selected' : '' }}>Staf RCE</option>
+                            <option value="dosen" {{ request('role') === 'dosen' ? 'selected' : '' }}>Dosen / Pengajar</option>
                             <option value="user" {{ request('role') === 'user' ? 'selected' : '' }}>User (Anggota)</option>
                         </select>
                     </div>
@@ -61,6 +63,7 @@
                                 <th>Nama & Username</th>
                                 <th>Email</th>
                                 <th>Role / Hak Akses</th>
+                                <th>Status Bimbingan</th>
                                 <th>Tanggal Daftar</th>
                                 <th class="text-end">Aksi</th>
                             </tr>
@@ -88,14 +91,25 @@
                                     <td>
                                         @if($user->role === 'admin')
                                             <span class="badge bg-danger"><i class="bi bi-shield-lock-fill me-1"></i> Administrator</span>
+                                        @elseif($user->role === 'staff')
+                                            <span class="badge bg-info text-dark"><i class="bi bi-person-workspace me-1"></i> Staf RCE</span>
+                                        @elseif($user->role === 'dosen')
+                                            <span class="badge bg-warning text-dark"><i class="bi bi-mortarboard-fill me-1"></i> Dosen</span>
                                         @else
                                             <span class="badge bg-success"><i class="bi bi-person-fill me-1"></i> Anggota RCE</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($user->sync_bimbingan)
+                                            <span class="badge bg-light-primary text-primary"><i class="bi bi-check-circle-fill me-1"></i> Tersinkron</span>
+                                        @else
+                                            <span class="badge bg-light text-muted">Non-aktif</span>
                                         @endif
                                     </td>
                                     <td>{{ $user->created_at ? $user->created_at->format('d M Y') : '-' }}</td>
                                     <td class="text-end">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-outline-primary" title="Edit Pengguna">
+                                            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-outline-primary" title="Edit Pengguna & Hak Akses">
                                                 <i class="bi bi-pencil-fill"></i> Edit
                                             </a>
                                             @if(auth()->id() !== $user->id)
@@ -112,7 +126,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center py-4 text-muted">
+                                    <td colspan="7" class="text-center py-4 text-muted">
                                         <i class="bi bi-people fs-2 d-block mb-2"></i>
                                         Tidak ada data pengguna ditemukan.
                                     </td>

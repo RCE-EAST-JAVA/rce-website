@@ -19,6 +19,18 @@
         body, .sidebar-wrapper, .menu, h1, h2, h3, h4, h5, h6, .btn, .form-control, .form-select {
             font-family: 'Outfit', sans-serif !important;
         }
+
+        /* Fix icon vertical alignment */
+        .bi, i[class*="bi-"], i[class^="bi-"] {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            line-height: 1 !important;
+            vertical-align: middle !important;
+        }
+        .btn i, .sidebar-link i {
+            margin-top: -1px;
+        }
     </style>
     @yield('styles')
 </head>
