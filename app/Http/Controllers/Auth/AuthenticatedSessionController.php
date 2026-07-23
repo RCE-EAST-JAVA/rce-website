@@ -26,15 +26,28 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        \Illuminate\Support\Facades\Log::info('LOGIN ATTEMPT STARTED', [
+            'login' => $request->input('login') ?? $request->input('email') ?? $request->input('username'),
+        ]);
+
         $request->authenticate();
 
         $request->session()->regenerate();
 
         $user = auth()->user();
-        if ($user && $user->role === 'admin') {
+        \Illuminate\Support\Facades\Log::info('LOGIN AUTHENTICATED SUCCESSFULLY', [
+            'user_id' => $user ? $user->id : null,
+            'email' => $user ? $user->email : null,
+            'role' => $user ? $user->role : null,
+            'session_id' => $request->session()->getId(),
+        ]);
+
+        if ($user && strtolower($user->role) === 'admin') {
+            \Illuminate\Support\Facades\Log::info('REDIRECTING TO ADMIN DASHBOARD');
             return redirect()->route('admin.dashboard');
         }
 
+        \Illuminate\Support\Facades\Log::info('REDIRECTING TO PORTAL PROFILE');
         return redirect()->route('portal.profile');
     }
 
