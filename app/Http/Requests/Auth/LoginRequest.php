@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -28,7 +29,9 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login' => ['required', 'string'],
+            'login' => ['nullable', 'string'],
+            'email' => ['nullable', 'string'],
+            'username' => ['nullable', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -42,15 +45,34 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $login = $this->input('login');
-        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $login = trim($this->input('login') ?? $this->input('email') ?? $this->input('username') ?? '');
+        $password = $this->input('password');
+        $remember = $this->boolean('remember');
 
-        $credentials = [
-            $fieldType => $login,
-            'password' => $this->input('password'),
-        ];
+        if (empty($login)) {
+            throw ValidationException::withMessages([
+                'login' => 'Username atau email wajib diisi.',
+            ]);
+        }
 
-        if (! Auth::attempt($credentials, $this->boolean('remember'))) {
+        $attemptSuccess = false;
+
+        // 1. If input is formatted as email, try matching by email
+        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            $attemptSuccess = Auth::attempt(['email' => $login, 'password' => $password], $remember);
+        }
+
+        // 2. Try matching by username if username column exists
+        if (!$attemptSuccess && Schema::hasColumn('users', 'username')) {
+            $attemptSuccess = Auth::attempt(['username' => $login, 'password' => $password], $remember);
+        }
+
+        // 3. Fallback try matching by email even if not standard format
+        if (!$attemptSuccess) {
+            $attemptSuccess = Auth::attempt(['email' => $login, 'password' => $password], $remember);
+        }
+
+        if (!$attemptSuccess) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -89,6 +111,7 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('login')).'|'.$this->ip());
+        $login = trim($this->input('login') ?? $this->input('email') ?? $this->input('username') ?? '');
+        return Str::transliterate(Str::lower($login).'|'.$this->ip());
     }
 }
