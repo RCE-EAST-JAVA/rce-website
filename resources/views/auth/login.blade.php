@@ -119,6 +119,18 @@
                     </div>
                 @endif
 
+                <!-- Validation Errors Alert -->
+                @if ($errors->any())
+                    <div class="mb-4 bg-red-50 text-red-700 text-sm p-4 rounded-xl border border-red-200">
+                        <div class="font-bold text-red-800 mb-1">Gagal Masuk:</div>
+                        <ul class="list-disc list-inside space-y-1">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form method="POST" action="{{ route('login') }}" class="space-y-5">
                     @csrf
 
