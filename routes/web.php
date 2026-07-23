@@ -38,7 +38,7 @@ Route::get('/dashboard', function () {
         return redirect()->route('admin.dashboard');
     }
     return redirect()->route('portal.profile');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 // Portal User (Harus Login)
 Route::middleware('auth')->prefix('portal')->group(function () {

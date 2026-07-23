@@ -28,6 +28,9 @@ return new class extends Migration
             }
             DB::table('users')->where('id', $user->id)->update(['username' => $username]);
         }
+
+        // Auto-verify existing users to avoid email verification redirect loops
+        DB::table('users')->whereNull('email_verified_at')->update(['email_verified_at' => now()]);
     }
 
     /**
