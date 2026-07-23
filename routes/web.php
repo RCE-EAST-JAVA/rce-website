@@ -18,44 +18,6 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Project;
 use App\Models\Article;
 
-// Temporary Debug Routes
-Route::get('/do-login', function () {
-    try {
-        auth()->loginUsingId(1);
-        session()->put('debug_test', 'session_saved_ok');
-        session()->save();
-        return response('<h2>Logged in User ID 1 (Session Saved)</h2><p><a href="/debug-session">Click here to test session persistence</a></p>');
-    } catch (\Throwable $e) {
-        return response('<h2 style="color:red">Session Save Failed: ' . htmlspecialchars($e->getMessage()) . '</h2>');
-    }
-});
-
-Route::get('/debug-session', function () {
-    $sessionFile = storage_path('framework/sessions/' . session()->getId());
-    $fileExists = file_exists($sessionFile);
-    $rawContent = $fileExists ? @file_get_contents($sessionFile) : null;
-
-    return response()->json([
-        'auth_check' => auth()->check(),
-        'auth_user' => auth()->user(),
-        'session_id' => session()->getId(),
-        'debug_test' => session('debug_test'),
-        'session_file_exists' => $fileExists,
-        'session_file_size' => $fileExists ? filesize($sessionFile) : 0,
-        'session_raw_content' => $rawContent,
-        'session_all' => session()->all(),
-        'app_key_set' => !empty(config('app.key')),
-        'session_config' => [
-            'driver' => config('session.driver'),
-            'encrypt' => config('session.encrypt'),
-            'domain' => config('session.domain'),
-            'secure' => config('session.secure'),
-            'same_site' => config('session.same_site'),
-            'cookie' => config('session.cookie'),
-        ]
-    ]);
-});
-
 // Halaman Publik
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/proyek', [ProjectController::class, 'index'])->name('projects.index');

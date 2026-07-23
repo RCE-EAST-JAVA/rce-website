@@ -195,7 +195,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             @foreach($related as $rel)
-            <a href="{{ route('projects.show', $rel->slug) }}"
+            <a href="{{ route('projects.show', $rel) }}"
                class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col">
                 <div class="relative h-44 bg-zinc-200 overflow-hidden">
                     @if($rel->display_image)

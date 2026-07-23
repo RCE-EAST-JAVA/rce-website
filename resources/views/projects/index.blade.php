@@ -60,7 +60,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-24">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         @forelse($projects as $project)
-            <a href="{{ route('projects.show', $project->slug) }}"
+            <a href="{{ route('projects.show', $project) }}"
                class="group bg-white rounded-3xl overflow-hidden border border-zinc-100 hover:border-accent-orange/30 shadow-sm hover:shadow-md transition duration-200 flex flex-col justify-between">
                 <div>
                     <!-- Project Image -->

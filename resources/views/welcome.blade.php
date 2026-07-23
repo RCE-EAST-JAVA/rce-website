@@ -411,7 +411,7 @@
                 {{-- Row 1: featured + 2 kecil di kanan --}}
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
                     {{-- Featured --}}
-                    <a data-aos="fade-up" href="{{ route('projects.show', $featured->slug) }}"
+                    <a data-aos="fade-up" href="{{ route('projects.show', $featured) }}"
                         class="group lg:col-span-3 bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 hover:border-accent-orange/30 shadow-sm hover:shadow-md transition duration-200 flex flex-col">
                         <div class="relative h-72 bg-zinc-200 overflow-hidden">
                             @if ($featured->display_image)
@@ -452,7 +452,7 @@
                     {{-- 3 kecil di kanan --}}
                     <div data-aos="fade-up" data-aos-delay="50" class="lg:col-span-2 flex flex-col gap-4">
                         @foreach ($side as $i => $project)
-                            <a href="{{ route('projects.show', $project->slug) }}"
+                            <a href="{{ route('projects.show', $project) }}"
                                 class="group bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-100 hover:border-accent-orange/30 shadow-sm hover:shadow-md transition duration-200 flex gap-4 p-4 flex-1">
                                 <div class="w-28 flex-shrink-0 rounded-2xl overflow-hidden bg-zinc-200 self-stretch">
                                     @if ($project->display_image)
