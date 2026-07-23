@@ -20,9 +20,14 @@ use App\Models\Article;
 
 // Temporary Debug Routes
 Route::get('/do-login', function () {
-    auth()->loginUsingId(1);
-    session()->put('debug_test', 'session_saved_ok');
-    return response('<h2>Logged in User ID 1</h2><p><a href="/debug-session">Click here to test session persistence</a></p>');
+    try {
+        auth()->loginUsingId(1);
+        session()->put('debug_test', 'session_saved_ok');
+        session()->save();
+        return response('<h2>Logged in User ID 1 (Session Saved)</h2><p><a href="/debug-session">Click here to test session persistence</a></p>');
+    } catch (\Throwable $e) {
+        return response('<h2 style="color:red">Session Save Failed: ' . htmlspecialchars($e->getMessage()) . '</h2>');
+    }
 });
 
 Route::get('/debug-session', function () {
