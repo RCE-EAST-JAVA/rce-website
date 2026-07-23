@@ -75,7 +75,9 @@
                         </ul>
                         <p class="text-muted mt-4 mb-3">Use the left menu to navigate to content management features or access official mail directly:</p>
                         <a href="{{ route('webmail.sso') }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
-                            <i class="bi bi-envelope-at-fill"></i> Access Mail RCE East Java <i class="bi bi-box-arrow-up-right ms-1"></i>
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>Access Mail RCE East Java</span>
+                            <i class="bi bi-box-arrow-up-right font-size-xs opacity-75" style="font-size: 0.8rem;"></i>
                         </a>
                     </div>
                 </div>
@@ -110,10 +112,12 @@
                     </div>
                 </div>
                 <p class="text-muted" style="font-size: 0.825rem; line-height: 1.4;">Akses cepat layanan email resmi RCE East Java.</p>
-                <a href="{{ route('webmail.sso') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
-                    <i class="bi bi-envelope-at"></i>
-                    <span>Buka Webmail</span>
-                    <i class="bi bi-box-arrow-up-right ms-auto"></i>
+                <a href="{{ route('webmail.sso') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary font-bold w-100 d-flex align-items-center justify-content-between px-3 py-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>Buka Webmail</span>
+                    </div>
+                    <i class="bi bi-box-arrow-up-right opacity-75" style="font-size: 0.85rem;"></i>
                 </a>
             </div>
         </div>
@@ -130,10 +134,12 @@
                     </div>
                 </div>
                 <p class="text-muted" style="font-size: 0.825rem; line-height: 1.4;">Portal bimbingan dosen, admin, dan konfirmasi mahasiswa.</p>
-                <a href="https://bimbingan.rce-eastjava.org/admin" target="_blank" rel="noopener noreferrer" class="btn btn-warning text-dark font-bold w-100 d-flex align-items-center justify-content-center gap-2">
-                    <i class="bi bi-box-arrow-up-right"></i>
-                    <span>Portal Bimbingan</span>
-                    <i class="bi bi-chevron-right ms-auto"></i>
+                <a href="https://bimbingan.rce-eastjava.org/admin/dashboard" target="_blank" rel="noopener noreferrer" class="btn btn-warning text-dark font-bold w-100 d-flex align-items-center justify-content-between px-3 py-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-mortarboard-fill"></i>
+                        <span>Portal Bimbingan</span>
+                    </div>
+                    <i class="bi bi-box-arrow-up-right opacity-75" style="font-size: 0.85rem;"></i>
                 </a>
             </div>
         </div>

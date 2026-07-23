@@ -288,7 +288,7 @@
 
                         <li class="sidebar-item">
                             <a href="{{ route('webmail.sso') }}" target="_blank" rel="noopener noreferrer" class="sidebar-link">
-                                <i class="bi bi-envelope-at-fill text-danger"></i>
+                                <i class="bi bi-envelope-fill text-danger"></i>
                                 <span>Webmail</span>
                                 <i class="bi bi-box-arrow-up-right ms-auto font-size-xs opacity-50" style="font-size: 0.75rem;"></i>
                             </a>
@@ -334,7 +334,7 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="https://bimbingan.rce-eastjava.org/admin" target="_blank" rel="noopener noreferrer" class="sidebar-link">
+                            <a href="https://bimbingan.rce-eastjava.org/admin/dashboard" target="_blank" rel="noopener noreferrer" class="sidebar-link">
                                 <i class="bi bi-mortarboard-fill text-warning"></i>
                                 <span>Sistem Bimbingan</span>
                                 <i class="bi bi-box-arrow-up-right ms-auto font-size-xs opacity-50" style="font-size: 0.75rem;"></i>
