@@ -6,6 +6,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\SdgController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebmailController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminStaffController;
@@ -26,6 +27,9 @@ Route::get('/staf', [StaffController::class, 'index'])->name('staff.index');
 Route::get('/staf/{staff}', [StaffController::class, 'show'])->name('staff.show');
 Route::get('/sdg', [SdgController::class, 'index'])->name('sdg.index');
 Route::get('/sdg/{number}', [SdgController::class, 'show'])->name('sdg.show')->where('number', '[0-9]+');
+
+// Direct Login SSO Webmail
+Route::get('/webmail/redirect', [WebmailController::class, 'sso'])->name('webmail.sso')->middleware('auth');
 
 // Redirect Dashboard Dinamis Berdasarkan Role
 Route::get('/dashboard', function () {

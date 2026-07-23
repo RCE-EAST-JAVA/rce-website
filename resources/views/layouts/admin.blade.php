@@ -286,6 +286,14 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item">
+                            <a href="{{ route('webmail.sso') }}" target="_blank" rel="noopener noreferrer" class="sidebar-link">
+                                <i class="bi bi-envelope-at-fill text-danger"></i>
+                                <span>Webmail</span>
+                                <i class="bi bi-box-arrow-up-right ms-auto font-size-xs opacity-50" style="font-size: 0.75rem;"></i>
+                            </a>
+                        </li>
+
                         <li class="sidebar-title">Konten</li>
 
                         <li class="sidebar-item {{ Request::is('admin/projects*') ? 'active' : '' }}">

@@ -73,7 +73,10 @@
                             <li>Managing profiles of academics, researchers, and practitioners in the <strong>People Directory</strong>.</li>
                             <li>Monitoring registered users in the portal.</li>
                         </ul>
-                        <p class="text-muted mt-4">Use the left menu to navigate to content management features.</p>
+                        <p class="text-muted mt-4 mb-3">Use the left menu to navigate to content management features or access official mail directly:</p>
+                        <a href="{{ route('webmail.sso') }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary d-inline-flex align-items-center gap-2">
+                            <i class="bi bi-envelope-at-fill"></i> Access Mail RCE East Java <i class="bi bi-box-arrow-up-right ms-1"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -92,6 +95,26 @@
                         <h6 class="text-muted mb-0">{{ auth()->user()->email }}</h6>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body py-4 px-4">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="stats-icon red me-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; background: rgba(220, 53, 69, 0.15); border-radius: 0.75rem;">
+                        <i class="bi bi-envelope-paper-fill text-danger fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="font-bold mb-0" style="font-size: 0.95rem;">Webmail Access</h6>
+                        <small class="text-muted" style="font-size: 0.75rem;">mail.rce-eastjava.com</small>
+                    </div>
+                </div>
+                <p class="text-muted" style="font-size: 0.825rem; line-height: 1.4;">Akses cepat layanan email resmi RCE East Java.</p>
+                <a href="{{ route('webmail.sso') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2">
+                    <i class="bi bi-envelope-at"></i>
+                    <span>Buka Webmail</span>
+                    <i class="bi bi-box-arrow-up-right ms-auto"></i>
+                </a>
             </div>
         </div>
     </div>
