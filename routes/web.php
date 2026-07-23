@@ -33,6 +33,7 @@ Route::get('/do-login', function () {
 Route::get('/debug-session', function () {
     $sessionFile = storage_path('framework/sessions/' . session()->getId());
     $fileExists = file_exists($sessionFile);
+    $rawContent = $fileExists ? @file_get_contents($sessionFile) : null;
 
     return response()->json([
         'auth_check' => auth()->check(),
@@ -40,12 +41,13 @@ Route::get('/debug-session', function () {
         'session_id' => session()->getId(),
         'debug_test' => session('debug_test'),
         'session_file_exists' => $fileExists,
-        'session_file_path' => $sessionFile,
         'session_file_size' => $fileExists ? filesize($sessionFile) : 0,
-        'cookies' => request()->cookie(),
+        'session_raw_content' => $rawContent,
+        'session_all' => session()->all(),
         'app_key_set' => !empty(config('app.key')),
         'session_config' => [
             'driver' => config('session.driver'),
+            'encrypt' => config('session.encrypt'),
             'domain' => config('session.domain'),
             'secure' => config('session.secure'),
             'same_site' => config('session.same_site'),
