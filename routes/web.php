@@ -7,6 +7,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\SdgController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebmailController;
+use App\Http\Controllers\BimbinganSsoController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProjectController;
 use App\Http\Controllers\Admin\AdminStaffController;
@@ -31,6 +32,9 @@ Route::get('/sdg/{number}', [SdgController::class, 'show'])->name('sdg.show')->w
 
 // Direct Login SSO Webmail
 Route::get('/webmail/redirect', [WebmailController::class, 'sso'])->name('webmail.sso')->middleware('auth');
+
+// Direct Login SSO Bimbingan
+Route::get('/bimbingan/redirect', [BimbinganSsoController::class, 'redirect'])->name('bimbingan.sso')->middleware('auth');
 
 // Redirect Dashboard Dinamis Berdasarkan Role
 Route::get('/dashboard', function () {

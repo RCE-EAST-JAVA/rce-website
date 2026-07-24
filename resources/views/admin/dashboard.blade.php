@@ -134,7 +134,7 @@
                     </div>
                 </div>
                 <p class="text-muted" style="font-size: 0.825rem; line-height: 1.4;">Portal bimbingan dosen, admin, dan konfirmasi mahasiswa.</p>
-                <a href="https://bimbingan.rce-eastjava.org/admin/dashboard" target="_blank" rel="noopener noreferrer" class="btn btn-warning text-dark font-bold w-100 d-flex align-items-center justify-content-between px-3 py-2">
+                <a href="{{ route('bimbingan.sso') }}" target="_blank" rel="noopener noreferrer" class="btn btn-warning text-dark font-bold w-100 d-flex align-items-center justify-content-between px-3 py-2">
                     <div class="d-flex align-items-center gap-2">
                         <i class="bi bi-mortarboard-fill"></i>
                         <span>Portal Bimbingan</span>

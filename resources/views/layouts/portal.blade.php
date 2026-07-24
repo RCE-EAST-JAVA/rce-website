@@ -101,7 +101,7 @@
                         </li>
                         
                         <li class="sidebar-item">
-                            <a href="https://bimbingan.rce-eastjava.org/admin/dashboard" target="_blank" rel="noopener noreferrer" class='sidebar-link'>
+                            <a href="{{ route('bimbingan.sso') }}" target="_blank" rel="noopener noreferrer" class='sidebar-link'>
                                 <i class="bi bi-mortarboard-fill text-warning"></i>
                                 <span>Sistem Bimbingan</span>
                                 <i class="bi bi-box-arrow-up-right ms-auto opacity-50" style="font-size: 0.75rem;"></i>
