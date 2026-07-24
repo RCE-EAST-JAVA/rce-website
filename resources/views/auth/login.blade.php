@@ -148,14 +148,7 @@
 
                     <!-- Password -->
                     <div>
-                        <div class="flex justify-between items-center mb-1.5">
-                            <label for="password" class="block text-sm font-semibold text-gray-700">Password</label>
-                            @if (Route::has('password.request'))
-                                <a class="text-xs text-accent-orange hover:underline font-semibold" href="{{ route('password.request') }}">
-                                    Forgot Password?
-                                </a>
-                            @endif
-                        </div>
+                        <label for="password" class="block text-sm font-semibold text-gray-700 mb-1.5">Password</label>
                         <div class="relative">
                             <input type="password" id="password" name="password" required autocomplete="current-password" class="w-full pl-10 pr-4 py-3 rounded-2xl border border-zinc-200 focus:outline-none focus:ring-2 focus:ring-accent-orange text-sm @error('password') border-red-500 focus:ring-red-500 @enderror" placeholder="••••••••">
                             <i class="bi bi-lock-fill absolute left-3.5 top-3.5 text-gray-400"></i>
