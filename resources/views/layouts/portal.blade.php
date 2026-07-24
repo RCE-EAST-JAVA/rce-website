@@ -251,17 +251,24 @@
                     </div>
                     
                     <section class="section">
-                        @if(session('status') === 'profile-updated')
+                        @if(session('success'))
                             <div class="alert alert-success alert-dismissible show fade">
-                                Informasi profil Anda berhasil diperbarui.
-                                <button type="button" class="btn-close" data-bs-alert="close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger alert-dismissible show fade">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
 
                         @if(session('status') === 'password-updated')
                             <div class="alert alert-success alert-dismissible show fade">
                                 Password Anda berhasil diperbarui.
-                                <button type="button" class="btn-close" data-bs-alert="close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
                         

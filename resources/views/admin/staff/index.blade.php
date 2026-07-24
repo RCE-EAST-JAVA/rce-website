@@ -7,9 +7,11 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="card-title">RCE East Java People Directory</h4>
+        @if(auth()->user()->hasPermission('staff', 'create'))
         <a href="{{ route('admin.staff.create') }}" class="btn btn-primary btn-sm">
             <i class="bi bi-plus-circle"></i> Add People
         </a>
+        @endif
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -22,7 +24,9 @@
                         <th>Category</th>
                         <th>Expertise</th>
                         <th>Contact</th>
+                        @if(auth()->user()->hasPermission('staff', 'edit') || auth()->user()->hasPermission('staff', 'delete'))
                         <th>Actions</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -58,11 +62,15 @@
                                 <a href="https://{{ $staff->linkedin }}" target="_blank" class="text-decoration-none text-info"><i class="bi bi-linkedin"></i></a>
                             @endif
                         </td>
+                        @if(auth()->user()->hasPermission('staff', 'edit') || auth()->user()->hasPermission('staff', 'delete'))
                         <td>
                             <div class="d-flex gap-2">
+                                @if(auth()->user()->hasPermission('staff', 'edit'))
                                 <a href="{{ route('admin.staff.edit', $staff->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
+                                @endif
+                                @if(auth()->user()->hasPermission('staff', 'delete'))
                                 <form action="{{ route('admin.staff.destroy', $staff->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this person?')">
                                     @csrf
                                     @method('DELETE')
@@ -70,8 +78,10 @@
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </form>
+                                @endif
                             </div>
                         </td>
+                        @endif
                     </tr>
                     @empty
                     <tr>

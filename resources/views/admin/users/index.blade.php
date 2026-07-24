@@ -21,10 +21,12 @@
                     <h4 class="card-title mb-1">Daftar Pengguna & Hak Akses Modular</h4>
                     <p class="text-muted text-sm mb-0">Kelola akun pengguna, kredensial login, dan matriks hak akses CRUD.</p>
                 </div>
+                @if(auth()->user()->hasPermission('users', 'create'))
                 <a href="{{ route('admin.users.create') }}" class="btn btn-primary d-inline-flex align-items-center gap-2">
                     <i class="bi bi-person-plus-fill"></i>
                     <span>Tambah Pengguna</span>
                 </a>
+                @endif
             </div>
 
             <div class="card-body">
@@ -60,7 +62,9 @@
                                 <th>Role / Hak Akses</th>
                                 <th>Status Bimbingan</th>
                                 <th>Tanggal Daftar</th>
+                                @if(auth()->user()->hasPermission('users', 'edit') || auth()->user()->hasPermission('users', 'delete'))
                                 <th class="text-end">Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -102,12 +106,15 @@
                                         @endif
                                     </td>
                                     <td>{{ $user->created_at ? $user->created_at->format('d M Y') : '-' }}</td>
+                                    @if(auth()->user()->hasPermission('users', 'edit') || auth()->user()->hasPermission('users', 'delete'))
                                     <td class="text-end">
                                         <div class="btn-group" role="group">
+                                            @if(auth()->user()->hasPermission('users', 'edit'))
                                             <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-outline-primary" title="Edit Pengguna & Hak Akses">
                                                 <i class="bi bi-pencil-fill"></i> Edit
                                             </a>
-                                            @if(auth()->id() !== $user->id)
+                                            @endif
+                                            @if(auth()->user()->hasPermission('users', 'delete') && auth()->id() !== $user->id)
                                                 <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna {{ $user->name }}?')">
                                                     @csrf
                                                     @method('DELETE')
@@ -118,6 +125,7 @@
                                             @endif
                                         </div>
                                     </td>
+                                    @endif
                                 </tr>
                             @empty
                                 <tr>

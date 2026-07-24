@@ -10,14 +10,16 @@
             <h4 class="card-title mb-0">Hero Slider Photos</h4>
             <small class="text-muted">Maximum 5 photos • {{ $heroPhotos->count() }}/5 used</small>
         </div>
-        @if($heroPhotos->count() < 5)
-            <a href="{{ route('admin.hero.create') }}" class="btn btn-primary btn-sm">
-                <i class="bi bi-plus-circle"></i> Add Photo
-            </a>
-        @else
-            <button class="btn btn-secondary btn-sm" disabled>
-                <i class="bi bi-slash-circle"></i> 5 Photo Limit Reached
-            </button>
+        @if(auth()->user()->hasPermission('hero', 'create'))
+            @if($heroPhotos->count() < 5)
+                <a href="{{ route('admin.hero.create') }}" class="btn btn-primary btn-sm">
+                    <i class="bi bi-plus-circle"></i> Add Photo
+                </a>
+            @else
+                <button class="btn btn-secondary btn-sm" disabled>
+                    <i class="bi bi-slash-circle"></i> 5 Photo Limit Reached
+                </button>
+            @endif
         @endif
     </div>
     <div class="card-body">
@@ -53,9 +55,11 @@
             <div class="text-center py-5 text-muted">
                 <i class="bi bi-images fs-1 d-block mb-3 opacity-25"></i>
                 <p class="mb-1">No hero photos yet.</p>
+                @if(auth()->user()->hasPermission('hero', 'create'))
                 <a href="{{ route('admin.hero.create') }}" class="btn btn-primary btn-sm mt-2">
                     <i class="bi bi-plus-circle"></i> Add First Photo
                 </a>
+                @endif
             </div>
         @else
             <div class="row g-3">
@@ -79,10 +83,14 @@
                                 {{ $photo->caption ?? '<span class="fst-italic">Tanpa caption</span>' }}
                             </p>
                         </div>
+                        @if(auth()->user()->hasPermission('hero', 'edit') || auth()->user()->hasPermission('hero', 'delete'))
                         <div class="card-footer d-flex gap-2 py-2">
+                            @if(auth()->user()->hasPermission('hero', 'edit'))
                             <a href="{{ route('admin.hero.edit', $photo->id) }}" class="btn btn-warning btn-sm flex-fill">
                                 <i class="bi bi-pencil-fill"></i> Edit
                             </a>
+                            @endif
+                            @if(auth()->user()->hasPermission('hero', 'delete'))
                             <form action="{{ route('admin.hero.destroy', $photo->id) }}" method="POST"
                                 onsubmit="return confirm('Delete this hero photo?')">
                                 @csrf
@@ -91,7 +99,9 @@
                                     <i class="bi bi-trash-fill"></i>
                                 </button>
                             </form>
+                            @endif
                         </div>
+                        @endif
                     </div>
                 </div>
                 @endforeach

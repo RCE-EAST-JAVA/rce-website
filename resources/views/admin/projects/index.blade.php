@@ -7,9 +7,11 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="card-title">Sustainable Programs List</h4>
+        @if(auth()->user()->hasPermission('projects', 'create'))
         <a href="{{ route('admin.projects.create') }}" class="btn btn-primary btn-sm">
             <i class="bi bi-plus-circle"></i> Add Program
         </a>
+        @endif
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -22,8 +24,12 @@
                         <th>Author</th>
                         <th>Date</th>
                         <th>SDGs</th>
+                        @if(auth()->user()->hasPermission('projects', 'edit'))
                         <th>Pin</th>
+                        @endif
+                        @if(auth()->user()->hasPermission('projects', 'edit') || auth()->user()->hasPermission('projects', 'delete'))
                         <th>Actions</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -60,6 +66,7 @@
                             @endif
                         </td>
                         <td>{{ $project->sdgs }}</td>
+                        @if(auth()->user()->hasPermission('projects', 'edit'))
                         <td>
                             <form action="{{ route('admin.projects.toggle-pin', $project->id) }}" method="POST">
                                 @csrf
@@ -69,20 +76,27 @@
                                 </button>
                             </form>
                         </td>
+                        @endif
+                        @if(auth()->user()->hasPermission('projects', 'edit') || auth()->user()->hasPermission('projects', 'delete'))
                         <td>
                             <div class="d-flex gap-2">
+                                @if(auth()->user()->hasPermission('projects', 'edit'))
                                 <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"                                     onsubmit="return confirm('Are you sure you want to delete this program?')">
+                                @endif
+                                @if(auth()->user()->hasPermission('projects', 'delete'))
+                                <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this program?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </form>
+                                @endif
                             </div>
                         </td>
+                        @endif
                     </tr>
                     @empty
                     <tr>

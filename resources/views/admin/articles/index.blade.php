@@ -7,9 +7,11 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="card-title mb-0">Publications List</h4>
+        @if(auth()->user()->hasPermission('articles', 'create'))
         <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-sm">
             <i class="bi bi-plus-circle"></i> Add Publication
         </a>
+        @endif
     </div>
     <div class="card-body">
 
@@ -29,9 +31,13 @@
                         <th>Category</th>
                         <th>Author</th>
                         <th>Status</th>
-                        <th>Pin</th>
                         <th>Published</th>
+                        @if(auth()->user()->hasPermission('articles', 'edit'))
+                        <th>Pin</th>
+                        @endif
+                        @if(auth()->user()->hasPermission('articles', 'edit') || auth()->user()->hasPermission('articles', 'delete'))
                         <th>Actions</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +64,7 @@
                             </span>
                         </td>
                         <td>{{ $article->published_at ? $article->published_at->format('d M Y') : '-' }}</td>
+                        @if(auth()->user()->hasPermission('articles', 'edit'))
                         <td>
                             <form action="{{ route('admin.articles.toggle-pin', $article->id) }}" method="POST">
                                 @csrf
@@ -67,11 +74,16 @@
                                 </button>
                             </form>
                         </td>
+                        @endif
+                        @if(auth()->user()->hasPermission('articles', 'edit') || auth()->user()->hasPermission('articles', 'delete'))
                         <td>
                             <div class="d-flex gap-2">
+                                @if(auth()->user()->hasPermission('articles', 'edit'))
                                 <a href="{{ route('admin.articles.edit', $article->id) }}" class="btn btn-warning btn-sm">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
+                                @endif
+                                @if(auth()->user()->hasPermission('articles', 'delete'))
                                 <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST"
                                     onsubmit="return confirm('Delete this publication?')">
                                     @csrf
@@ -80,8 +92,10 @@
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </form>
+                                @endif
                             </div>
                         </td>
+                        @endif
                     </tr>
                     @empty
                     <tr>
