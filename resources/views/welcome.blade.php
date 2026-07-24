@@ -118,7 +118,8 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-32 md:pt-52 md:pb-48 flex flex-col justify-center min-h-screen"
             :style="'transform: translateY(' + (scrollY * -0.08) + 'px)'">
             <span data-aos="fade-up"
-                class="text-accent-orange font-bold text-sm tracking-widest uppercase mb-4 block">Regional Centre of Expertise (RCE) on Education for Sustainable Development (ESD)</span>
+                class="text-accent-orange font-bold text-sm tracking-widest uppercase mb-4 block">Regional Centre of
+                Expertise (RCE) on Education for Sustainable Development (ESD)</span>
             <h1 data-aos="fade-up" data-aos-delay="50" class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
                 RCE <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-500">EAST JAVA</span>
@@ -221,7 +222,7 @@
                     <div>
                         <span class="text-xs font-bold uppercase tracking-widest text-amber-200 mb-2 block">Year
                             Founded</span>
-                        <h2 class="text-6xl font-black mb-4">2009</h2>
+                        <h2 class="text-6xl font-black mb-4">2021</h2>
                         <p class="text-amber-100 text-sm leading-relaxed">
                             Established as part of the global United Nations University (UNU) network to address
                             environmental and social development challenges through education.
@@ -269,8 +270,10 @@
             'unesa' => 'https://upload.wikimedia.org/wikipedia/commons/f/f4/State_University_of_Surabaya_logo.png',
             'its' => 'https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_ITS.png',
             'unair' => 'https://upload.wikimedia.org/wikipedia/commons/6/65/Logo-Branding-UNAIR-biru.png',
-            'universitas airlangga' => 'https://upload.wikimedia.org/wikipedia/commons/6/65/Logo-Branding-UNAIR-biru.png',
-            'universitas brawijaya' => 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Logo_Universitas_Brawijaya.svg',
+            'universitas airlangga' =>
+                'https://upload.wikimedia.org/wikipedia/commons/6/65/Logo-Branding-UNAIR-biru.png',
+            'universitas brawijaya' =>
+                'https://upload.wikimedia.org/wikipedia/commons/b/bb/Logo_Universitas_Brawijaya.svg',
             'uin sunan ampel' => 'https://upload.wikimedia.org/wikipedia/id/b/b4/UIN_SUNAN_AMPEL.jpg',
             'uin sunan ampel surabaya' => 'https://upload.wikimedia.org/wikipedia/id/b/b4/UIN_SUNAN_AMPEL.jpg',
         ];
@@ -278,67 +281,71 @@
         $extraPartners = [
             [
                 'name' => 'United Nations University',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/6/6e/UNU-logo.svg'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/6/6e/UNU-logo.svg',
             ],
             [
                 'name' => 'Australian Government',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_the_Commonwealth_of_Australia.svg'
+                'logo' =>
+                    'https://upload.wikimedia.org/wikipedia/commons/c/c5/Coat_of_arms_of_the_Commonwealth_of_Australia.svg',
             ],
             [
                 'name' => 'East Java Provincial Government',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/7/74/Coat_of_arms_of_East_Java.svg'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/7/74/Coat_of_arms_of_East_Java.svg',
             ],
             [
                 'name' => 'Bondowoso District Government',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Seal_of_Bondowoso_Regency.svg'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Seal_of_Bondowoso_Regency.svg',
             ],
             [
                 'name' => 'Jember District Government',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Seal_of_Jember_Regency.svg'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Seal_of_Jember_Regency.svg',
             ],
             [
                 'name' => 'Universitas Jember',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Logo_unej.png'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Logo_unej.png',
             ],
             [
                 'name' => 'Australian National University',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/en/4/4c/Australian_National_University_%28emblem%29.svg'
+                'logo' =>
+                    'https://upload.wikimedia.org/wikipedia/en/4/4c/Australian_National_University_%28emblem%29.svg',
             ],
             [
                 'name' => 'Johns Hopkins University',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/en/f/fb/Johns_Hopkins_University_logo.svg'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/f/fb/Johns_Hopkins_University_logo.svg',
             ],
             [
                 'name' => 'Universitas Indonesia',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/id/d/da/Universitas_Indonesia_logo.svg'
+                'logo' => 'https://upload.wikimedia.org/wikipedia/id/d/da/Universitas_Indonesia_logo.svg',
             ],
             [
                 'name' => 'COMCEC - OIC',
-                'logo' => 'https://upload.wikimedia.org/wikipedia/en/2/25/Organisation_of_Islamic_Cooperation_Logo.svg'
-            ]
+                'logo' => 'https://upload.wikimedia.org/wikipedia/en/2/25/Organisation_of_Islamic_Cooperation_Logo.svg',
+            ],
         ];
 
-        $allPartners = collect($partners)->map(function($p) use ($logoMapping) {
-            $logo = $p->logo ? asset($p->logo) : null;
-            if (!$logo) {
-                $lowerName = strtolower(trim($p->name));
-                if (isset($logoMapping[$lowerName])) {
-                    $logo = $logoMapping[$lowerName];
+        $allPartners = collect($partners)
+            ->map(function ($p) use ($logoMapping) {
+                $logo = $p->logo ? asset($p->logo) : null;
+                if (!$logo) {
+                    $lowerName = strtolower(trim($p->name));
+                    if (isset($logoMapping[$lowerName])) {
+                        $logo = $logoMapping[$lowerName];
+                    }
                 }
-            }
-            return [
-                'name' => $p->name,
-                'logo' => $logo
-            ];
-        })
-        ->concat($extraPartners)
-        ->filter(fn($p) => !empty($p['logo']));
+                return [
+                    'name' => $p->name,
+                    'logo' => $logo,
+                ];
+            })
+            ->concat($extraPartners)
+            ->filter(fn($p) => !empty($p['logo']));
     @endphp
 
     <div class="py-16 bg-white border-y border-zinc-100 overflow-hidden relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
             <div data-aos="fade-up">
-                <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-3 block">Academic Partner Network</span>
+                <span class="text-xs font-bold uppercase tracking-widest text-accent-orange mb-3 block">Academic Partner
+                    Network</span>
                 <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Partners &amp; Collaborators</h2>
                 <div class="w-16 h-1 bg-accent-orange rounded-full mx-auto"></div>
             </div>
@@ -347,38 +354,48 @@
         <!-- Marquee Container with Left & Right Gradient Shadows -->
         <div class="relative w-full overflow-hidden select-none">
             <!-- Left Gradient Shadow -->
-            <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+            <div
+                class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none">
+            </div>
             <!-- Right Gradient Shadow -->
-            <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+            <div
+                class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none">
+            </div>
 
             <div class="marquee-track flex whitespace-nowrap items-center hover:[animation-play-state:paused]">
                 {{-- Part 1 --}}
-                <div class="marquee-content flex items-center" style="display: flex; align-items: center; gap: 2rem; padding-right: 2rem;">
-                    @foreach($allPartners as $mitra)
-                        <div class="flex items-center justify-center shrink-0" style="margin: 0 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <div class="marquee-content flex items-center"
+                    style="display: flex; align-items: center; gap: 2rem; padding-right: 2rem;">
+                    @foreach ($allPartners as $mitra)
+                        <div class="flex items-center justify-center shrink-0"
+                            style="margin: 0 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                             <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
-                                 class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                 title="{{ $mitra['name'] }}">
+                                class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                title="{{ $mitra['name'] }}">
                         </div>
                     @endforeach
                 </div>
                 {{-- Part 2 --}}
-                <div class="marquee-content flex items-center" style="display: flex; align-items: center; gap: 2rem; padding-right: 2rem;">
-                    @foreach($allPartners as $mitra)
-                        <div class="flex items-center justify-center shrink-0" style="margin: 0 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <div class="marquee-content flex items-center"
+                    style="display: flex; align-items: center; gap: 2rem; padding-right: 2rem;">
+                    @foreach ($allPartners as $mitra)
+                        <div class="flex items-center justify-center shrink-0"
+                            style="margin: 0 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                             <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
-                                 class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                 title="{{ $mitra['name'] }}">
+                                class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                title="{{ $mitra['name'] }}">
                         </div>
                     @endforeach
                 </div>
                 {{-- Part 3 --}}
-                <div class="marquee-content flex items-center" style="display: flex; align-items: center; gap: 2rem; padding-right: 2rem;">
-                    @foreach($allPartners as $mitra)
-                        <div class="flex items-center justify-center shrink-0" style="margin: 0 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <div class="marquee-content flex items-center"
+                    style="display: flex; align-items: center; gap: 2rem; padding-right: 2rem;">
+                    @foreach ($allPartners as $mitra)
+                        <div class="flex items-center justify-center shrink-0"
+                            style="margin: 0 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                             <img src="{{ $mitra['logo'] }}" alt="{{ $mitra['name'] }}"
-                                 class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                                 title="{{ $mitra['name'] }}">
+                                class="h-14 md:h-16 w-auto object-contain filter grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                title="{{ $mitra['name'] }}">
                         </div>
                     @endforeach
                 </div>
