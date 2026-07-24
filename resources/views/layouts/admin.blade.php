@@ -459,22 +459,6 @@
                     </div>
 
                     <section class="section">
-                        @if(session('success'))
-                            <div class="alert alert-success alert-dismissible show fade d-flex align-items-center gap-2">
-                                <i class="bi bi-check-circle-fill"></i>
-                                <span>{{ session('success') }}</span>
-                                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"></button>
-                            </div>
-                        @endif
-
-                        @if(session('error'))
-                            <div class="alert alert-danger alert-dismissible show fade d-flex align-items-center gap-2">
-                                <i class="bi bi-exclamation-circle-fill"></i>
-                                <span>{{ session('error') }}</span>
-                                <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"></button>
-                            </div>
-                        @endif
-
                         @yield('content')
                     </section>
                 </div>
@@ -495,6 +479,35 @@
 
     <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/compiled/js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        @if(session('success'))
+            Toast.fire({
+                icon: 'success',
+                title: "{{ session('success') }}"
+            });
+        @endif
+
+        @if(session('error'))
+            Toast.fire({
+                icon: 'error',
+                title: "{{ session('error') }}"
+            });
+        @endif
+    </script>
 
     @yield('scripts')
 </body>
