@@ -36,9 +36,9 @@ Route::get('/webmail/redirect', [WebmailController::class, 'sso'])->name('webmai
 // Direct Login SSO Bimbingan
 Route::get('/bimbingan/redirect', [BimbinganSsoController::class, 'redirect'])->name('bimbingan.sso')->middleware('auth');
 
-// Redirect Dashboard Dinamis Berdasarkan Role
+// Redirect Dashboard Dinamis Berdasarkan Hak Akses
 Route::get('/dashboard', function () {
-    if (auth()->user()->role === 'admin') {
+    if (auth()->user()->hasAdminAccess()) {
         return redirect()->route('admin.dashboard');
     }
     return redirect()->route('portal.profile');
@@ -51,18 +51,36 @@ Route::middleware('auth')->prefix('portal')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('portal.profile.destroy');
 });
 
-// Admin Panel (Harus Login & Admin)
+// Admin Panel (Harus Login & Akses Admin)
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::resource('projects', AdminProjectController::class)->names('admin.projects');
-    Route::resource('staff', AdminStaffController::class)->names('admin.staff');
-    Route::resource('hero', AdminHeroController::class)->names('admin.hero')->except(['show']);
-    Route::resource('articles', AdminArticleController::class)->names('admin.articles')->except(['show']);
-    Route::post('articles/upload-image', [AdminArticleController::class, 'uploadImage'])->name('admin.articles.upload-image');
-    Route::post('articles/{article}/toggle-pin', [AdminArticleController::class, 'togglePin'])->name('admin.articles.toggle-pin');
-    Route::post('projects/{project}/toggle-pin', [AdminProjectController::class, 'togglePin'])->name('admin.projects.toggle-pin');
-    Route::resource('partners', AdminPartnerController::class)->names('admin.partners')->except(['show']);
-    Route::resource('users', AdminUserController::class)->names('admin.users');
+
+    Route::middleware('admin:projects,view')->group(function () {
+        Route::resource('projects', AdminProjectController::class)->names('admin.projects');
+        Route::post('projects/{project}/toggle-pin', [AdminProjectController::class, 'togglePin'])->name('admin.projects.toggle-pin');
+    });
+
+    Route::middleware('admin:staff,view')->group(function () {
+        Route::resource('staff', AdminStaffController::class)->names('admin.staff');
+    });
+
+    Route::middleware('admin:hero,view')->group(function () {
+        Route::resource('hero', AdminHeroController::class)->names('admin.hero')->except(['show']);
+    });
+
+    Route::middleware('admin:articles,view')->group(function () {
+        Route::resource('articles', AdminArticleController::class)->names('admin.articles')->except(['show']);
+        Route::post('articles/upload-image', [AdminArticleController::class, 'uploadImage'])->name('admin.articles.upload-image');
+        Route::post('articles/{article}/toggle-pin', [AdminArticleController::class, 'togglePin'])->name('admin.articles.toggle-pin');
+    });
+
+    Route::middleware('admin:partners,view')->group(function () {
+        Route::resource('partners', AdminPartnerController::class)->names('admin.partners')->except(['show']);
+    });
+
+    Route::middleware('admin:users,view')->group(function () {
+        Route::resource('users', AdminUserController::class)->names('admin.users');
+    });
 });
 
 // Route untuk sitemap XML

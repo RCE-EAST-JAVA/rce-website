@@ -42,7 +42,7 @@ class AuthenticatedSessionController extends Controller
             'session_id' => $request->session()->getId(),
         ]);
 
-        if ($user && strtolower($user->role) === 'admin') {
+        if ($user && $user->hasAdminAccess()) {
             \Illuminate\Support\Facades\Log::info('REDIRECTING TO /admin RELATIVE');
             return redirect('/admin');
         }

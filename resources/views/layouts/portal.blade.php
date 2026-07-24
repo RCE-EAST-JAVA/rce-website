@@ -100,6 +100,7 @@
                             </a>
                         </li>
                         
+                        @if(auth()->user()->hasPermission('bimbingan', 'view'))
                         <li class="sidebar-item">
                             <a href="{{ route('bimbingan.sso') }}" target="_blank" rel="noopener noreferrer" class='sidebar-link'>
                                 <i class="bi bi-mortarboard-fill text-warning"></i>
@@ -107,7 +108,73 @@
                                 <i class="bi bi-box-arrow-up-right ms-auto opacity-50" style="font-size: 0.75rem;"></i>
                             </a>
                         </li>
-                        
+                        @endif
+
+                        @if(auth()->user()->hasAdminAccess())
+                            <li class="sidebar-title">Menu Kelola / CMS</li>
+
+                            <li class="sidebar-item {{ Request::is('admin') ? 'active' : '' }}">
+                                <a href="{{ route('admin.dashboard') }}" class='sidebar-link text-primary'>
+                                    <i class="bi bi-grid-fill text-primary"></i>
+                                    <span>Dashboard Admin</span>
+                                </a>
+                            </li>
+
+                            @if(auth()->user()->hasPermission('projects', 'view'))
+                            <li class="sidebar-item {{ Request::is('admin/projects*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.projects.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-kanban-fill"></i>
+                                    <span>Program Portfolio</span>
+                                </a>
+                            </li>
+                            @endif
+
+                            @if(auth()->user()->hasPermission('articles', 'view'))
+                            <li class="sidebar-item {{ Request::is('admin/articles*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.articles.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-newspaper"></i>
+                                    <span>Publikasi & Artikel</span>
+                                </a>
+                            </li>
+                            @endif
+
+                            @if(auth()->user()->hasPermission('staff', 'view'))
+                            <li class="sidebar-item {{ Request::is('admin/staff*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.staff.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-people-fill"></i>
+                                    <span>Direktori Staf</span>
+                                </a>
+                            </li>
+                            @endif
+
+                            @if(auth()->user()->hasPermission('partners', 'view'))
+                            <li class="sidebar-item {{ Request::is('admin/partners*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.partners.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-building"></i>
+                                    <span>Mitra & Kolaborator</span>
+                                </a>
+                            </li>
+                            @endif
+
+                            @if(auth()->user()->hasPermission('hero', 'view'))
+                            <li class="sidebar-item {{ Request::is('admin/hero*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.hero.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-images"></i>
+                                    <span>Foto Hero</span>
+                                </a>
+                            </li>
+                            @endif
+
+                            @if(auth()->user()->hasPermission('users', 'view'))
+                            <li class="sidebar-item {{ Request::is('admin/users*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.users.index') }}" class='sidebar-link'>
+                                    <i class="bi bi-shield-lock-fill text-primary"></i>
+                                    <span>Kelola Pengguna (RBAC)</span>
+                                </a>
+                            </li>
+                            @endif
+                        @endif
+
                         <li class="sidebar-title">Akun</li>
                         
                         <li class="sidebar-item">

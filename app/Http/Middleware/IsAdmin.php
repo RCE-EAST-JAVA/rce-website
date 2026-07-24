@@ -13,7 +13,7 @@ class IsAdmin
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ?string $module = null, ?string $action = 'view'): Response
     {
         $check = auth()->check();
         $user = auth()->user();
@@ -23,10 +23,20 @@ class IsAdmin
             'auth_check' => $check,
             'user_id' => $user ? $user->id : null,
             'role' => $user ? $user->role : null,
+            'module' => $module,
+            'action' => $action,
             'session_id' => $request->session()->getId(),
         ]);
 
         if ($check && $user->hasAdminAccess()) {
+            if ($module && !$user->hasPermission($module, $action)) {
+                \Illuminate\Support\Facades\Log::warning('MODULE ACCESS DENIED', [
+                    'user_id' => $user->id,
+                    'module' => $module,
+                    'action' => $action,
+                ]);
+                return redirect()->route('admin.dashboard')->with('error', 'Anda tidak memiliki hak akses untuk modul ini.');
+            }
             return $next($request);
         }
 

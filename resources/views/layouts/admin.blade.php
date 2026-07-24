@@ -306,36 +306,57 @@
                             </a>
                         </li>
 
+                        @if(auth()->user()->hasPermission('bimbingan', 'view'))
+                        <li class="sidebar-item">
+                            <a href="{{ route('bimbingan.sso') }}" target="_blank" rel="noopener noreferrer" class="sidebar-link">
+                                <i class="bi bi-mortarboard-fill text-warning"></i>
+                                <span>Sistem Bimbingan</span>
+                                <i class="bi bi-box-arrow-up-right ms-auto font-size-xs opacity-50" style="font-size: 0.75rem;"></i>
+                            </a>
+                        </li>
+                        @endif
+
+                        @if(auth()->user()->hasPermission('projects', 'view') || auth()->user()->hasPermission('articles', 'view') || auth()->user()->hasPermission('staff', 'view') || auth()->user()->hasPermission('partners', 'view'))
                         <li class="sidebar-title">Konten</li>
 
+                        @if(auth()->user()->hasPermission('projects', 'view'))
                         <li class="sidebar-item {{ Request::is('admin/projects*') ? 'active' : '' }}">
                             <a href="{{ route('admin.projects.index') }}" class="sidebar-link">
                                 <i class="bi bi-kanban-fill"></i>
-                                <span>Manage Programs</span>
+                                <span>Program Portfolio</span>
                             </a>
                         </li>
+                        @endif
 
+                        @if(auth()->user()->hasPermission('articles', 'view'))
                         <li class="sidebar-item {{ Request::is('admin/articles*') ? 'active' : '' }}">
                             <a href="{{ route('admin.articles.index') }}" class="sidebar-link">
                                 <i class="bi bi-newspaper"></i>
-                                <span>Manage Publications</span>
+                                <span>Publikasi & Artikel</span>
                             </a>
                         </li>
+                        @endif
 
+                        @if(auth()->user()->hasPermission('staff', 'view'))
                         <li class="sidebar-item {{ Request::is('admin/staff*') ? 'active' : '' }}">
                             <a href="{{ route('admin.staff.index') }}" class="sidebar-link">
                                 <i class="bi bi-people-fill"></i>
-                                <span>Manage Staff</span>
+                                <span>Direktori Staf</span>
                             </a>
                         </li>
+                        @endif
 
+                        @if(auth()->user()->hasPermission('partners', 'view'))
                         <li class="sidebar-item {{ Request::is('admin/partners*') ? 'active' : '' }}">
                             <a href="{{ route('admin.partners.index') }}" class="sidebar-link">
                                 <i class="bi bi-building"></i>
                                 <span>Mitra & Kolaborator</span>
                             </a>
                         </li>
+                        @endif
+                        @endif
 
+                        @if(auth()->user()->hasPermission('hero', 'view'))
                         <li class="sidebar-title">Tampilan</li>
 
                         <li class="sidebar-item {{ Request::is('admin/hero*') ? 'active' : '' }}">
@@ -344,21 +365,23 @@
                                 <span>Foto Hero</span>
                             </a>
                         </li>
-
-                        <li class="sidebar-item">
-                            <a href="{{ route('bimbingan.sso') }}" target="_blank" rel="noopener noreferrer" class="sidebar-link">
-                                <i class="bi bi-mortarboard-fill text-warning"></i>
-                                <span>Sistem Bimbingan</span>
-                                <i class="bi bi-box-arrow-up-right ms-auto font-size-xs opacity-50" style="font-size: 0.75rem;"></i>
-                            </a>
-                        </li>
+                        @endif
 
                         <li class="sidebar-title">Pengaturan & Akun</li>
 
+                        @if(auth()->user()->hasPermission('users', 'view'))
                         <li class="sidebar-item {{ Request::is('admin/users*') ? 'active' : '' }}">
                             <a href="{{ route('admin.users.index') }}" class="sidebar-link">
                                 <i class="bi bi-shield-lock-fill text-primary"></i>
                                 <span>Kelola Pengguna (RBAC)</span>
+                            </a>
+                        </li>
+                        @endif
+
+                        <li class="sidebar-item {{ Request::is('portal/profile*') ? 'active' : '' }}">
+                            <a href="{{ route('portal.profile') }}" class="sidebar-link">
+                                <i class="bi bi-person-badge-fill"></i>
+                                <span>Profil Saya</span>
                             </a>
                         </li>
 
